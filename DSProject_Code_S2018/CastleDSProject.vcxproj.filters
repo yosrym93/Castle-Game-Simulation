@@ -16,9 +16,6 @@
     <Filter Include="Enemies">
       <UniqueIdentifier>{0af33dc2-c49c-4540-b583-4c48cacf990e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ADTs">
-      <UniqueIdentifier>{e724dc94-bae8-448a-8dc7-4d4c8a7fac33}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -143,18 +140,6 @@
     <ClCompile Include="Enemies\Enemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="ADTs\Queue.cpp">
-      <Filter>ADTs</Filter>
-    </ClCompile>
-    <ClCompile Include="ADTs\Node.cpp">
-      <Filter>ADTs</Filter>
-    </ClCompile>
-    <ClCompile Include="ADTs\InactiveEnemies.cpp">
-      <Filter>ADTs</Filter>
-    </ClCompile>
-    <ClCompile Include="ADTs\ActiveEnemies.cpp">
-      <Filter>ADTs</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -230,18 +215,6 @@
     </ClInclude>
     <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\Queue.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\Node.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\InactiveEnemies.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\ActiveEnemies.h">
-      <Filter>ADTs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
