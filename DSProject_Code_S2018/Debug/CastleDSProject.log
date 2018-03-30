@@ -1,0 +1,82 @@
+﻿  GUI.cpp
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.h(27): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.h(28): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.cpp(149): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.cpp(150): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.cpp(151): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.cpp(152): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+  Enemy.cpp
+  Demo_Main.cpp
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.h(27): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.h(28): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  windowinput.cpp
+  mousequeue.cpp
+  keyqueue.cpp
+  image.cpp
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\image.cpp(115): warning C4018: '<': signed/unsigned mismatch
+  colors.cpp
+  CMUgraphics.cpp
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\cmugraphics.cpp(751): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(136): note: see declaration of 'strcpy'
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\cmugraphics.cpp(1164): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\cmugraphics.cpp(1171): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\cmugraphics.cpp(1202): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\cmugraphics.cpp(1210): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\cmugraphics.cpp(1357): warning C4018: '>': signed/unsigned mismatch
+  auxil.cpp
+  Tower.cpp
+  Castle.cpp
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.h(27): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.h(28): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  Battle.cpp
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.h(27): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\gui\gui.h(28): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  Generating Code...
+  jutils.c
+  jquant2.c
+  jquant1.c
+  jmemnobs.c
+  jmemmgr.c
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\jpeg\jmemmgr.c(1103): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdlib.h(1199): note: see declaration of 'getenv'
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\jpeg\jmemmgr.c(1106): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(2261): note: see declaration of 'sscanf'
+  jidctred.c
+  jidctint.c
+  jidctfst.c
+  jidctflt.c
+  jerror.c
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\jpeg\jerror.c(169): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\jpeg\jerror.c(171): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+  jdtrans.c
+  jdsample.c
+  jdpostct.c
+  jdphuff.c
+  jdmerge.c
+  jdmaster.c
+  jdmarker.c
+  jdmainct.c
+  jdinput.c
+  jdhuff.c
+  Generating Code...
+  Compiling...
+  jddctmgr.c
+  jdcolor.c
+  jdcoefct.c
+  jdatasrc.c
+  jdapistd.c
+  jdapimin.c
+  jcparam.c
+  jcomapi.c
+  jpegload.c
+e:\amr\2nd semster\ds\the-castle\dsproject_code_s2018\cmugraphicslib\jpegload.c(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+  Generating Code...
+Battle.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  CastleDSProject.vcxproj -> E:\Amr\2nd semster\DS\the-castle\DSProject_Code_S2018\.\Debug\CastleDSProject.exe

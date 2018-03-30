@@ -126,10 +126,6 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ADTs\ActiveEnemies.cpp" />
-    <ClCompile Include="ADTs\InactiveEnemies.cpp" />
-    <ClCompile Include="ADTs\Node.cpp" />
-    <ClCompile Include="ADTs\Queue.cpp" />
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Castle\Castle.cpp" />
     <ClCompile Include="Castle\Tower.cpp" />
@@ -279,10 +275,6 @@
     <ClCompile Include="GUI\GUI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ADTs\ActiveEnemies.h" />
-    <ClInclude Include="ADTs\InactiveEnemies.h" />
-    <ClInclude Include="ADTs\Node.h" />
-    <ClInclude Include="ADTs\Queue.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Castle\Castle.h" />
     <ClInclude Include="Castle\Tower.h" />
