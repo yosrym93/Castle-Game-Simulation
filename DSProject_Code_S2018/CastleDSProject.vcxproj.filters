@@ -143,6 +143,7 @@
     <ClCompile Include="Enemies\Enemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Enemies\Balloon.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
@@ -164,6 +165,8 @@
     <ClCompile Include="ADTs\InactiveEnemies.cpp">
       <Filter>ADTs</Filter>
     </ClCompile>
+=======
+>>>>>>> mn el awl
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -240,6 +243,7 @@
     <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Enemies\Balloon.h">
       <Filter>Enemies</Filter>
     </ClInclude>
@@ -273,5 +277,7 @@
     <ClInclude Include="ADTs\PrecondViolatedExcep.h">
       <Filter>ADTs</Filter>
     </ClInclude>
+=======
+>>>>>>> mn el awl
   </ItemGroup>
 </Project>

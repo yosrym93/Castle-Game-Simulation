@@ -126,8 +126,11 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="ADTs\ActiveEnemies.cpp" />
     <ClCompile Include="ADTs\InactiveEnemies.cpp" />
+=======
+>>>>>>> mn el awl
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Castle\Castle.cpp" />
     <ClCompile Include="Castle\Tower.cpp" />
