@@ -9,7 +9,10 @@ class Battle
 private:
 	Castle BCastle;
 	int EnemyCount;	//the actual number of enemies in the game
-	Enemy * BEnemiesForDraw[MaxEnemyCount]; // This Array of Pointers is used for drawing elements in the GUI
+	Enemy * BEnemiesForDraw[MaxEnemyCount]; 
+	double C1, C2, C3; // input constants for periority equation
+	int Time;
+	                                        // This Array of Pointers is used for drawing elements in the GUI
 								  			// No matter what list type you are using to hold enemies, 
 											// you must pass the enemies to the GUI function as an array of enemy pointers. 
 											// At every time step, you should update those pointers 

@@ -2,6 +2,8 @@
 class Tower
 {
 	double Health;
+	int N; // max number of elements tower can attack in time step
+	int FirePower;
 
 	//
 	// TODO: Add More Data Members As Needed

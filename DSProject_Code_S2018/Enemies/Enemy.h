@@ -15,6 +15,13 @@ protected:
 	int Distance;	//Horizontal distance between enemy & the tower of its region
 	                //Always positive (ranges from 2 to 60)
 	double Health;	//Enemy health
+	bool CanAttack;
+	int K;
+	int ArrivalTime;
+	int Reload;
+	int Type;
+	int DeathTime;
+	int FirstShot;
 	
 	//
 	// TODO: Add More Data Members As Needed

@@ -9,7 +9,7 @@
 class Castle
 {
 	Tower Towers[NoOfRegions];
-
+	int Unpaved[4]; // unpaved distance of each region
 	//
 	// TODO: Add More Data Members As Needed
 	//
