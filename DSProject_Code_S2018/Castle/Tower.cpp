@@ -1,15 +1,26 @@
 #include "Tower.h"
 
 
-void Tower::SetHealth(double h)
+void Tower::setHealth(double h)
 {
 	if(h > 0)
-		Health = h;
+		health = h;
 	else
-		Health = 0; // killed
+		health = 0; // killed
 }
 
 double Tower::GetHealth() const
 {
-	return Health;
+	return health;
+}
+
+void Tower::setNum(int rn)
+{
+	N=(rn > 0) ? rn: 5;//assuming default number is 5
+}
+
+
+void Tower::setFirePower(int fp)
+{
+	firePower = (fp>0)?fp:10;//assuming the default fire power is 10
 }

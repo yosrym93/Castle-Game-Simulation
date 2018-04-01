@@ -28,6 +28,16 @@ void Enemy::DecrementDist()
 		Distance--;
 }
 
+void Enemy::setId(int rid)
+{
+	id = rid;
+}
+
+int Enemy::getId()
+{
+	return id;
+}
+
 void Enemy::SetDistance(int d)
 {
 	if (d >= MinDistance && d <= MaxDistance)
@@ -39,4 +49,53 @@ void Enemy::SetDistance(int d)
 int Enemy::GetDistance() const
 {
 	return Distance;
+}
+
+void Enemy::setArrTime(int rtime)
+{
+	arrivalTime = (rtime > 0) ? rtime : 1; //assuming 1 is the default
+}
+
+int Enemy::getArrTime()
+{
+	return arrivalTime;
+}
+
+void Enemy::setHealth(double rhealth)
+{
+	health = (rhealth > 0) ? rhealth : 10;//assuming 10 is the default
+}
+
+void Enemy::setPow(int rpow)
+{
+	firePower = (rpow > 0) ? rpow : 10;//assuming that the default is 10
+}
+
+void Enemy::setRld(int rld)
+{
+	reload = (rld > 0) ? rld : 10;//assuming 10 is the default
+}
+
+void Enemy::setType(int rtype)
+{
+	switch (rtype)
+	{
+	case 0:
+		type = paver;
+		break;
+	case 1:
+		type = fighter;
+		break;
+	case 2:
+		type = shielded;
+		break;
+	case 3:
+		type = balloon;
+		break;
+	case 4:
+		type = tank;
+		break;
+	default:
+		break;
+	}
 }

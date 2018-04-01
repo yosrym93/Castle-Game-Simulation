@@ -17,8 +17,8 @@ int main()
 	pGUI->PrintMessage("This is Just a Demo. Click to Move to the Next Time Step ...");
 
 	//intialize health of the towers with 200
-	pGameBattle->GetCastle()->SetTowersHealth(200);
-	 
+	pGameBattle->GetCastle()->setTowersHealth(200);
+	pGameBattle->Load();
 	// Declare some enemies and fill their data
 	// In the game, enemies should be loaded from an input file
 	// and should be dynamically allocated

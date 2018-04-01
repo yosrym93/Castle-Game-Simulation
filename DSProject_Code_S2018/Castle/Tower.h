@@ -1,9 +1,9 @@
 #pragma once
 class Tower
 {
-	double Health;
+	double health;
 	int N; // max number of elements tower can attack in time step
-	int FirePower;
+	int firePower;
 
 	//
 	// TODO: Add More Data Members As Needed
@@ -11,9 +11,10 @@ class Tower
 
 public:
 
-	void SetHealth(double h);
+	void setHealth(double h);
 	double GetHealth() const;
-
+	void setNum(int );
+	void setFirePower(int );
 	//
 	// TODO: Add More Member Functions As Needed
 	//

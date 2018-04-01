@@ -8,8 +8,7 @@
 
 class Castle
 {
-	Tower Towers[NoOfRegions];
-	int Unpaved[4]; // unpaved distance of each region
+	Tower towers[NoOfRegions];
 	//
 	// TODO: Add More Data Members As Needed
 	//
@@ -17,8 +16,9 @@ class Castle
 public:
 
 	Castle();
-	void SetTowersHealth(double h);
-
+	void setTowersHealth(double h);
+	void setTowersFirePower(int pow);
+	void setTowersNum(int n);
 	//
 	// TODO: Add More Member Functions As Needed
 	//

@@ -9,19 +9,20 @@ class Enemy
 {
 
 protected:
-	int ID;         //Each enemy has a unique ID (sequence number)
+	int id;         //Each enemy has a unique ID (sequence number)
 	color Clr;	    //Color of the enemy (will be set depending on the enemy type: Paver, ...etc.)
 	REGION Region;  //Region of this enemy
 	int Distance;	//Horizontal distance between enemy & the tower of its region
 	                //Always positive (ranges from 2 to 60)
-	double Health;	//Enemy health
-	bool CanAttack;
+	double health;	//Enemy health
+	bool canAttack;
 	int K;
-	int ArrivalTime;
-	int Reload;
-	int Type;
-	int DeathTime;
-	int FirstShot;
+	int arrivalTime;
+	int reload;
+	TYPE type;
+	double firePower;
+	int deathTime;
+	int firstShot;
 	
 	//
 	// TODO: Add More Data Members As Needed
@@ -35,10 +36,17 @@ public:
 	REGION GetRegion() const;
 
 	void DecrementDist();
-
+	//setters and getters 
+	void setId(int);
+	int getId();
 	void SetDistance(int d);
 	int GetDistance() const;
-
+	void setArrTime(int);
+	int getArrTime();
+	void setHealth(double);
+	void setPow(int);
+	void setRld(int);
+	void setType(int);
 	// Virtual Functions: ----------------
 
 	//virtual void Move() = 0;	    //All enemies can move

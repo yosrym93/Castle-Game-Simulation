@@ -6,10 +6,24 @@ Castle::Castle()
 {
 }
 
-void Castle::SetTowersHealth(double h)
+void Castle::setTowersHealth(double h)
 {
 	for (int i = 0; i < NoOfRegions; i++)
 	{
-		Towers[i].SetHealth(h);
+		towers[i].setHealth(h);
+	}
+}
+void Castle::setTowersNum(int n)
+{
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		towers[i].setNum(n);
+	}
+}
+void Castle::setTowersFirePower(int pow)
+{
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		towers[i].setFirePower(pow);
 	}
 }
