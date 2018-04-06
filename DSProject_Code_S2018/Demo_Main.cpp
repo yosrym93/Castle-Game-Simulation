@@ -61,16 +61,16 @@ int main()
 		pGUI->DrawCastle();
 
 		// Decrement the distance of each enemy
-		e1.DecrementDist();
-		e2.DecrementDist();
-		e3.DecrementDist();
-		e4.DecrementDist();
-		e5.DecrementDist();
-		e6.DecrementDist();
-		e7.DecrementDist();
-		e8.DecrementDist();
-		e9.DecrementDist();
-		e10.DecrementDist();
+		e1.decrementDist();
+		e2.decrementDist();
+		e3.decrementDist();
+		e4.decrementDist();
+		e5.decrementDist();
+		e6.decrementDist();
+		e7.decrementDist();
+		e8.decrementDist();
+		e9.decrementDist();
+		e10.decrementDist();
 
 		// Redraw the enemies
 		pGameBattle->DrawEnemies(pGUI);

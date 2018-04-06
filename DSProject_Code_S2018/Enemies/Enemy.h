@@ -31,13 +31,15 @@ public:
 	Enemy(color r_c, REGION r_region, int d = MaxDistance);
 	virtual ~Enemy();
 
-	color GetColor() const;
-	REGION GetRegion() const;
+	color getColor() const;
+	REGION getRegion() const;
 
-	void DecrementDist();
+	void decrementDist();
 
-	void SetDistance(int d);
-	int GetDistance() const;
+	void setDistance(int d);
+	int getDistance() const;
+
+	int getArrivalTime() const;
 
 	// Virtual Functions: ----------------
 

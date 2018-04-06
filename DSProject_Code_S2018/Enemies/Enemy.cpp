@@ -5,30 +5,30 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 {
 	Clr = r_c;
 	Region = r_region;
-	SetDistance(d);
+	setDistance(d);
 }
 
 Enemy::~Enemy()
 {
 }
 
-color Enemy::GetColor() const
+color Enemy::getColor() const
 {
 	return Clr;
 }
 
-REGION Enemy::GetRegion() const
+REGION Enemy::getRegion() const
 {
 	return Region;
 }
 
-void Enemy::DecrementDist()
+void Enemy::decrementDist()
 {
 	if (Distance > MinDistance)
 		Distance--;
 }
 
-void Enemy::SetDistance(int d)
+void Enemy::setDistance(int d)
 {
 	if (d >= MinDistance && d <= MaxDistance)
 		Distance = d;
@@ -36,7 +36,11 @@ void Enemy::SetDistance(int d)
 		Distance = MaxDistance;
 }
 
-int Enemy::GetDistance() const
+int Enemy::getDistance() const
 {
 	return Distance;
+}
+
+int Enemy::getArrivalTime() const {
+	return ArrivalTime;
 }

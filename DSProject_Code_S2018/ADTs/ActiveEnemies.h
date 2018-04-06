@@ -9,6 +9,9 @@ class ActiveEnemies
 public:
 	ActiveEnemies();
 	void addEnemy(Enemy* newEnemy);
+	Enemy* pickRand();				//for phase 1: picks a random enemy, return null if there is no enemies
+	int getCount() const;
+	bool isEmpty() const;
 	void clear();
 	
 	~ActiveEnemies();

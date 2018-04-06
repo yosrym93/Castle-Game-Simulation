@@ -164,9 +164,6 @@
     <ClCompile Include="ADTs\InactiveEnemies.cpp">
       <Filter>ADTs</Filter>
     </ClCompile>
-    <ClCompile Include="ADTs\KilledEnemies.cpp">
-      <Filter>ADTs</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -265,9 +262,6 @@
       <Filter>ADTs</Filter>
     </ClInclude>
     <ClInclude Include="ADTs\Node.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\KilledEnemies.h">
       <Filter>ADTs</Filter>
     </ClInclude>
     <ClInclude Include="ADTs\InactiveEnemies.h">
