@@ -2,13 +2,17 @@
 #include "Queue.h"
 #include "../Enemies/Enemy.h"
 
+class Battle;
+
 class InactiveEnemies
 {
 	Queue<Enemy*> enemiesQueue;
 public:
 	InactiveEnemies();
 	void addEnemy(Enemy* newEnemy);
-	//void activateEnemies(int);
+	int getCount() const;
+	void activateEnemies(Battle& B);		//activates enemies according to their arrival time
+	bool isEmpty() const;
 	void clear();
 	~InactiveEnemies();
 };
