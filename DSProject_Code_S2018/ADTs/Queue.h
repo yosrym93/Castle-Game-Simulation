@@ -41,7 +41,7 @@ bool Queue<T>::enqueue(const T& item) {
 }
 
 template<typename T>
-bool Queue<T>::isEmpty() {
+bool Queue<T>::isEmpty() const{
 	if (head == nullptr)
 		return true;
 	return false;
