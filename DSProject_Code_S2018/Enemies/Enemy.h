@@ -32,21 +32,20 @@ public:
 	Enemy(color r_c, REGION r_region, int d = MaxDistance);
 	virtual ~Enemy();
 
-	color GetColor() const;
-	REGION GetRegion() const;
-
-	void DecrementDist();
+	color getColor() const;
+	REGION getRegion() const;
+	void decrementDist();
 	//setters and getters 
 	void setId(int);
 	int getId();
 	void SetDistance(int d);
-	int GetDistance() const;
 	void setArrTime(int);
 	int getArrTime();
 	void setHealth(double);
 	void setPow(int);
 	void setRld(int);
 	void setType(int);
+	int getDistance() const;
 	// Virtual Functions: ----------------
 
 	//virtual void Move() = 0;	    //All enemies can move

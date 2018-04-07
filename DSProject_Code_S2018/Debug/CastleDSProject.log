@@ -1,4 +1,0 @@
-﻿  Battle.cpp
-e:\amr\2nd semster\ds\thecastle\dsproject_code_s2018\gui\gui.h(27): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-e:\amr\2nd semster\ds\thecastle\dsproject_code_s2018\gui\gui.h(28): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-  CastleDSProject.vcxproj -> E:\Amr\2nd semster\DS\thecastle\DSProject_Code_S2018\.\Debug\CastleDSProject.exe

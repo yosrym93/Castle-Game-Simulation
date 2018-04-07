@@ -163,9 +163,9 @@ void GUI::DrawCastle() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::DrawEnemy(const Enemy & E, int YPos) const       // It's a private function
 {
-	color clr = E.GetColor();
-	REGION Region = E.GetRegion();
-	int Distance = E.GetDistance();
+	color clr = E.getColor();
+	REGION Region = E.getRegion();
+	int Distance = E.getDistance();
 
 	int x, y, refX, refY;
 	//First calculate x,y position of the enemy on the output screen
@@ -225,7 +225,7 @@ void GUI::DrawEnemies(Enemy* enemies[], int size) const
 
 			for(int i = 0 ; i < size ; i++)
 			{	
-				if(enemies[i]->GetDistance() == distance && enemies[i]->GetRegion() == region)
+				if(enemies[i]->getDistance() == distance && enemies[i]->getRegion() == region)
 				{
 					CountEnemies++;
 				}
@@ -244,7 +244,7 @@ void GUI::DrawEnemies(Enemy* enemies[], int size) const
 
 				for(int i = 0 ; i < size ; i++)
 				{	
-					if(enemies[i]->GetDistance() == distance && enemies[i]->GetRegion() == region)
+					if(enemies[i]->getDistance() == distance && enemies[i]->getRegion() == region)
 					{
 						DrawEnemy(*(enemies[i]), CountEnemies + 1);
 						CountEnemies++;

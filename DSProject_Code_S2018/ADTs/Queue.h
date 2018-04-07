@@ -10,6 +10,7 @@ class Queue {
 public:
 	Queue();
 	bool enqueue(const T&);							//inserts an item at the end
+	bool isEmpty() const;							//checks whether the queue is empty
 	T peek() throw (PrecondViolatedExcep);			//returns the first item without removing it, throws an exception if queue is empty
  	T dequeue() throw (PrecondViolatedExcep);		//returns and removes the first item, throws an exception if queue is empty
 	int getCount() const;							//returns the number of items 
@@ -20,6 +21,7 @@ public:
 
 template <typename T>
 Queue<T>::Queue() {
+	head = nullptr;
 	count = 0;
 }
 
@@ -40,6 +42,13 @@ bool Queue<T>::enqueue(const T& item) {
 }
 
 template<typename T>
+bool Queue<T>::isEmpty() const {
+	if (head == nullptr)
+		return true;
+	return false;
+}
+
+template<typename T>
 T Queue<T>::peek() {
 	if (head == nullptr) {
 		string message = "peek() called with empty queue";
@@ -55,10 +64,10 @@ T Queue<T>::dequeue() {
 		string message = "dequeue() called with empty queue";
 		throw (new PrecondViolatedExcep(message));
 	}
-	Node* ptr = head;
+	Node<T>* ptr = head;
 	head = head->getNext();
 	count--;
-	return ptr;
+	return ptr->getData();
 }
 
 template <typename T>

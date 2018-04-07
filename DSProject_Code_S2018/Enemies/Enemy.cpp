@@ -12,22 +12,21 @@ Enemy::~Enemy()
 {
 }
 
-color Enemy::GetColor() const
+color Enemy::getColor() const
 {
 	return Clr;
 }
 
-REGION Enemy::GetRegion() const
+REGION Enemy::getRegion() const
 {
 	return Region;
 }
 
-void Enemy::DecrementDist()
+void Enemy::decrementDist()
 {
 	if (Distance > MinDistance)
 		Distance--;
 }
-
 void Enemy::setId(int rid)
 {
 	id = rid;
@@ -44,9 +43,10 @@ void Enemy::SetDistance(int d)
 		Distance = d;
 	else
 		Distance = MaxDistance;
+
 }
 
-int Enemy::GetDistance() const
+int Enemy::getDistance() const
 {
 	return Distance;
 }
