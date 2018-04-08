@@ -81,12 +81,9 @@ void GUI::DrawMenu() const
 
 	MenuItemImages[MENU_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[MENU_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
-
-	//
-	//TODO: Prepare images for each menu item (an icon for each modes) and add it to the list
-	//
-
-	// You should add an icon for each mode of operation (silent, step by step, ...etc.)
+	MenuItemImages[MENU_INTERACTIVE] = "images\\MenuItems\\interactive.jpg";
+	MenuItemImages[MENU_STEPBYSTEP] = "images\\MenuItems\\stepbystep.jpg";
+	MenuItemImages[MENU_SILENT] = "images\\MenuItems\\Silent.jpg";
 
 	//Draw menu item one image at a time
 	for(int i=0; i<MENU_ITM_COUNT; i++)

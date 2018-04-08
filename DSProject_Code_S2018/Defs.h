@@ -27,9 +27,13 @@ enum MenuItem
 {
 	//Note: menu icons are ordered here as they appear in menu
 	//If you want to change the menu icons order, change the order here
-
+	MENU_INTERACTIVE,
+	MENU_STEPBYSTEP,
+	MENU_SILENT,
 	MENU_LOAD,
 	MENU_EXIT,
+
+
 
 	//TODO: Add more items names here
 	//      for the 3 modes of the application
