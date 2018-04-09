@@ -20,13 +20,13 @@ public:
 	template<typename S>
 	void traverse(void (S::*func)(T), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
 													//that takes an elemnt in the list as its parameter
-
+	void update();									//update the list (removing killed enemies)
 	void clear();									//deletes all items in the list
 	bool isEmpty() const;
 	int getCount() const;
 
-	T pickRand();									//picks a random element and returns it, for phase 1
-
+	void pickRand();								//picks a random element and kill it(by setting the health = 0), for phase 1
+	
 	~List();
 };
 
@@ -35,7 +35,20 @@ List<T>::List() {
 	head = nullptr;
 	count = 0;
 }
+template <typename T>
+void List<T>::update() {
+	Node<T>*curr = head;
+	int i = 0;
+	while (curr != nullptr && count>i)
+	{
+		if (curr->getData()->getHealth() == 0)
+			remove(i);
+		
+		curr = curr->getNext();
+		i++;
 
+	}
+}
 template <typename T>
 void List<T>::push(const T& newItem) {
 	Node<T>* newNode = new Node<T>(newItem);
@@ -78,6 +91,14 @@ template<typename T>
 bool List<T>::remove(int pos) {
 	if (pos < 0 || pos >= count) 
 		return false;
+	else if (pos == 0)
+	{
+		Node<T>*temp = head;
+		head = head->getNext();
+		delete temp;
+		count--;
+		return true;
+	}
 	Node<T>* ptr = head;
 	for (int i = 0; i < pos - 1; i++)
 		ptr = ptr->getNext();
@@ -142,13 +163,20 @@ bool List<T>::isEmpty() const {
 }
 
 template<typename T>
-T List<T>::pickRand() {
+void List<T>::pickRand() {
 	if (count == 0) {
-		string message = "pickRand() called with an empty list";
-		throw (new PrecondViolatedExcep(message));
+		return ;
+	}
+	else if (count == 1)
+	{
+		int ran = 0;
+		T temp = get(ran);
+		temp->setHealth(0);//kill the enemy
 	}
 	else {
-		return get(rand() % count);
+		int ran = rand() % count;
+		T temp = get(ran);
+		temp->setHealth(0);//kill the enemy
 	}
 }
 

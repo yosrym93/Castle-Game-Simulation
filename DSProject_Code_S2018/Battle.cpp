@@ -1,16 +1,50 @@
 #include "Battle.h"
-
+#include "ShieldedEnemies.cpp"
 
 Battle::Battle()
 {
+	currentTime = 0;
 	enemyCount = 0;
+	killed = 0;
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		enemyRegionalCount[i] = 0;
+	}
 }
+void Battle::killRandom()
+{
+	int list, region, count = 0;
+	for (int i = 0; i < 4;i++)
+	{
+		region = 0;
+		list = 3;
+		region = rand() % 4;
+		list = rand() % 4;
+		Enemy* temp;
+		switch (list)
+		{
+		case 1:
+			tankEnemies[region].pickRand();
+			break;
+		case 2:
+			shieldedEnemies[region].pickRand();
+			break;
+		case 3:
+			normalEnemies[region].pickRand();
+			break;
+		default:
+			break;
+		}
 
+	}
+}
 void Battle::AddEnemy(Enemy* Ptr)
 {
-	if (enemyCount < MaxEnemyCount) 
+	if (enemyCount < MaxEnemyCount)
+	{
 		bEnemiesForDraw[enemyCount++] = Ptr;
-
+		enemyRegionalCount[Ptr->getRegion()]++;
+	}
 	// Note that this function doesn't allocate any enemy objects
 	// It only makes the first free pointer in the array
 	// points to what is pointed to by the passed pointer Ptr
@@ -25,7 +59,44 @@ Castle * Battle::GetCastle()
 {
 	return &bCastle;
 }
+void Battle::update()
+{
+	double health;
+	currentTime++;
+	Enemy*temp;
+	for (int i = 0;i < enemyCount;i++)
+	{
+		health=bEnemiesForDraw[i]->getHealth();
+		if(health==0)
+		{
+			bEnemiesForDraw[i] = bEnemiesForDraw[enemyCount-1];
+			//delete bEnemiesForDraw[enemyCount - 1];
+			enemyCount--;
+			for (int j = 0;j < NoOfRegions;j++)
+			{
+				normalEnemies[j].update();
+				shieldedEnemies[j].update();
+				tankEnemies[j].update();
+			}
+
+		}
+		else {
+			bEnemiesForDraw[i]->decrementDist();
+		}
+	}
+	inactiveEnemies.activateEnemies(*this);
+}
+
 //function that prepare the war (load all the Battle specifications)
+int Battle::getTotalAlive()
+{
+	return enemyCount;
+}
+void Battle::print()
+{
+	GUI *pGUI = new GUI;
+
+}
 void Battle::Load()
 {
 	string fileName;
@@ -99,7 +170,15 @@ void Battle::Load()
 	}
 	if (inFile.is_open())
 		inFile.close();
+	pGUI->PrintMessage("Load Successful.");
 	delete pGUI;
+}
+bool Battle::isFighting()
+{
+	bool isFig = false;
+	for (int i = 0; i < NoOfRegions;i++)
+		isFig = isFig || (!tankEnemies[i].isEmpty() || !shieldedEnemies[i].isEmpty() || !normalEnemies[i].isEmpty() || !inactiveEnemies.isEmpty());
+	return isFig;
 }
 //return enum REGION from a char
 REGION Battle::getRegion(char cRegion)
@@ -133,33 +212,34 @@ int Battle::getCurrentTime() const {
 
 /****************************  Inactive Enemies Functions  ****************************/
 void Battle::activateEnemy(Enemy* inactiveEnemy) {
-	Enemy* fighter = dynamic_cast<Fighter*>(inactiveEnemy);
-	if (fighter) {
-		normalEnemies.addEnemy(fighter);
+	int Reg = inactiveEnemy->getRegion();
+	if (dynamic_cast<Fighter*>(inactiveEnemy)) {
+		normalEnemies[Reg].addEnemy(inactiveEnemy);
+		AddEnemy(inactiveEnemy);
 		return;
 	}
-
-	Enemy* paver = dynamic_cast<Paver*>(inactiveEnemy);
-	if (paver) {
-		normalEnemies.addEnemy(paver);
+	if (dynamic_cast<Paver*>(inactiveEnemy)) {
+		normalEnemies[Reg].addEnemy(inactiveEnemy);
+		AddEnemy(inactiveEnemy);
 		return;
 	}
-
-	Enemy* balloon = dynamic_cast<Balloon*>(inactiveEnemy);
-	if (balloon) {
-		normalEnemies.addEnemy(balloon);
+	if (dynamic_cast<Balloon*>(inactiveEnemy)) {
+		normalEnemies[Reg].addEnemy(inactiveEnemy);
+		AddEnemy(inactiveEnemy);
 		return;
 	}
 
 	Enemy* tank = dynamic_cast<Tank*>(inactiveEnemy);
 	if (tank) {
-		tankEnemies.addEnemy(tank);
+		tankEnemies[Reg].addEnemy(inactiveEnemy);
+		AddEnemy(inactiveEnemy);
 		return;
 	}
 
 	Enemy* shieldedFighter = dynamic_cast<Shielded*>(inactiveEnemy);
 	if (shieldedFighter) {
-		//shieldedEnemies.addEnemy(shieldedFighter);
+		shieldedEnemies[Reg].addEnemy(inactiveEnemy);
+		AddEnemy(inactiveEnemy);
 		return;
 	}
 }

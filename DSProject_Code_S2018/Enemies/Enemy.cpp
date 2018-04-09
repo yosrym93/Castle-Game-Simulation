@@ -32,7 +32,7 @@ void Enemy::setId(int rid)
 	id = rid;
 }
 
-int Enemy::getId()
+int Enemy::getId() const
 {
 	return id;
 }
@@ -51,9 +51,14 @@ int Enemy::getDistance() const
 	return Distance;
 }
 
+double Enemy::getHealth() const
+{
+	return health;
+}
+
 void Enemy::setArrTime(int rtime)
 {
-	arrivalTime = (rtime > 0) ? rtime : 1; //assuming 1 is the default
+	arrivalTime = (rtime >= 0) ? rtime : 1; //assuming 1 is the default
 }
 
 int Enemy::getArrTime()
@@ -63,7 +68,7 @@ int Enemy::getArrTime()
 
 void Enemy::setHealth(double rhealth)
 {
-	health = (rhealth > 0) ? rhealth : 10;//assuming 10 is the default
+	health = (rhealth >= 0) ? rhealth : 10;//assuming 10 is the default
 }
 
 void Enemy::setPow(int rpow)

@@ -37,7 +37,7 @@ public:
 	void decrementDist();
 	//setters and getters 
 	void setId(int);
-	int getId();
+	int getId() const;
 	void SetDistance(int d);
 	void setArrTime(int);
 	int getArrTime();
@@ -46,6 +46,7 @@ public:
 	void setRld(int);
 	void setType(int);
 	int getDistance() const;
+	double getHealth()const;
 	// Virtual Functions: ----------------
 
 	//virtual void Move() = 0;	    //All enemies can move

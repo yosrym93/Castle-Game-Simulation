@@ -9,9 +9,8 @@ ActiveEnemies::ActiveEnemies()
 void ActiveEnemies::addEnemy(Enemy* newEnemy) {
 	enemiesList.push(newEnemy);
 }
-
-Enemy* ActiveEnemies::pickRand() {
-	return enemiesList.pickRand();
+void ActiveEnemies::pickRand() {
+	 enemiesList.pickRand();
 }
 
 int ActiveEnemies::getCount() const {
@@ -24,6 +23,11 @@ bool ActiveEnemies::isEmpty() const {
 
 void ActiveEnemies::clear() {
 	enemiesList.clear();
+}
+
+void ActiveEnemies::update()
+{
+	enemiesList.update();
 }
 
 ActiveEnemies::~ActiveEnemies()

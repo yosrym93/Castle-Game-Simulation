@@ -6,6 +6,11 @@ Castle::Castle()
 {
 }
 
+string Castle::print()
+{
+	return string();
+}
+
 void Castle::setTowersHealth(double h)
 {
 	for (int i = 0; i < NoOfRegions; i++)

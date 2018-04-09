@@ -1,13 +1,32 @@
 
 #include "Array.h"
 template<class T>
-void Array<T>::swap(T *& f, T *& s)
+void Array<T>::swap(T*&f, T*&s)
 {
-	T temp = *f;
-	*f = *s;
-	*s = temp;
+	T* temp = f;
+	f = s;
+	s = temp;
 }
-
+template<class T>
+void Array<T> ::update()
+{
+	for (int i = 0;i < size;i++)
+	{
+		if (arr[i]->getHealth() == 0)
+			remove(arr[i]);
+	}
+}
+template<class T>
+void Array<T>::pickRand()
+{
+	if (isEmpty()) return ;
+	T*ran;
+	if (size == 1)
+		 ran = arr[0];
+	else
+		 ran = arr[rand() % size];
+	ran->setHealth(0);
+}
 template<class T>
 void Array<T>::quickSort(int start, int pivot)
 {
@@ -54,6 +73,11 @@ void Array<T>::updateCapacity()
 		}
 }
 template <class T>
+int Array<T>::getCount() const 
+{
+	return size;
+}
+template <class T>
 Array<T>::Array()
 {
 	size = 0;
@@ -77,12 +101,16 @@ void Array<T>::sort()
 template<class T>
 bool Array<T>::remove(T *ptr)
 {
+	T*temp;
 	for (int i = 0; i < size; i++)
 	{
 		if (ptr == arr[i])
 		{
+			temp = ptr;
 			swap(arr[i], arr[size - 1]);
 			size--;
+			delete temp;
+			temp = nullptr;
 			return true;
 		}
 	}

@@ -1,7 +1,7 @@
 #include "Battle.h"
 #include "GUI\GUI.h"
 
-
+void Simulation(Battle *B, GUI *G);
 
 int main()
 {
@@ -13,7 +13,8 @@ int main()
 	Battle* pGameBattle = new Battle;
 
 	GUI * pGUI = new GUI;
-
+	Simulation(pGameBattle, pGUI);
+	/*
 	pGUI->PrintMessage("This is Just a Demo. Click to Move to the Next Time Step ...");
 
 	//intialize health of the towers with 200
@@ -53,7 +54,7 @@ int main()
 
 	// Now a demo to move enemies some time steps
 	// TimeStep is a normal integer that is incremented each time by 1
-	for(int TimeStep = 1 ; TimeStep <= 10 ; TimeStep++)
+		for(int TimeStep = 1 ; TimeStep <= 10 ; TimeStep++)
 	{
 		// Clear for redrawing
 		pGUI->ClearStatusBar();
@@ -77,10 +78,37 @@ int main()
 
 		pGUI->GetPointClicked(p);
 	}
-
+	*/
 	delete pGUI;
 	delete pGameBattle;
 	
 	return 0;
 }
 
+void Simulation(Battle *pGameBattle,GUI *pGUI)
+{
+	pGameBattle->Load();
+	pGUI->PrintMessage("Load Successful.");
+	Point p;
+	string msg;
+	int TimeStep = 1;
+	//pGUI->GetPointClicked(p);
+	while (pGameBattle->isFighting())
+	{
+		pGUI->GetPointClicked(p);
+		// Clear for redrawing
+		pGUI->ClearStatusBar();
+		pGUI->ClearBattleArea();
+		pGUI->DrawCastle();
+		pGameBattle->update();
+		// Decrement the distance of each enemy
+		
+
+		// Redraw the enemies
+		pGameBattle->DrawEnemies(pGUI);
+		pGameBattle->killRandom();
+		//pGUI->PrintMessage();
+		TimeStep++;
+	}
+
+}
