@@ -139,35 +139,35 @@ void GUI::DrawCastle() const
 	int L = CastleWidth / 2;
 
 	// 1- Drawing the brown square of the castle
-	pWind->SetPen(BROWN);
-	pWind->SetBrush(BROWN);
-	pWind->DrawRectangle(CastleStartX, CastleStartY, CastleEndX, CastleEndY);
-
+	//pWind->SetPen(BROWN);
+	//pWind->SetBrush(BROWN);
+	//pWind->DrawRectangle(CastleStartX, CastleStartY, CastleEndX, CastleEndY);
+	pWind->DrawImage("images\\MenuItems\\castle.jpg", CastleStartX, CastleStartY, CastleWidth, CastleWidth);
 	// 2- Drawing the 2 brown crossed lines (for making 4 regions)
 	pWind->SetPen(BROWN, 3);
 	pWind->DrawLine(0, YHalfBattleArea, WindWidth, YHalfBattleArea);
 	pWind->DrawLine(WindWidth/2, MenuBarHeight, WindWidth/2, WindHeight-StatusBarHeight);
 
 	// 3- Drawing the 2 white crossed lines (inside the castle)
-	pWind->SetPen(WHITE);
-	pWind->DrawLine(WindWidth/2, YHalfBattleArea - CastleWidth/2, WindWidth/2, YHalfBattleArea + CastleWidth/2);
-	pWind->DrawLine(WindWidth/2 - CastleWidth/2, YHalfBattleArea, WindWidth/2 + CastleWidth/2, YHalfBattleArea);
+	//pWind->SetPen(WHITE);
+	//pWind->DrawLine(WindWidth/2, YHalfBattleArea - CastleWidth/2, WindWidth/2, YHalfBattleArea + CastleWidth/2);
+	//pWind->DrawLine(WindWidth/2 - CastleWidth/2, YHalfBattleArea, WindWidth/2 + CastleWidth/2, YHalfBattleArea);
 
 	// 4- Drawing the 4 white squares inside the castle (one for each tower)
-	pWind->SetPen(WHITE);
-	pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(CastleStartX + L/3, CastleStartY + L/3, CastleStartX + 2*L/3, CastleStartY + 2*L/3);
-	pWind->DrawRectangle(CastleStartX + L/3, CastleEndY - L/3, CastleStartX + 2*L/3, CastleEndY - 2*L/3);
-	pWind->DrawRectangle(CastleEndX - 2*L/3, CastleStartY + L/3, CastleEndX - L/3, CastleStartY + 2*L/3);
-	pWind->DrawRectangle(CastleEndX - 2*L/3, CastleEndY - L/3, CastleEndX - L/3, CastleEndY - 2*L/3);
+	//pWind->SetPen(WHITE);
+	//pWind->SetBrush(WHITE);
+	//pWind->DrawRectangle(CastleStartX + L/3, CastleStartY + L/3, CastleStartX + 2*L/3, CastleStartY + 2*L/3);
+	//pWind->DrawRectangle(CastleStartX + L/3, CastleEndY - L/3, CastleStartX + 2*L/3, CastleEndY - 2*L/3);
+	//pWind->DrawRectangle(CastleEndX - 2*L/3, CastleStartY + L/3, CastleEndX - L/3, CastleStartY + 2*L/3);
+	//pWind->DrawRectangle(CastleEndX - 2*L/3, CastleEndY - L/3, CastleEndX - L/3, CastleEndY - 2*L/3);
 
 	// 5- Writing the letter of each region (A, B, C, D)
-	pWind->SetPen(BROWN);
-	pWind->SetFont(25, BOLD , BY_NAME, "Arial");
-	pWind->DrawString(CastleStartX + 0.44*L, CastleStartY + 5*L/12, "A");
-	pWind->DrawString(CastleStartX + 0.44*L, YHalfBattleArea + 5*L/12, "D");
-	pWind->DrawString(WindWidth/2 + 0.44*L, CastleStartY + 5*L/12, "B");
-	pWind->DrawString(WindWidth/2 + 0.44*L, YHalfBattleArea + 5*L/12, "C");
+	//pWind->SetPen(BROWN);
+	//pWind->SetFont(25, BOLD , BY_NAME, "Arial");
+	//pWind->DrawString(CastleStartX + 0.44*L, CastleStartY + 5*L/12, "A");
+	//pWind->DrawString(CastleStartX + 0.44*L, YHalfBattleArea + 5*L/12, "D");
+	//pWind->DrawString(WindWidth/2 + 0.44*L, CastleStartY + 5*L/12, "B");
+	//pWind->DrawString(WindWidth/2 + 0.44*L, YHalfBattleArea + 5*L/12, "C");
 
 	// 6- Drawing the 2 vertical brown lines at distance 60
 	// that is because some rounding errors may occur if you choose another width and height for the window
