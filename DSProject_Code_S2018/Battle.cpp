@@ -5,10 +5,9 @@ Battle::Battle()
 {
 	currentTime = 0;
 	enemyCount = 0;
-	killed = 0;
 	for (int i = 0; i < NoOfRegions; i++)
 	{
-		enemyRegionalCount[i] = 0;
+		killed[i] = 0;
 	}
 }
 void Battle::killRandom()
@@ -16,21 +15,22 @@ void Battle::killRandom()
 	int list, region, count = 0;
 	for (int i = 0; i < 4;i++)
 	{
-		region = 0;
-		list = 3;
 		region = rand() % 4;
 		list = rand() % 4;
 		Enemy* temp;
 		switch (list)
 		{
 		case 1:
-			tankEnemies[region].pickRand();
+			if(tankEnemies[region].pickRand())
+				killed[region]++;
 			break;
 		case 2:
-			shieldedEnemies[region].pickRand();
+			if(shieldedEnemies[region].pickRand())
+				killed[region]++;
 			break;
 		case 3:
-			normalEnemies[region].pickRand();
+			if(normalEnemies[region].pickRand())
+				killed[region]++;
 			break;
 		default:
 			break;
@@ -43,7 +43,7 @@ void Battle::AddEnemy(Enemy* Ptr)
 	if (enemyCount < MaxEnemyCount)
 	{
 		bEnemiesForDraw[enemyCount++] = Ptr;
-		enemyRegionalCount[Ptr->getRegion()]++;
+		//enemyRegionalCount[Ptr->getRegion()]++;
 	}
 	// Note that this function doesn't allocate any enemy objects
 	// It only makes the first free pointer in the array
@@ -97,11 +97,32 @@ void Battle::print()
 	GUI *pGUI = new GUI;
 
 }
-void Battle::Load()
+//print towers,active and inactive enemies info.
+void Battle::print(GUI *pGUI)
+{
+	string castleInfo;
+	string region;
+	string enemies;
+	pGUI->PrintMessage("format of printing an Enemy (type,Id,Health,ArrivalTime,firePower,Relod) and printing tower (health,firepower,number)" );
+	pGUI->setHeight(1);
+	pGUI->PrintMessage("Castle Info:");
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		pGUI->setHeight(2+i);
+		castleInfo = bCastle.print(i);
+		region = getRegion(i);
+		pGUI->setWidth(0);
+		pGUI->PrintMessage("Region " + region+ "killed enemies:"+to_string(killed[i]));
+		pGUI->setWidth(2);
+		pGUI->PrintMessage("Active enemies Info: ");
+		enemies=normalEnemies[i].print()+tankEnemies[i].print()+ shieldedEnemies[i].print();
+	}
+}
+// function that loads the inputs from the file 
+void Battle::Load(GUI*pGUI)
 {
 	string fileName;
 	ifstream inFile;
-	GUI * pGUI = new GUI;
 	pGUI->PrintMessage("Enter the file name ");
 	fileName = pGUI->GetString();
 	inFile.open(fileName+".txt"); //opening the file that we are going to read the data from it
@@ -171,7 +192,6 @@ void Battle::Load()
 	if (inFile.is_open())
 		inFile.close();
 	pGUI->PrintMessage("Load Successful.");
-	delete pGUI;
 }
 bool Battle::isFighting()
 {
@@ -200,6 +220,31 @@ REGION Battle::getRegion(char cRegion)
 		break;
 	default:
 		r = A_REG;//default (this case should never happen)
+		break;
+
+	}
+	return r;
+}
+// return char type of enum type
+char Battle::getRegion(REGION cRegion)
+{
+	char r;
+	switch (cRegion)
+	{
+	case A_REG:
+		r = 'A';
+		break;
+	case B_REG:
+		r = 'B';
+		break;
+	case C_REG:
+		r = 'C';
+		break;
+	case D_REG:
+		r = 'D';
+		break;
+	default:
+		r ='A';//default (this case should never happen)
 		break;
 
 	}

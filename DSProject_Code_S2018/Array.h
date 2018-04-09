@@ -22,8 +22,9 @@ public:
 	bool remove(T*);						//Removes a specific pointer from the array.
 	void clear();							//Clears all the pointers from the array.
 	bool isEmpty();							//Checks whether the array is empty.
-	void pickRand();							//Returns a random enemy from the array or NULL if it's empty.
+	bool pickRand();							//Returns a random enemy from the array or NULL if it's empty.
 	T get(int) throw (PrecondViolatedExcep);//Gets an item using it's index if it exists.
 	void update();							//update list (remove killed enemies from the list)
+//	void print(GUI*);
 	~Array();
 };

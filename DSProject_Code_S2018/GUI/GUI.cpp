@@ -1,5 +1,6 @@
 #include "GUI.h"
-
+int height=150;
+int width=0;
 //////////////////////////////////////////////////////////////////////////////////////////
 GUI::GUI()
 {
@@ -28,6 +29,17 @@ void GUI::GetPointClicked(Point &P) const
 	pWind->WaitMouseClick(P.x, P.y);	//Wait for mouse click
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
+void GUI::setHeight(int i)
+{
+	height = 150;
+	height -= (15 * i);
+}
+void GUI::setWidth(int i)
+{
+	width = 0;
+	width = (50 * i);
+}
 string GUI::GetString() const 
 {
 	string Label;
@@ -54,13 +66,14 @@ string GUI::GetString() const
 
 void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 {
-	ClearStatusBar();	//First clear the status bar
+//	ClearStatusBar();	//First clear the status bar
 	
 	pWind->SetPen(DARKRED);
 	pWind->SetFont(18, BOLD , BY_NAME, "Arial");   
-	pWind->DrawString(10, WindHeight - (int) (StatusBarHeight/1.5), msg); // You may need to change these coordinates later 
+	pWind->DrawString(width, WindHeight - (int) (height), msg); // You may need to change these coordinates later 
 	                                                                      // to be able to write multi-line
 }
+//StatusBarHeight / 1.5
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::DrawString(const int iX, const int iY, const string Text)
 {

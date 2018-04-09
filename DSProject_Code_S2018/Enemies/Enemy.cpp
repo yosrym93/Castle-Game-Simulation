@@ -8,9 +8,16 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	SetDistance(d);
 }
 
+string Enemy::print()
+{
+	string printInfo;
+	string type=getType();
+	printInfo =  "( "+ type +" ,"+to_string(id) +" ,"+ to_string(health)+" ,"+ to_string(arrivalTime) +" ," +to_string(firePower) +" ,"+ to_string(reload)+" )";
+	return printInfo;
+}
 Enemy::~Enemy()
 {
-}
+} 
 
 color Enemy::getColor() const
 {
@@ -79,6 +86,30 @@ void Enemy::setPow(int rpow)
 void Enemy::setRld(int rld)
 {
 	reload = (rld > 0) ? rld : 10;//assuming 10 is the default
+}
+//return the type as a string
+string Enemy::getType()
+{
+	switch (type)
+	{
+	case paver:
+		return "Paver";
+		break;
+	case fighter:
+		return "Fighter";
+		break;
+	case shielded:
+		return "Shielded fighter";
+		break;
+	case tank:
+		return "Tank";
+		break;
+	case balloon:
+		return "Balloon";
+		break;
+	default:
+		return"";
+	}
 }
 
 void Enemy::setType(int rtype)

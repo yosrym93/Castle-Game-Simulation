@@ -23,7 +23,7 @@ protected:
 	double firePower;
 	int deathTime;
 	int firstShot;
-	
+
 	//
 	// TODO: Add More Data Members As Needed
 	//
@@ -35,6 +35,7 @@ public:
 	color getColor() const;
 	REGION getRegion() const;
 	void decrementDist();
+	string print();
 	//setters and getters 
 	void setId(int);
 	int getId() const;
@@ -47,6 +48,8 @@ public:
 	void setType(int);
 	int getDistance() const;
 	double getHealth()const;
+	string getType(); //return the type as a string 
+
 	// Virtual Functions: ----------------
 
 	//virtual void Move() = 0;	    //All enemies can move

@@ -10,11 +10,13 @@ class Tower
 	//
 
 public:
-
+	//setter and getters..
 	void setHealth(double h);
-	double GetHealth() const;
+	double getHealth() const;
 	void setNum(int );
 	void setFirePower(int );
+	int getMaxNum()const;
+	int getFirePower()const;
 	//
 	// TODO: Add More Member Functions As Needed
 	//

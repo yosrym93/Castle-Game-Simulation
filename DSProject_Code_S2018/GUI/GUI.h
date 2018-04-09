@@ -62,6 +62,10 @@ public:
 	void ClearStatusBar() const;    // clears the status bar
 	void ClearBattleArea() const;	// clears the Battle area from all drawn enemies
 
+	void setHeight(int);
+
+	void setWidth(int);
+
 	void DrawCastle() const;	    // draws the castle with the towers and 4 regions
 	void DrawEnemies(Enemy* enemies[],int size) const;  
 									// No matter what list type you are using to hold enemies, 

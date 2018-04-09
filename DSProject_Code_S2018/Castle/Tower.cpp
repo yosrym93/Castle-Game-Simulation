@@ -9,11 +9,19 @@ void Tower::setHealth(double h)
 		health = 0; // killed
 }
 
-double Tower::GetHealth() const
+double Tower::getHealth() const
 {
 	return health;
 }
 
+int Tower::getFirePower()const
+{
+	return firePower;
+}
+int Tower::getMaxNum()const
+{
+	return N;
+}
 void Tower::setNum(int rn)
 {
 	N=(rn > 0) ? rn: 5;//assuming default number is 5

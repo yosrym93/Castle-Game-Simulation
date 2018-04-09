@@ -9,8 +9,8 @@ ActiveEnemies::ActiveEnemies()
 void ActiveEnemies::addEnemy(Enemy* newEnemy) {
 	enemiesList.push(newEnemy);
 }
-void ActiveEnemies::pickRand() {
-	 enemiesList.pickRand();
+bool ActiveEnemies::pickRand() {
+	 return enemiesList.pickRand();
 }
 
 int ActiveEnemies::getCount() const {
@@ -28,6 +28,19 @@ void ActiveEnemies::clear() {
 void ActiveEnemies::update()
 {
 	enemiesList.update();
+}
+
+string ActiveEnemies::print()
+{
+	int size = enemiesList.getCount();
+	Enemy* enemy;
+	string print;
+	for (int i = 0; i < size; i++)
+	{
+		enemy =  enemiesList.get(i);
+		print = print +" ,"+ enemy->print();
+	}
+	return print;
 }
 
 ActiveEnemies::~ActiveEnemies()
