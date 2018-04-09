@@ -24,7 +24,7 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 	pGameBattle->Load(pGUI);
 	Point p;
 	string msg;
-	int TimeStep = 1;
+	int TimeStep = 0;
 	//pGUI->GetPointClicked(p);
 	while (pGameBattle->isFighting())
 	{
@@ -43,7 +43,7 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 		//pGameBattle->print();
 		TimeStep++;
 	}
-
+	system("pause");
 }
 /*
 pGUI->PrintMessage("This is Just a Demo. Click to Move to the Next Time Step ...");

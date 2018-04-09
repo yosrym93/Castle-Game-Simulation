@@ -19,12 +19,9 @@ void Array<T> ::update()
 template<class T>
 bool Array<T>::pickRand()
 {
-	if (isEmpty()) return false ;
-	T*ran;
-	if (size == 1)
-		 ran = arr[0];
-	else
-		 ran = arr[rand() % size];
+	if (isEmpty()) 
+		return false ;
+	T* ran = arr[rand() % size];
 	ran->setHealth(0);
 	return true;
 }

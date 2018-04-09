@@ -12,25 +12,22 @@ Battle::Battle()
 }
 void Battle::killRandom()
 {
-	int list, region, count = 0;
+	int list, region;
 	for (int i = 0; i < 4;i++)
-	{
+	{ 
 		region = rand() % 4;
 		list = rand() % 4;
 		Enemy* temp;
 		switch (list)
 		{
 		case 1:
-			if(tankEnemies[region].pickRand())
-				killed[region]++;
+			tankEnemies[region].pickRand();
 			break;
 		case 2:
-			if(shieldedEnemies[region].pickRand())
-				killed[region]++;
+			shieldedEnemies[region].pickRand();
 			break;
 		case 3:
-			if(normalEnemies[region].pickRand())
-				killed[region]++;
+			normalEnemies[region].pickRand();
 			break;
 		default:
 			break;
@@ -61,30 +58,31 @@ Castle * Battle::GetCastle()
 }
 void Battle::update()
 {
+	inactiveEnemies.activateEnemies(*this);
 	double health;
-	currentTime++;
 	Enemy*temp;
 	for (int i = 0;i < enemyCount;i++)
 	{
 		health=bEnemiesForDraw[i]->getHealth();
 		if(health==0)
 		{
+			killed[bEnemiesForDraw[i]->getRegion()]++;
 			bEnemiesForDraw[i] = bEnemiesForDraw[enemyCount-1];
-			//delete bEnemiesForDraw[enemyCount - 1];
 			enemyCount--;
-			for (int j = 0;j < NoOfRegions;j++)
-			{
-				normalEnemies[j].update();
-				shieldedEnemies[j].update();
-				tankEnemies[j].update();
-			}
+			
 
 		}
 		else {
 			bEnemiesForDraw[i]->decrementDist();
 		}
 	}
-	inactiveEnemies.activateEnemies(*this);
+	for (int j = 0;j < NoOfRegions;j++)
+	{
+		normalEnemies[j].update();
+		shieldedEnemies[j].update();
+		tankEnemies[j].update();
+	}
+	currentTime++;
 }
 
 //function that prepare the war (load all the Battle specifications)

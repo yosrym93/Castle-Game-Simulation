@@ -184,23 +184,14 @@ bool List<T>::isEmpty() const {
 
 template<typename T>
 bool List<T>::pickRand() {
-	if (count == 0) {
+	if (count == 0)
 		return false ;
-	}
-	else if (count == 1)
-	{
-		int ran = 0;
-		T temp = get(ran);
-		temp->setHealth(0);//kill the enemy
-		return true;
-	}
-	else {
 		int ran = rand() % count;
 		T temp = get(ran);
 		temp->setHealth(0);//kill the enemy
 		return true;
 	}
-}
+
 
 template <typename T>
 List<T>::~List() {
