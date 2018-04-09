@@ -16,8 +16,8 @@ private:
 	// Some Static Constant Data Members: ---------------------
 
 	static const int	
-		WindWidth=1200, WindHeight=650,		//Window width and height
-		StatusBarHeight = 150,	//Status Bar Height
+		WindWidth=1200, WindHeight=670,		//Window width and height
+		StatusBarHeight = 170,	//Status Bar Height
 		MenuBarHeight = 50,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
 		MenuItemWidth = 80,		//Width of each item in menu bar menu
 		
@@ -56,11 +56,17 @@ public:
 
 	// Output Functions  ---------------------------
 	void PrintMessage(string msg) const; // prints a message in the status bar
+	void updatePrintedMessage(string msg) const; // prints a message in the status bar
+
 	void DrawString(const int iX, const int iY, const string Text); // prints a message in the passed coordinates
 
 	void DrawMenu() const;	// draws the game menu
 	void ClearStatusBar() const;    // clears the status bar
 	void ClearBattleArea() const;	// clears the Battle area from all drawn enemies
+
+	void setHeight(int);
+
+	void setWidth(int);
 
 	void DrawCastle() const;	    // draws the castle with the towers and 4 regions
 	void DrawEnemies(Enemy* enemies[],int size) const;  

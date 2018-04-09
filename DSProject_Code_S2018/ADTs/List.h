@@ -1,7 +1,6 @@
 #pragma once
 #include "Node.h"
 #include "PrecondViolatedExcep.h"
-
 template <typename T>
 class List {
 	Node<T>* head;
@@ -25,8 +24,8 @@ public:
 	bool isEmpty() const;
 	int getCount() const;
 
-	void pickRand();								//picks a random element and kill it(by setting the health = 0), for phase 1
-	
+	bool pickRand();								//picks a random element and kill it(by setting the health = 0), for phase 1
+//	void print(GUI*);
 	~List();
 };
 
@@ -35,6 +34,27 @@ List<T>::List() {
 	head = nullptr;
 	count = 0;
 }
+
+/*template <typename T>
+void List<T>::print(GUI*pGUI)
+{
+	if (head == nullptr)
+	{
+		pGUI->PrintMessage("No enemies");
+	}
+	else {
+		Node<T>*curr = head;
+		string print;
+		while (curr != nullptr)
+		{
+			print = curr->getData()->print();
+			pGUI->PrintMessage(print);
+			curr = curr->getNext();
+		}
+	}
+
+}*/
+
 template <typename T>
 void List<T>::update() {
 	Node<T>*curr = head;
@@ -163,22 +183,15 @@ bool List<T>::isEmpty() const {
 }
 
 template<typename T>
-void List<T>::pickRand() {
-	if (count == 0) {
-		return ;
-	}
-	else if (count == 1)
-	{
-		int ran = 0;
-		T temp = get(ran);
-		temp->setHealth(0);//kill the enemy
-	}
-	else {
+bool List<T>::pickRand() {
+	if (count == 0)
+		return false ;
 		int ran = rand() % count;
 		T temp = get(ran);
 		temp->setHealth(0);//kill the enemy
+		return true;
 	}
-}
+
 
 template <typename T>
 List<T>::~List() {

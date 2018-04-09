@@ -5,19 +5,16 @@ Battle::Battle()
 {
 	currentTime = 0;
 	enemyCount = 0;
-	killed = 0;
 	for (int i = 0; i < NoOfRegions; i++)
 	{
-		enemyRegionalCount[i] = 0;
+		killed[i] = 0;
 	}
 }
 void Battle::killRandom()
 {
-	int list, region, count = 0;
+	int list, region;
 	for (int i = 0; i < 4;i++)
-	{
-		region = 0;
-		list = 3;
+	{ 
 		region = rand() % 4;
 		list = rand() % 4;
 		Enemy* temp;
@@ -43,7 +40,7 @@ void Battle::AddEnemy(Enemy* Ptr)
 	if (enemyCount < MaxEnemyCount)
 	{
 		bEnemiesForDraw[enemyCount++] = Ptr;
-		enemyRegionalCount[Ptr->getRegion()]++;
+		//enemyRegionalCount[Ptr->getRegion()]++;
 	}
 	// Note that this function doesn't allocate any enemy objects
 	// It only makes the first free pointer in the array
@@ -61,30 +58,31 @@ Castle * Battle::GetCastle()
 }
 void Battle::update()
 {
+	inactiveEnemies.activateEnemies(*this);
 	double health;
-	currentTime++;
 	Enemy*temp;
 	for (int i = 0;i < enemyCount;i++)
 	{
 		health=bEnemiesForDraw[i]->getHealth();
 		if(health==0)
 		{
+			killed[bEnemiesForDraw[i]->getRegion()]++;
 			bEnemiesForDraw[i] = bEnemiesForDraw[enemyCount-1];
-			//delete bEnemiesForDraw[enemyCount - 1];
 			enemyCount--;
-			for (int j = 0;j < NoOfRegions;j++)
-			{
-				normalEnemies[j].update();
-				shieldedEnemies[j].update();
-				tankEnemies[j].update();
-			}
+			
 
 		}
 		else {
 			bEnemiesForDraw[i]->decrementDist();
 		}
 	}
-	inactiveEnemies.activateEnemies(*this);
+	for (int j = 0;j < NoOfRegions;j++)
+	{
+		normalEnemies[j].update();
+		shieldedEnemies[j].update();
+		tankEnemies[j].update();
+	}
+	currentTime++;
 }
 
 //function that prepare the war (load all the Battle specifications)
@@ -97,11 +95,38 @@ void Battle::print()
 	GUI *pGUI = new GUI;
 
 }
-void Battle::Load()
+//print towers,active and inactive enemies info.
+void Battle::print(GUI *pGUI)
+{
+	pGUI->ClearStatusBar();
+	string castleInfo;
+	string region;
+	string enemies;
+	pGUI->setHeight(0);
+	pGUI->setWidth(0);
+	pGUI->updatePrintedMessage("Format of printing: Enemy(Type,ID,Health,ArrivalTime,FirePwr,Rld), Tower(Health,Firepwr,No.)" );
+	pGUI->setHeight(1);
+	pGUI->updatePrintedMessage("Castle info:");
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		pGUI->setHeight(2+2*i);
+		castleInfo = bCastle.print(i);
+		region = getRegion(i);
+		pGUI->setWidth(0);
+		pGUI->updatePrintedMessage(("Region " + region+ ". Killed Enemies:"+to_string(killed[i])+"  "+castleInfo));
+		pGUI->setWidth(0);
+		pGUI->setHeight(3 + 2*i);
+		pGUI->updatePrintedMessage("Active Enemies info: ");
+		enemies=normalEnemies[i].print()+tankEnemies[i].print()+ shieldedEnemies[i].print();
+		pGUI->setWidth(3);
+		pGUI->updatePrintedMessage(enemies);
+	}
+}
+// function that loads the inputs from the file 
+void Battle::Load(GUI*pGUI)
 {
 	string fileName;
 	ifstream inFile;
-	GUI * pGUI = new GUI;
 	pGUI->PrintMessage("Enter the file name ");
 	fileName = pGUI->GetString();
 	inFile.open(fileName+".txt"); //opening the file that we are going to read the data from it
@@ -171,7 +196,6 @@ void Battle::Load()
 	if (inFile.is_open())
 		inFile.close();
 	pGUI->PrintMessage("Load Successful.");
-	delete pGUI;
 }
 bool Battle::isFighting()
 {
@@ -200,6 +224,31 @@ REGION Battle::getRegion(char cRegion)
 		break;
 	default:
 		r = A_REG;//default (this case should never happen)
+		break;
+
+	}
+	return r;
+}
+// return char type of enum type
+char Battle::getRegion(int cRegion)
+{
+	char r;
+	switch (cRegion)
+	{
+	case A_REG:
+		r = 'A';
+		break;
+	case B_REG:
+		r = 'B';
+		break;
+	case C_REG:
+		r = 'C';
+		break;
+	case D_REG:
+		r = 'D';
+		break;
+	default:
+		r ='A';//default (this case should never happen)
 		break;
 
 	}

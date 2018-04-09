@@ -17,15 +17,13 @@ void Array<T> ::update()
 	}
 }
 template<class T>
-void Array<T>::pickRand()
+bool Array<T>::pickRand()
 {
-	if (isEmpty()) return ;
-	T*ran;
-	if (size == 1)
-		 ran = arr[0];
-	else
-		 ran = arr[rand() % size];
+	if (isEmpty()) 
+		return false ;
+	T* ran = arr[rand() % size];
 	ran->setHealth(0);
+	return true;
 }
 template<class T>
 void Array<T>::quickSort(int start, int pivot)
@@ -132,15 +130,33 @@ bool Array<T>::isEmpty()
 }
 
 template<class T>
-T Array<T>::get(int ind) throw(PrecondViolatedExcep)
+T* Array<T>::get(int ind) throw(PrecondViolatedExcep)
 {
 	if (ind >= size || ind < 0)
 	{
 		string error = "get() called with an invalid index.";
 		throw (new PrecondViolatedExcep(error));
 	}
+	else return arr[ind];
 }
 
+/*template<class T>
+void Array<T>::print(GUI*pGUI)
+{
+	string print;
+	if (size == 0)
+	{
+		pGUI->PrintMessage("No enemies");
+	}
+	else {
+
+		for(int i=0;i<size;i++)
+		{
+			print = arr[i]->print();
+			pGUI->PrintMessage(print);
+		}
+	}
+}*/
 template <class T>
 Array<T>::~Array()
 {
