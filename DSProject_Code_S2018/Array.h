@@ -9,18 +9,21 @@ class Array
 	T** arr;								//Array of pointers to Template.
 	int size;								//Array size.
 	int capacity;							//Array capacity.
-	void swap(T* &f, T *&s);				//Swaps two elements in sorting.
+	void swap(T*&f, T*&s);					//Swaps two elements in sorting.
 	void quickSort(int start, int pivot);	//Sorts using quicksort technique.
 	void updateCapacity();					//Adjusts array's capacity based on needed size.
 
 
 public:
 	Array();								//Constructor for the array.
+	int getCount() const;					//Returns size.
 	void insert(T* x);						//Adds new element to the array.
 	void sort();							//Sorts the array.
 	bool remove(T*);						//Removes a specific pointer from the array.
 	void clear();							//Clears all the pointers from the array.
 	bool isEmpty();							//Checks whether the array is empty.
+	void pickRand();							//Returns a random enemy from the array or NULL if it's empty.
 	T get(int) throw (PrecondViolatedExcep);//Gets an item using it's index if it exists.
+	void update();							//update list (remove killed enemies from the list)
 	~Array();
 };

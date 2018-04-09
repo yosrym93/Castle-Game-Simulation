@@ -7,12 +7,26 @@ void ShieldedEnemies::addEnemy(Enemy * newEnemy)
 {
 	ShieldedArray.insert(newEnemy);
 }
-
-void ShieldedEnemies::clear()
+int ShieldedEnemies::getCount() const
+{
+	return ShieldedArray.getCount();
+}
+ void ShieldedEnemies::pickRand()
+	{
+	 ShieldedArray.pickRand();
+	}
+ bool ShieldedEnemies::isEmpty()
+ {
+	 return ShieldedArray.isEmpty();
+ }
+ void ShieldedEnemies::clear()
 {
 	ShieldedArray.clear();
 }
-
+ void ShieldedEnemies::update()
+ {
+	 ShieldedArray.update();
+ }
 
 ShieldedEnemies::~ShieldedEnemies()
 {

@@ -16,6 +16,7 @@ class Castle
 public:
 
 	Castle();
+	string print();
 	void setTowersHealth(double h);
 	void setTowersFirePower(int pow);
 	void setTowersNum(int n);
