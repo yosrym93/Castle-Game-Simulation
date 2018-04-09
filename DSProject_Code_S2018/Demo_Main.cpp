@@ -40,7 +40,7 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 		pGameBattle->DrawEnemies(pGUI);
 		pGameBattle->killRandom();
 		//PrintInfo about tower and active enemies and inactive enemies 
-		pGameBattle->print();
+		//pGameBattle->print();
 		TimeStep++;
 	}
 

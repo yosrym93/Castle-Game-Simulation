@@ -100,22 +100,28 @@ void Battle::print()
 //print towers,active and inactive enemies info.
 void Battle::print(GUI *pGUI)
 {
+	pGUI->ClearStatusBar();
 	string castleInfo;
 	string region;
 	string enemies;
-	pGUI->PrintMessage("format of printing an Enemy (type,Id,Health,ArrivalTime,firePower,Relod) and printing tower (health,firepower,number)" );
+	pGUI->setHeight(0);
+	pGUI->setWidth(0);
+	pGUI->updatePrintedMessage("Format of printing: Enemy(Type,ID,Health,ArrivalTime,FirePwr,Rld), Tower(Health,Firepwr,No.)" );
 	pGUI->setHeight(1);
-	pGUI->PrintMessage("Castle Info:");
+	pGUI->updatePrintedMessage("Castle info:");
 	for (int i = 0; i < NoOfRegions; i++)
 	{
-		pGUI->setHeight(2+i);
+		pGUI->setHeight(2+2*i);
 		castleInfo = bCastle.print(i);
 		region = getRegion(i);
 		pGUI->setWidth(0);
-		pGUI->PrintMessage("Region " + region+ "killed enemies:"+to_string(killed[i]));
-		pGUI->setWidth(2);
-		pGUI->PrintMessage("Active enemies Info: ");
+		pGUI->updatePrintedMessage(("Region " + region+ ". Killed Enemies:"+to_string(killed[i])+"  "+castleInfo));
+		pGUI->setWidth(0);
+		pGUI->setHeight(3 + 2*i);
+		pGUI->updatePrintedMessage("Active Enemies info: ");
 		enemies=normalEnemies[i].print()+tankEnemies[i].print()+ shieldedEnemies[i].print();
+		pGUI->setWidth(3);
+		pGUI->updatePrintedMessage(enemies);
 	}
 }
 // function that loads the inputs from the file 
@@ -226,7 +232,7 @@ REGION Battle::getRegion(char cRegion)
 	return r;
 }
 // return char type of enum type
-char Battle::getRegion(REGION cRegion)
+char Battle::getRegion(int cRegion)
 {
 	char r;
 	switch (cRegion)

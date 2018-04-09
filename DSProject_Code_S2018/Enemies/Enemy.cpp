@@ -12,7 +12,7 @@ string Enemy::print()
 {
 	string printInfo;
 	string type=getType();
-	printInfo =  "( "+ type +" ,"+to_string(id) +" ,"+ to_string(health)+" ,"+ to_string(arrivalTime) +" ," +to_string(firePower) +" ,"+ to_string(reload)+" )";
+	printInfo =  "( "+ type +" ,"+to_string(id) +" ,"+ to_string((int)health)+" ,"+ to_string(arrivalTime) +" ," +to_string((int)firePower) +" ,"+ to_string(reload)+" )";
 	return printInfo;
 }
 Enemy::~Enemy()

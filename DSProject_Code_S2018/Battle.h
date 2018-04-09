@@ -55,7 +55,7 @@ public:
 	void Load(GUI*); // load all enemies in the inactive queue
 	bool isFighting(); //are there still ENEMIES ALIVE????!!
 	REGION getRegion(char);//converting char type into enum type
-	char getRegion(REGION); //converting enum type into char type
+	char getRegion(int); //converting enum type into char type
 	void print(GUI*);//print towers,active and inactive enemies info.
 	//
 	// TODO: Add More Member Functions As Needed

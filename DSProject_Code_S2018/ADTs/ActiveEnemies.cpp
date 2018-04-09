@@ -38,7 +38,9 @@ string ActiveEnemies::print()
 	for (int i = 0; i < size; i++)
 	{
 		enemy =  enemiesList.get(i);
-		print = print +" ,"+ enemy->print();
+		if(i!=0)
+		print = print +", "+ enemy->print();
+		else print = enemy->print();
 	}
 	return print;
 }

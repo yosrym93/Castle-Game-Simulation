@@ -36,8 +36,10 @@ string ShieldedEnemies::print()
 	 string print;
 	 for (int i = 0; i < size; i++)
 	 {
-		 enemy = & ShieldedArray.get(i);
-		 print = print + " ," + enemy->print();
+		 enemy = ShieldedArray.get(i);
+		 if (i != 0)
+			 print = print + ", " + enemy->print();
+		 else print = enemy->print();
 	 }
 	 return print;
  }

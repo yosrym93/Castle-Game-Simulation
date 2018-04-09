@@ -133,13 +133,14 @@ bool Array<T>::isEmpty()
 }
 
 template<class T>
-T Array<T>::get(int ind) throw(PrecondViolatedExcep)
+T* Array<T>::get(int ind) throw(PrecondViolatedExcep)
 {
 	if (ind >= size || ind < 0)
 	{
 		string error = "get() called with an invalid index.";
 		throw (new PrecondViolatedExcep(error));
 	}
+	else return arr[ind];
 }
 
 /*template<class T>
