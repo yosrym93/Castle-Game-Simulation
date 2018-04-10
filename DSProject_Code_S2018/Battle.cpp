@@ -64,7 +64,7 @@ Castle * Battle::GetCastle()
 void Battle::update(int cTime)
 {
 	currentTime = cTime;
-	inactiveEnemies.activateEnemies(*this);
+	
 	double health;
 	Enemy*temp;
 	for (int i = 0;i < enemyCount;i++)
@@ -75,7 +75,7 @@ void Battle::update(int cTime)
 			killed[bEnemiesForDraw[i]->getRegion()]++;
 			bEnemiesForDraw[i] = bEnemiesForDraw[enemyCount-1];
 			enemyCount--;
-			
+			i--;
 
 		}
 		else {
@@ -88,6 +88,8 @@ void Battle::update(int cTime)
 		shieldedEnemies[j].update();
 		tankEnemies[j].update();
 	}
+
+	inactiveEnemies.activateEnemies(*this);
 }
 
 //function that prepare the war (load all the Battle specifications)
