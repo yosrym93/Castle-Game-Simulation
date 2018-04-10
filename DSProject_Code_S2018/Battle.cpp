@@ -63,6 +63,7 @@ Castle * Battle::GetCastle()
 //Updates all lists and the GUI array
 void Battle::update()
 {
+	currentTime++;
 	inactiveEnemies.activateEnemies(*this);
 	double health;
 	Enemy*temp;
@@ -87,18 +88,12 @@ void Battle::update()
 		shieldedEnemies[j].update();
 		tankEnemies[j].update();
 	}
-	currentTime++;
 }
 
 //function that prepare the war (load all the Battle specifications)
 int Battle::getTotalAlive()
 {
 	return enemyCount;
-}
-void Battle::print()
-{
-	GUI *pGUI = new GUI;
-
 }
 //print towers,active and inactive enemies info.
 void Battle::print(GUI *pGUI)
@@ -197,10 +192,16 @@ void Battle::Load(GUI*pGUI)
 			inactiveEnemies.addEnemy(pEnemy);
 			inFile >> id;
 		}
+		pGUI->PrintMessage("Load Successful.");
+	}
+	else {
+		Point p;
+		pGUI->PrintMessage("No file with this name.");
+		pGUI->GetPointClicked(p);
+		Load(pGUI);
 	}
 	if (inFile.is_open())
 		inFile.close();
-	pGUI->PrintMessage("Load Successful.");
 }
 bool Battle::isFighting()
 {
