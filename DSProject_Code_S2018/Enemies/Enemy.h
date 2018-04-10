@@ -48,7 +48,8 @@ public:
 	void setType(int);
 	int getDistance() const;
 	double getHealth()const;
-	string getType(); //return the type as a string 
+	string getTypeStr() const; //return the type as a string 
+	bool isKilled();
 
 	// Virtual Functions: ----------------
 

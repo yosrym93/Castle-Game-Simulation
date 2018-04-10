@@ -8,11 +8,11 @@ class ActiveEnemies
 public:
 	ActiveEnemies();
 	void addEnemy(Enemy* newEnemy);
-	bool pickRand();				//for phase 1: picks a random enemy and sets its health to zero.
+	bool killRand();				//for phase 1: picks a random enemy and sets its health to zero.
 	int getCount() const;
 	bool isEmpty() const;
 	void clear();
-	void update();
+	void update();					//Updates enemies in the active list
 	string print();
 	~ActiveEnemies();
 };

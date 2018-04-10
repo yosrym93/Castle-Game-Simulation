@@ -17,13 +17,11 @@ void Array<T> ::update()
 	}
 }
 template<class T>
-bool Array<T>::pickRand()
+T* Array<T>::pickRand()
 {
-	if (isEmpty()) 
-		return false ;
-	T* ran = arr[rand() % size];
-	ran->setHealth(0);
-	return true;
+	if (size == 0)
+		return nullptr;
+	return arr[rand() % size];
 }
 template<class T>
 void Array<T>::quickSort(int start, int pivot)

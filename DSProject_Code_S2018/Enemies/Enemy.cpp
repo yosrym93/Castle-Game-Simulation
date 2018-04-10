@@ -11,7 +11,7 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 string Enemy::print()
 {
 	string printInfo;
-	string type=getType();
+	string type=getTypeStr();
 	printInfo =  "( "+ type +" ,"+to_string(id) +" ,"+ to_string((int)health)+" ,"+ to_string(arrivalTime) +" ," +to_string((int)firePower) +" ,"+ to_string(reload)+" )";
 	return printInfo;
 }
@@ -88,7 +88,7 @@ void Enemy::setRld(int rld)
 	reload = (rld > 0) ? rld : 10;//assuming 10 is the default
 }
 //return the type as a string
-string Enemy::getType()
+string Enemy::getTypeStr () const
 {
 	switch (type)
 	{
@@ -134,4 +134,10 @@ void Enemy::setType(int rtype)
 	default:
 		break;
 	}
+}
+
+bool Enemy::isKilled() {
+	if (health == 0)
+		return true;
+	return false;
 }

@@ -1,30 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="CMUgraphicsLib">
-      <UniqueIdentifier>{a8aa66fb-3f0e-4fb3-8004-4280a8142c45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CMUgraphicsLib\JPEG">
-      <UniqueIdentifier>{42ccd24f-e496-4c7d-acc8-2240fef71767}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI">
-      <UniqueIdentifier>{207b73e3-f955-4a8a-8da9-738eff09163b}</UniqueIdentifier>
+    <Filter Include="ADTs">
+      <UniqueIdentifier>{d9ba3cd3-f9d2-4762-94bc-1b9bf8ce42b7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Castle">
-      <UniqueIdentifier>{fae09400-ab11-4662-a0e7-5dae6dbea84b}</UniqueIdentifier>
+      <UniqueIdentifier>{90cbc859-6a59-4d99-ab2b-39b1bac2e91c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CMUgraphicsLib">
+      <UniqueIdentifier>{04c21c27-91c2-424d-8423-f16c800cdcae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CMUgraphicsLib\jpeg">
+      <UniqueIdentifier>{cc772765-1d33-4cea-8c0f-13b9ab6d7773}</UniqueIdentifier>
     </Filter>
     <Filter Include="Enemies">
-      <UniqueIdentifier>{0af33dc2-c49c-4540-b583-4c48cacf990e}</UniqueIdentifier>
+      <UniqueIdentifier>{2c16d37a-6a76-4607-bac2-e55aadfc731f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ADTs">
-      <UniqueIdentifier>{7de70c2c-aa0e-4857-916b-cab0cc73bc36}</UniqueIdentifier>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{e3d962fd-4331-483a-991a-b309d68eb7dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ADTs\ActiveEnemies.cpp">
+      <Filter>ADTs</Filter>
+    </ClCompile>
+    <ClCompile Include="ADTs\InactiveEnemies.cpp">
+      <Filter>ADTs</Filter>
+    </ClCompile>
+    <ClCompile Include="Castle\Castle.cpp">
+      <Filter>Castle</Filter>
+    </ClCompile>
+    <ClCompile Include="Castle\Tower.cpp">
+      <Filter>Castle</Filter>
+    </ClCompile>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="CMUgraphicsLib\colors.cpp">
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\image.cpp">
@@ -43,107 +58,93 @@
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jcomapi.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jcparam.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdapimin.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdapistd.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdatasrc.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdcoefct.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdcolor.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jddctmgr.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdhuff.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdinput.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdmainct.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdmarker.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdmaster.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdmerge.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdphuff.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdpostct.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdsample.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jdtrans.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jerror.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jidctflt.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jidctfst.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jidctint.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jidctred.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jmemmgr.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jmemnobs.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant1.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant2.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
-    </ClCompile>
-    <ClCompile Include="CMUgraphicsLib\colors.cpp">
-      <Filter>CMUgraphicsLib</Filter>
-    </ClCompile>
-    <ClCompile Include="Battle.cpp" />
-    <ClCompile Include="Demo_Main.cpp" />
-    <ClCompile Include="GUI\GUI.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Castle\Castle.cpp">
-      <Filter>Castle</Filter>
-    </ClCompile>
-    <ClCompile Include="Castle\Tower.cpp">
-      <Filter>Castle</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemies\Enemy.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClCompile>
     <ClCompile Include="Enemies\Balloon.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemies\Enemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Enemies\Fighter.cpp">
@@ -158,14 +159,35 @@
     <ClCompile Include="Enemies\Tank.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="ADTs\ActiveEnemies.cpp">
-      <Filter>ADTs</Filter>
-    </ClCompile>
-    <ClCompile Include="ADTs\InactiveEnemies.cpp">
-      <Filter>ADTs</Filter>
+    <ClCompile Include="GUI\GUI.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ADTs\ActiveEnemies.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="ADTs\InactiveEnemies.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="ADTs\List.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="ADTs\Node.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="ADTs\PrecondViolatedExcep.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="ADTs\Queue.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="Castle\Castle.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
+    <ClInclude Include="Castle\Tower.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
       <Filter>CMUgraphicsLib</Filter>
     </ClInclude>
@@ -197,51 +219,39 @@
       <Filter>CMUgraphicsLib</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jconfig.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jdct.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jdhuff.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jerror.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jinclude.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jmemsys.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jmorecfg.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h">
-      <Filter>CMUgraphicsLib\JPEG</Filter>
+      <Filter>CMUgraphicsLib\jpeg</Filter>
     </ClInclude>
-    <ClInclude Include="Battle.h" />
-    <ClInclude Include="Defs.h" />
-    <ClInclude Include="GUI\GUI.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Castle\Castle.h">
-      <Filter>Castle</Filter>
-    </ClInclude>
-    <ClInclude Include="Castle\Tower.h">
-      <Filter>Castle</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemies\Enemy.h">
+    <ClInclude Include="Enemies\Balloon.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Enemies\Balloon.h">
+    <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemies\Fighter.h">
@@ -256,25 +266,8 @@
     <ClInclude Include="Enemies\Tank.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="ADTs\ActiveEnemies.h">
-      <Filter>ADTs</Filter>
+    <ClInclude Include="GUI\GUI.h">
+      <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="ADTs\Queue.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\Node.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\InactiveEnemies.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\List.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\PrecondViolatedExcep.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-=======
->>>>>>> mn el awl
   </ItemGroup>
 </Project>
