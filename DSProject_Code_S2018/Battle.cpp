@@ -61,9 +61,9 @@ Castle * Battle::GetCastle()
 }
 
 //Updates all lists and the GUI array
-void Battle::update()
+void Battle::update(int cTime)
 {
-	currentTime++;
+	currentTime = cTime;
 	inactiveEnemies.activateEnemies(*this);
 	double health;
 	Enemy*temp;
