@@ -12,7 +12,7 @@ public:
 	int getCount() const;
 	bool isEmpty() const;
 	void clear();
-	void update();					//Updates enemies in the active list
+	void update();					//Updates enemies in the active list (removes the killed enemies)
 	string print();
 	~ActiveEnemies();
 };

@@ -14,23 +14,20 @@ public:
 	T get(int pos) throw (PrecondViolatedExcep);	//returns an item at a certain position,  
 													//throws an exceptions if pos is out of range
 	template<typename S>
-	void traverse(void (S::*func)());				//traverses through the list and calls a function for each 
-													//object in the list
+	void traverse(void (S::*func)());				//traverses through the list and calls a function for each object
 
 	template<typename S>
 	void traverse(void (S::*func)(T), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
 													//that takes an element in the list as its parameter
 	template<typename S>
-	void condtionalRemove(bool (S::*func)());		//traverses through the list and calls func for each element, if it
-													//returns true, the element is removed
+	void condtionalRemove(bool (S::*func)());		//traverses through the list and removes an element if a condition is true
 
-	//void update();								//update the list (removing killed enemies)
 	void clear();									//deletes all items in the list
 	bool isEmpty() const;
 	int getCount() const;
 
 	T pickRand();								//picks a random element and kill it(by setting the health = 0), for phase 1
-//	void print(GUI*);
+
 	~List();
 };
 
@@ -40,41 +37,7 @@ List<T>::List() {
 	count = 0;
 }
 
-/*template <typename T>
-void List<T>::print(GUI*pGUI)
-{
-	if (head == nullptr)
-	{
-		pGUI->PrintMessage("No enemies");
-	}
-	else {
-		Node<T>*curr = head;
-		string print;
-		while (curr != nullptr)
-		{
-			print = curr->getData()->print();
-			pGUI->PrintMessage(print);
-			curr = curr->getNext();
-		}
-	}
-
-}*/
-
-/*
-template <typename T>
-void List<T>::update() {
-	Node<T>*curr = head;
-	int i = 0;
-	while (curr != nullptr && count>i)
-	{
-		if (curr->getData()->getHealth() == 0)
-			remove(i);
-		
-		curr = curr->getNext();
-		i++;
-
-	}
-} */
+//pushes an element to the end of the list
 template <typename T>
 void List<T>::push(const T& newItem) {
 	Node<T>* newNode = new Node<T>(newItem);
@@ -89,7 +52,7 @@ void List<T>::push(const T& newItem) {
 		count++;
 	}
 }
-
+//removes an element by its value, returns true if found and removed, otherwise false.
 template <typename T>
 bool List<T>::remove(const T& val) {
 	Node<T>* tempDeleted;
@@ -119,7 +82,7 @@ bool List<T>::remove(const T& val) {
 	}
 	return found;
 }
-
+//removes an element by its position (starts at 0), returns false if position is out of range
 template<typename T>
 bool List<T>::remove(int pos) {
 	if (pos < 0 || pos >= count) 
@@ -141,7 +104,7 @@ bool List<T>::remove(int pos) {
 	count--;
 	return true;
 }
-
+//gets an element by its position (starting 0), throws an exception if position is out of range
 template <typename T>
 T List<T>::get(int pos) {
 	if (pos < 0 || pos >= count) {
@@ -154,6 +117,7 @@ T List<T>::get(int pos) {
 	return ptr->getData();
 }
 
+//traverses through the list and calls a function for each object
 template <typename T>
 template <typename S>
 void List<T>::traverse(void (S::*func)()) {
@@ -163,7 +127,8 @@ void List<T>::traverse(void (S::*func)()) {
 		ptr = ptr->getNext();
 	}
 }
-
+//traverses through the list and calls a function from object fnCaller
+//that takes an element in the list as its parameter
 template <typename T>
 template <typename S>
 void List<T>::traverse(void (S::*func)(T), S &fnCaller) {
@@ -173,7 +138,7 @@ void List<T>::traverse(void (S::*func)(T), S &fnCaller) {
 		ptr = ptr->getNext();
 	}
 }
-
+//traverses through the list and removes an element if a condition is true
 template<typename T>
 template<typename S>
 void List<T>::condtionalRemove(bool(S::* func)())
@@ -204,7 +169,7 @@ void List<T>::condtionalRemove(bool(S::* func)())
 	}
 }
 
-
+//deletes all elements in the list
 template <typename T>
 void List<T>::clear() {
 	Node<T>* temp;
@@ -214,19 +179,19 @@ void List<T>::clear() {
 		delete temp;
 	}
 }
-
+//returns the number of elements in the list
 template<typename T>
 int List<T>::getCount() const {
 	return count;
 }
-
+//is the list empty?
 template<typename T>
 bool List<T>::isEmpty() const {
 	if (head == nullptr)
 		return true;
 	return false;
 }
-
+//picks a random element from the list, throws an exception if it's empty
 template<typename T>
 T List<T>::pickRand() {
 	if (count == 0) {

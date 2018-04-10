@@ -7,15 +7,7 @@ void Array<T>::swap(T*&f, T*&s)
 	f = s;
 	s = temp;
 }
-template<class T>
-void Array<T> ::update()
-{
-	for (int i = 0;i < size;i++)
-	{
-		if (arr[i]->getHealth() == 0)
-			remove(arr[i]);
-	}
-}
+
 template<class T>
 T* Array<T>::pickRand()
 {
@@ -137,24 +129,26 @@ T* Array<T>::get(int ind) throw(PrecondViolatedExcep)
 	}
 	else return arr[ind];
 }
+//traverses through the list and removes an element if a condition is true
 
-/*template<class T>
-void Array<T>::print(GUI*pGUI)
+template<typename T>
+template<typename S>
+void Array<T>::condtionalRemove(bool(S::* conditionFn)())
 {
-	string print;
-	if (size == 0)
+	T* temp;
+	for (int i = 0; i < size; i++)
 	{
-		pGUI->PrintMessage("No enemies");
-	}
-	else {
-
-		for(int i=0;i<size;i++)
+		if ((arr[i]->*conditionFn)())
 		{
-			print = arr[i]->print();
-			pGUI->PrintMessage(print);
+			temp = arr[i];
+			swap(arr[i], arr[size - 1]);
+			size--;
+			delete temp;
+			temp = nullptr;
 		}
 	}
-}*/
+}
+
 template <class T>
 Array<T>::~Array()
 {
