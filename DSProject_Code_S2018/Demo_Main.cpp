@@ -32,7 +32,7 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 		pGUI->ClearStatusBar();
 		pGUI->ClearBattleArea();
 		pGUI->DrawCastle();
-		pGameBattle->update();
+		pGameBattle->update(TimeStep);
 		//printing info
 		pGameBattle->print(pGUI);
 		// Redraw the enemies
@@ -43,12 +43,5 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 	}
 
 	pGUI->GetPointClicked(p);
-	// Clear for redrawing
-	pGUI->ClearStatusBar();
-	pGUI->ClearBattleArea();
-	pGUI->DrawCastle();
-	pGameBattle->update();
-	//printing info
-	pGameBattle->print(pGUI);
 	
 }

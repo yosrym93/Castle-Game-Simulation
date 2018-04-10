@@ -46,7 +46,7 @@ public:
 	void DrawEnemies(GUI * pGUI);	//Draws enemies in the GUI array
 	Castle * GetCastle();
 	void killRandom();				//Kills enemieas randomly according to phase 1.
-	void update();					//Updates all lists and the GUI array
+	void update(int);					//Updates all lists and the GUI array
 	int getCurrentTime() const;	
 	int getTotalAlive();			//Gets the number of alive enemies at any moment.
 	void print();					//Prints data for phase 1.
