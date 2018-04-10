@@ -32,7 +32,7 @@ bool ShieldedEnemies::killRand()
 }
  void ShieldedEnemies::update()
  {
-	 ShieldedArray.update();
+	 ShieldedArray.condtionalRemove(&Enemy::isKilled);
  }
 
 string ShieldedEnemies::print()

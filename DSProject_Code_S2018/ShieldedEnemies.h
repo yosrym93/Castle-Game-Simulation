@@ -13,7 +13,7 @@ public:
 	void clear();
 	bool killRand();				//for phase 1: picks a random enemy and sets its health to zero.
 	bool isEmpty();
-	void update();
+	void update();					//Updates enemies in the active list (removes the killed enemies)
 	~ShieldedEnemies();
 	string print();
 };

@@ -24,7 +24,8 @@ public:
 	bool isEmpty();							//Checks whether the array is empty.
 	T* pickRand();							//Returns a random enemy from the array or NULL if it's empty.
 	T* get(int) throw (PrecondViolatedExcep);//Gets an item using it's index if it exists.
-	void update();							//update list (remove killed enemies from the list)
-//	void print(GUI*);
+
+	template<typename S>
+	void condtionalRemove(bool (S::*conditionFn)());	//traverses through the list and removes an element if a condition is true
 	~Array();
 };
