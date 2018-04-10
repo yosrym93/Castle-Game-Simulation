@@ -14,17 +14,22 @@ public:
 	T get(int pos) throw (PrecondViolatedExcep);	//returns an item at a certain position,  
 													//throws an exceptions if pos is out of range
 	template<typename S>
-	void traverse(void (S::*func)());
+	void traverse(void (S::*func)());				//traverses through the list and calls a function for each 
+													//object in the list
 
 	template<typename S>
 	void traverse(void (S::*func)(T), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
-													//that takes an elemnt in the list as its parameter
-	void update();									//update the list (removing killed enemies)
+													//that takes an element in the list as its parameter
+	template<typename S>
+	void condtionalRemove(bool (S::*func)());		//traverses through the list and calls func for each element, if it
+													//returns true, the element is removed
+
+	//void update();								//update the list (removing killed enemies)
 	void clear();									//deletes all items in the list
 	bool isEmpty() const;
 	int getCount() const;
 
-	bool pickRand();								//picks a random element and kill it(by setting the health = 0), for phase 1
+	T pickRand();								//picks a random element and kill it(by setting the health = 0), for phase 1
 //	void print(GUI*);
 	~List();
 };
@@ -55,6 +60,7 @@ void List<T>::print(GUI*pGUI)
 
 }*/
 
+/*
 template <typename T>
 void List<T>::update() {
 	Node<T>*curr = head;
@@ -68,7 +74,7 @@ void List<T>::update() {
 		i++;
 
 	}
-}
+} */
 template <typename T>
 void List<T>::push(const T& newItem) {
 	Node<T>* newNode = new Node<T>(newItem);
@@ -86,9 +92,17 @@ void List<T>::push(const T& newItem) {
 
 template <typename T>
 bool List<T>::remove(const T& val) {
-	Node<T>* tempHead = new Node<int>(0, head);
-	Node<T>* ptr = tempHead;
 	Node<T>* tempDeleted;
+	while (head != nullptr && head->getData() == val) {
+		tempDeleted = head;
+		head = head->getNext();
+		delete tempDeleted;
+		count--;
+	}
+
+	if (head == nullptr) return;
+
+	Node<T>* ptr = head;
 	bool found = false;
 
 	while (ptr->getNext() != NULL) {
@@ -103,7 +117,6 @@ bool List<T>::remove(const T& val) {
 			ptr = ptr->getNext();
 		}
 	}
-	head = tempHead->getNext();
 	return found;
 }
 
@@ -147,6 +160,7 @@ void List<T>::traverse(void (S::*func)()) {
 	Node<T>* ptr = head;
 	while(ptr != nullptr) {
 		(ptr->getData()->*func)();
+		ptr = ptr->getNext();
 	}
 }
 
@@ -156,6 +170,37 @@ void List<T>::traverse(void (S::*func)(T), S &fnCaller) {
 	Node<T>* ptr = head;
 	while (ptr != nullptr) {
 		(fnPara.*func)(ptr->getData());
+		ptr = ptr->getNext();
+	}
+}
+
+template<typename T>
+template<typename S>
+void List<T>::condtionalRemove(bool(S::* func)())
+{
+	Node<T>* tempDeleted;
+	while (head != nullptr && (head->getData()->*func)()) {
+		tempDeleted = head;
+		head = head->getNext();
+		delete tempDeleted;
+		count--;
+	}
+
+	if (head == nullptr) return;
+
+	Node<T>* ptr = head;
+	bool found = false;
+
+	while (ptr->getNext() != NULL) {
+		if ((ptr->getNext()->getData()->*func)()) {
+			tempDeleted = ptr->getNext();
+			ptr->setNext(tempDeleted->getNext());
+			delete tempDeleted;
+			count--;
+		}
+		else {
+			ptr = ptr->getNext();
+		}
 	}
 }
 
@@ -183,15 +228,15 @@ bool List<T>::isEmpty() const {
 }
 
 template<typename T>
-bool List<T>::pickRand() {
-	if (count == 0)
-		return false ;
-		int ran = rand() % count;
-		T temp = get(ran);
-		temp->setHealth(0);//kill the enemy
-		return true;
+T List<T>::pickRand() {
+	if (count == 0) {
+		string message = "pickRand() called with an empty list";
+		throw (new PrecondViolatedExcep(message));
 	}
-
+	else {
+		return get(rand() % count);
+	}
+}
 
 template <typename T>
 List<T>::~List() {

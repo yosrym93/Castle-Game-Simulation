@@ -11,10 +11,17 @@ int ShieldedEnemies::getCount() const
 {
 	return ShieldedArray.getCount();
 }
-bool ShieldedEnemies::pickRand()
+
+bool ShieldedEnemies::killRand()
 {
-	 return ShieldedArray.pickRand();
+	if (ShieldedArray.isEmpty())
+		return false;
+
+	Enemy* randomEnemy = ShieldedArray.pickRand();
+	randomEnemy->setHealth(0);		//kills the enemy
+	return true;
 }
+
  bool ShieldedEnemies::isEmpty()
  {
 	 return ShieldedArray.isEmpty();

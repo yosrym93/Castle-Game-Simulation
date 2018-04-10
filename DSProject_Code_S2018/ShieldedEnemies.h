@@ -11,7 +11,7 @@ public:
 	int getCount() const;
 	void addEnemy(Enemy* newEnemy);
 	void clear();
-	bool pickRand();				//for phase 1: picks a random enemy and sets its health to zero.
+	bool killRand();				//for phase 1: picks a random enemy and sets its health to zero.
 	bool isEmpty();
 	void update();
 	~ShieldedEnemies();

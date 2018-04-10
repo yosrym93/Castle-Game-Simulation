@@ -43,7 +43,6 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 		//pGameBattle->print();
 		TimeStep++;
 	}
-	system("pause");
 }
 /*
 pGUI->PrintMessage("This is Just a Demo. Click to Move to the Next Time Step ...");

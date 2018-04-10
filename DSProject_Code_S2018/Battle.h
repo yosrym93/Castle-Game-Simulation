@@ -1,17 +1,16 @@
 #pragma once
 #include <fstream>
+
 #include "Enemies\Enemy.h"
 #include "Enemies\Fighter.h"
 #include "Enemies\Balloon.h"
 #include "Enemies\Paver.h"
 #include "Enemies\Shielded.h"
 #include "Enemies\Tank.h"
+
 #include "Castle\Castle.h"
 #include "Castle\Tower.h"
-#include "Enemies\Paver.h"
-#include "Enemies\Fighter.h"
-#include "Enemies\Balloon.h"
-#include "Enemies\Tank.h"
+
 #include "ADTs\ActiveEnemies.h"
 #include "ADTs\InactiveEnemies.h"
 #include "ShieldedEnemies.h"
@@ -22,45 +21,43 @@ class Battle
 {
 private:
 	Castle bCastle;
-	int enemyCount;	//the actual number of enemies in the game
-	double c1, c2, c3; // input constants for periority equation
-	int Unpaved[NoOfRegions]; // unpaved distance of each region
-	InactiveEnemies inactiveEnemies; // the list that contain the inactive enemies
-	ActiveEnemies normalEnemies[NoOfRegions];
-	ShieldedEnemies shieldedEnemies[NoOfRegions];
-	ActiveEnemies tankEnemies[NoOfRegions];
-	Enemy * bEnemiesForDraw[MaxEnemyCount]; 	// This Array of Pointers is used for drawing elements in the GUI
-								  			// No matter what list type you are using to hold enemies, 
-											// you must pass the enemies to the GUI function as an array of enemy pointers. 
-											// At every time step, you should update those pointers 
-											// to point to the current active enemies 
-											// then pass the pointers list to the GUI function
+	int enemyCount;									 //the actual number of enemies in the game
+	double c1, c2, c3;							     // input constants for priority equation
 	int currentTime;
+	int Unpaved[NoOfRegions];						 // unpaved distance of each region
 	int killed[NoOfRegions];				//number of killed enemies in each region
-	//
-	// TODO: Add More Data Members As Needed
-	//
+
+	/************************Inactive Enemies List(s)************************/
+	InactiveEnemies inactiveEnemies;				//all inactive enemies
+
+	/************************Active Enemies List(s)************************/
+	ActiveEnemies normalEnemies[NoOfRegions];		//pavers, fighters and balloons
+	ShieldedEnemies shieldedEnemies[NoOfRegions];	//shielded fighters
+	ActiveEnemies tankEnemies[NoOfRegions];			//tanks
+	
+	/************************ GUI Array ************************/
+	Enemy * bEnemiesForDraw[MaxEnemyCount]; // This Array of Pointers is used for drawing elements in the GUI
+								  			
 
 public:
 	
 	Battle();
-	void AddEnemy(Enemy* Ptr);
-	void DrawEnemies(GUI * pGUI);
+	void AddEnemy(Enemy* Ptr);		//Adds an enemy to the GUI array
+	void DrawEnemies(GUI * pGUI);	//Draws enemies in the GUI array
 	Castle * GetCastle();
-	void killRandom();		//Kills enemieas randomly according to phase 1.
-	void update();
-	int getCurrentTime() const;
-	int getTotalAlive();		//Gets the number of alive enemies at any moment.
-	void print();				//Prints data for phase 1.
-	void Load(GUI*); // load all enemies in the inactive queue
-	bool isFighting(); //are there still ENEMIES ALIVE????!!
-	REGION getRegion(char);//converting char type into enum type
-	char getRegion(int); //converting enum type into char type
-	void print(GUI*);//print towers,active and inactive enemies info.
-	//
-	// TODO: Add More Member Functions As Needed
-	//
+	void killRandom();				//Kills enemieas randomly according to phase 1.
+	void update();					//Updates all lists and the GUI array
+	int getCurrentTime() const;	
+	int getTotalAlive();			//Gets the number of alive enemies at any moment.
+	void print();					//Prints data for phase 1.
+	void Load(GUI*);				//Load all enemies to the inactive list
+	bool isFighting();				//are there still ENEMIES ALIVE????!!
+	REGION getRegion(char);			//converting char type into enum type
+	char getRegion(int);			//converting enum type into char type
+	void print(GUI*);				//print towers,active and inactive enemies info.
+	
 	/****************************  Inactive Enemies Functions  ****************************/
 	void activateEnemy(Enemy* inactiveEnemy);
+
 };
 

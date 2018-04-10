@@ -21,13 +21,13 @@ void Battle::killRandom()
 		switch (list)
 		{
 		case 1:
-			tankEnemies[region].pickRand();
+			tankEnemies[region].killRand();
 			break;
 		case 2:
 			shieldedEnemies[region].pickRand();
 			break;
 		case 3:
-			normalEnemies[region].pickRand();
+			normalEnemies[region].killRand();
 			break;
 		default:
 			break;
@@ -35,6 +35,8 @@ void Battle::killRandom()
 
 	}
 }
+
+//Adds an enemy to the GUI array
 void Battle::AddEnemy(Enemy* Ptr)
 {
 	if (enemyCount < MaxEnemyCount)
@@ -47,6 +49,7 @@ void Battle::AddEnemy(Enemy* Ptr)
 	// points to what is pointed to by the passed pointer Ptr
 }
 
+//Draws enemies in the GUI array
 void Battle::DrawEnemies(GUI * pGUI)
 {
 	pGUI->DrawEnemies(bEnemiesForDraw, enemyCount);
@@ -56,6 +59,8 @@ Castle * Battle::GetCastle()
 {
 	return &bCastle;
 }
+
+//Updates all lists and the GUI array
 void Battle::update()
 {
 	inactiveEnemies.activateEnemies(*this);
@@ -104,9 +109,9 @@ void Battle::print(GUI *pGUI)
 	string enemies;
 	pGUI->setHeight(0);
 	pGUI->setWidth(0);
-	pGUI->updatePrintedMessage("Format of printing: Enemy(Type,ID,Health,ArrivalTime,FirePwr,Rld), Tower(Health,Firepwr,No.)" );
+	pGUI->updatePrintedMessage("Format of printing: Enemy(Type,ID,Health,ArrivalTime,FirePwr,Rld), Tower(Health,Firepwr,No. of Enemies)" );
 	pGUI->setHeight(1);
-	pGUI->updatePrintedMessage("Castle info:");
+	pGUI->updatePrintedMessage("Castle info: (at T = " + to_string(currentTime) + ")");
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		pGUI->setHeight(2+2*i);
