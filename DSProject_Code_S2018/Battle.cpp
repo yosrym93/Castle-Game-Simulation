@@ -24,7 +24,7 @@ void Battle::killRandom()
 			tankEnemies[region].killRand();
 			break;
 		case 2:
-			shieldedEnemies[region].pickRand();
+			shieldedEnemies[region].killRand();
 			break;
 		case 3:
 			normalEnemies[region].killRand();
