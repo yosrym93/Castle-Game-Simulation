@@ -26,6 +26,7 @@ private:
 	int currentTime;
 	int Unpaved[NoOfRegions];						 // unpaved distance of each region
 	int killed[NoOfRegions];				//number of killed enemies in each region
+	MenuItem mode;
 
 	/************************Inactive Enemies List(s)************************/
 	InactiveEnemies inactiveEnemies;				//all inactive enemies
@@ -55,6 +56,10 @@ public:
 	REGION getRegion(char);			//converting char type into enum type
 	char getRegion(int);			//converting enum type into char type
 	void print(GUI*);				//print towers,active and inactive enemies info.
+	void timeCounter();
+	void interactiveTime();
+	void stepByStepTime();
+	void silentTime();
 	
 	/****************************  Inactive Enemies Functions  ****************************/
 	void activateEnemy(Enemy* inactiveEnemy);

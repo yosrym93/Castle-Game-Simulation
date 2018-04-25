@@ -124,6 +124,48 @@ void Battle::print(GUI *pGUI)
 		pGUI->updatePrintedMessage(enemies);
 	}
 }
+void Battle::timeCounter()
+{
+		switch (mode)
+		{
+		case MENU_INTERACTIVE:        //interactive mode
+			interactiveTime();
+			break;
+		case MENU_STEPBYSTEP:        //step by step mode
+			stepByStepTime();
+			break;
+		case MENU_SILENT:             //silent mode
+			silentTime();
+			break;
+		}
+
+}
+void Battle::interactiveTime()
+{
+	Point x;
+	GUI*p;
+	while (isFighting())
+	{
+		p->GetPointClicked(x);
+		currentTime++;
+	}
+}
+void Battle::stepByStepTime()
+{
+	while (isFighting())
+	{
+		Sleep(500);
+		currentTime++;
+
+	}
+}
+void Battle::silentTime()
+{
+	while (isFighting())
+	{
+		currentTime++;
+	}
+}
 // function that loads the inputs from the file 
 void Battle::Load(GUI*pGUI)
 {

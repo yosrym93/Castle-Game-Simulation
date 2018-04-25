@@ -5,6 +5,7 @@ class Fighter :
 {
 public:
 	Fighter(color r_c, REGION r_region, int d);
+	void Attack();
 	~Fighter();
 };
 
