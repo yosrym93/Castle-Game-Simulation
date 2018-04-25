@@ -162,6 +162,8 @@
     <ClCompile Include="GUI\GUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Battle.cpp" />
+    <ClCompile Include="Demo_Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADTs\ActiveEnemies.h">
@@ -269,5 +271,7 @@
     <ClInclude Include="GUI\GUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Battle.h" />
+    <ClInclude Include="Defs.h" />
   </ItemGroup>
 </Project>
