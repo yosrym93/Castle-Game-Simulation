@@ -1,5 +1,4 @@
 #include "Battle.h"
-#include "ShieldedEnemies.cpp"
 
 Battle::Battle()
 {
@@ -7,7 +6,7 @@ Battle::Battle()
 	enemyCount = 0;
 	for (int i = 0; i < NoOfRegions; i++)
 	{
-		killed[i] = 0;
+		nKilledEnemies[i] = 0;
 	}
 }
 void Battle::killRandom()
@@ -36,8 +35,10 @@ void Battle::killRandom()
 	}
 }
 
+/*************************** GUI array functions ****************************/
+
 //Adds an enemy to the GUI array
-void Battle::AddEnemy(Enemy* Ptr)
+void Battle::addEnemyGUI(Enemy* Ptr)
 {
 	if (enemyCount < MaxEnemyCount)
 	{
@@ -50,53 +51,41 @@ void Battle::AddEnemy(Enemy* Ptr)
 }
 
 //Draws enemies in the GUI array
-void Battle::DrawEnemies(GUI * pGUI)
+void Battle::drawEnemies(GUI * pGUI)
 {
 	pGUI->DrawEnemies(bEnemiesForDraw, enemyCount);
 }
 
-Castle * Battle::GetCastle()
-{
-	return &bCastle;
+void Battle::removeKilledGUI() {
+
+	for (int i = 0; i < enemyCount; i++)
+	{
+		if (bEnemiesForDraw[i]->isKilled())
+		{
+			nKilledEnemies[bEnemiesForDraw[i]->getRegion()]++;
+			bEnemiesForDraw[i] = bEnemiesForDraw[enemyCount - 1];
+			enemyCount--;
+			i--;
+
+		}
+	}
 }
+
+
+/*************************************/
+
 
 //Updates all lists and the GUI array
 void Battle::update(int cTime)
 {
 	currentTime = cTime;
 	
-	double health;
-	Enemy*temp;
-	for (int i = 0;i < enemyCount;i++)
-	{
-		health=bEnemiesForDraw[i]->getHealth();
-		if(health==0)
-		{
-			killed[bEnemiesForDraw[i]->getRegion()]++;
-			bEnemiesForDraw[i] = bEnemiesForDraw[enemyCount-1];
-			enemyCount--;
-			i--;
-
-		}
-		else {
-			bEnemiesForDraw[i]->decrementDist();
-		}
-	}
-	for (int j = 0;j < NoOfRegions;j++)
-	{
-		normalEnemies[j].update();
-		shieldedEnemies[j].update();
-		tankEnemies[j].update();
-	}
+	removeKilledEnemies();
 
 	inactiveEnemies.activateEnemies(*this);
 }
 
-//function that prepare the war (load all the Battle specifications)
-int Battle::getTotalAlive()
-{
-	return enemyCount;
-}
+
 //print towers,active and inactive enemies info.
 void Battle::print(GUI *pGUI)
 {
@@ -115,7 +104,7 @@ void Battle::print(GUI *pGUI)
 		castleInfo = bCastle.print(i);
 		region = getRegion(i);
 		pGUI->setWidth(0);
-		pGUI->updatePrintedMessage(("Region " + region+ ". Killed Enemies:"+to_string(killed[i])+"  "+castleInfo));
+		pGUI->updatePrintedMessage(("Region " + region+ ". Killed Enemies:"+to_string(nKilledEnemies[i])+"  "+castleInfo));
 		pGUI->setWidth(0);
 		pGUI->setHeight(3 + 2*i);
 		pGUI->updatePrintedMessage("Active Enemies info: ");
@@ -167,7 +156,7 @@ void Battle::silentTime()
 	}
 }
 // function that loads the inputs from the file 
-void Battle::Load(GUI*pGUI)
+void Battle::load(GUI*pGUI)
 {
 	string fileName;
 	ifstream inFile;
@@ -187,6 +176,8 @@ void Battle::Load(GUI*pGUI)
 		bCastle.setTowersHealth(tH);
 		bCastle.setTowersNum(maxNum);
 		bCastle.setTowersFirePower(tP);
+
+		int totalEnemiesCount = 0;
 
 		int id;
 		int type;
@@ -232,17 +223,22 @@ void Battle::Load(GUI*pGUI)
 				pEnemy->setHealth(health);
 				pEnemy->setPow(pow);
 				pEnemy->setRld(rld);
+				totalEnemiesCount++;
 			}
 			inactiveEnemies.addEnemy(pEnemy);
 			inFile >> id;
 		}
+		//Sets some values for the writer 
+		writer.setTotalEnemies(totalEnemiesCount);
+		writer.setTowerStartingHealth(tH);
+
 		pGUI->PrintMessage("Load Successful.");
 	}
 	else {
 		Point p;
 		pGUI->PrintMessage("No file with this name.");
 		pGUI->GetPointClicked(p);
-		Load(pGUI);
+		load(pGUI);
 	}
 	if (inFile.is_open())
 		inFile.close();
@@ -254,6 +250,20 @@ bool Battle::isFighting()
 		isFig = isFig || (!tankEnemies[i].isEmpty() || !shieldedEnemies[i].isEmpty() || !normalEnemies[i].isEmpty() || !inactiveEnemies.isEmpty());
 	return isFig;
 }
+
+/****************************  Getter Functions  ****************************/
+Castle * Battle::getCastle()
+{
+	return &bCastle;
+}
+
+//function that prepare the war (load all the Battle specifications)
+int Battle::getTotalAlive()
+{
+	return enemyCount;
+}
+
+
 //return enum REGION from a char
 REGION Battle::getRegion(char cRegion)
 {
@@ -304,41 +314,79 @@ char Battle::getRegion(int cRegion)
 	}
 	return r;
 }
+
 int Battle::getCurrentTime() const {
 	return currentTime;
 }
 
+//Returns the unpaved distance of a region
+int Battle::getUnpavedDist(int r) {
+	return unpavedDistance[r];
+}
 
 /****************************  Inactive Enemies Functions  ****************************/
 void Battle::activateEnemy(Enemy* inactiveEnemy) {
 	int Reg = inactiveEnemy->getRegion();
 	if (dynamic_cast<Fighter*>(inactiveEnemy)) {
 		normalEnemies[Reg].addEnemy(inactiveEnemy);
-		AddEnemy(inactiveEnemy);
+		addEnemyGUI(inactiveEnemy);
 		return;
 	}
 	if (dynamic_cast<Paver*>(inactiveEnemy)) {
 		normalEnemies[Reg].addEnemy(inactiveEnemy);
-		AddEnemy(inactiveEnemy);
+		addEnemyGUI(inactiveEnemy);
 		return;
 	}
 	if (dynamic_cast<Balloon*>(inactiveEnemy)) {
 		normalEnemies[Reg].addEnemy(inactiveEnemy);
-		AddEnemy(inactiveEnemy);
+		addEnemyGUI(inactiveEnemy);
 		return;
 	}
 
 	Enemy* tank = dynamic_cast<Tank*>(inactiveEnemy);
 	if (tank) {
 		tankEnemies[Reg].addEnemy(inactiveEnemy);
-		AddEnemy(inactiveEnemy);
+		addEnemyGUI(inactiveEnemy);
 		return;
 	}
 
 	Enemy* shieldedFighter = dynamic_cast<Shielded*>(inactiveEnemy);
 	if (shieldedFighter) {
 		shieldedEnemies[Reg].addEnemy(inactiveEnemy);
-		AddEnemy(inactiveEnemy);
+		addEnemyGUI(inactiveEnemy);
 		return;
 	}
 }
+
+/****************************  Killed Enemies Functions  ****************************/
+//Removes all killed enemies from all lists and sends them to the writer
+void Battle::removeKilledEnemies() {
+	//Remove killed enemies from active lists
+	for (int i = 0; i < NoOfRegions; i++) {
+		normalEnemies[i].removeKilled(*this);
+		shieldedEnemies[i].removeKilled(*this);
+		tankEnemies[i].removeKilled(*this);
+	}
+
+	//Remove killed enemies from the GUI array
+	if (1)
+		removeKilledGUI();
+
+	//Writes removed enemies' data and delete them
+	writer.writeEnemies(*this);
+}
+
+//Returns true if an enemy is killed and sends it to the writer
+bool Battle::isKilledEnemy(Enemy* e) {
+	if (e->isKilled()) {
+		e->calcKD(currentTime);
+		writer.addEnemy(e);
+		return true;
+	}
+	return false;
+}
+
+void Battle::outputEnemy(Enemy* e) {
+	writer.writeEnemy(e, currentTime);
+}
+

@@ -2,31 +2,149 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="ADTs">
-      <UniqueIdentifier>{d9ba3cd3-f9d2-4762-94bc-1b9bf8ce42b7}</UniqueIdentifier>
+      <UniqueIdentifier>{d4f7ef23-83ce-4754-b45f-7cc176fb8040}</UniqueIdentifier>
     </Filter>
     <Filter Include="Castle">
-      <UniqueIdentifier>{90cbc859-6a59-4d99-ab2b-39b1bac2e91c}</UniqueIdentifier>
+      <UniqueIdentifier>{34dbd5e7-ecf8-4dfa-863a-14e8a8a09f92}</UniqueIdentifier>
     </Filter>
     <Filter Include="CMUgraphicsLib">
-      <UniqueIdentifier>{04c21c27-91c2-424d-8423-f16c800cdcae}</UniqueIdentifier>
+      <UniqueIdentifier>{5983bd93-d095-4deb-81c9-125dd52a8347}</UniqueIdentifier>
     </Filter>
     <Filter Include="CMUgraphicsLib\jpeg">
-      <UniqueIdentifier>{cc772765-1d33-4cea-8c0f-13b9ab6d7773}</UniqueIdentifier>
+      <UniqueIdentifier>{36f30512-e0e7-412b-9839-48d09e7d93c8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Enemies">
-      <UniqueIdentifier>{2c16d37a-6a76-4607-bac2-e55aadfc731f}</UniqueIdentifier>
+      <UniqueIdentifier>{30cfff85-ba74-4017-ac14-0f13ee8e2260}</UniqueIdentifier>
     </Filter>
     <Filter Include="GUI">
-      <UniqueIdentifier>{e3d962fd-4331-483a-991a-b309d68eb7dc}</UniqueIdentifier>
+      <UniqueIdentifier>{bb8ef962-185e-41ec-9c58-10f82a5df64a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output">
+      <UniqueIdentifier>{0cbb8534-7ed9-4f00-8363-db170d89e3f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnemyLists">
+      <UniqueIdentifier>{ea64bc7f-abd6-4aa0-8124-ddd98ee477d2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ADTs\ActiveEnemies.cpp">
+    <ClInclude Include="ADTs\List.h">
       <Filter>ADTs</Filter>
-    </ClCompile>
-    <ClCompile Include="ADTs\InactiveEnemies.cpp">
+    </ClInclude>
+    <ClInclude Include="ADTs\Node.h">
       <Filter>ADTs</Filter>
-    </ClCompile>
+    </ClInclude>
+    <ClInclude Include="ADTs\PrecondViolatedExcep.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="ADTs\Queue.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="ADTs\Array.h">
+      <Filter>ADTs</Filter>
+    </ClInclude>
+    <ClInclude Include="Castle\Castle.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
+    <ClInclude Include="Castle\Tower.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\auxil.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\CMUgraphics.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\colors.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\error.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\image.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpegload.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\keyqueue.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\mousequeue.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\version.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\windowinput.h">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jconfig.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jdct.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jdhuff.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jerror.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jinclude.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jmemsys.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jmorecfg.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h">
+      <Filter>CMUgraphicsLib\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies\Balloon.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies\Enemy.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies\Fighter.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies\Paver.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies\Shielded.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies\Tank.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\GUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Output\Output.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Battle.h" />
+    <ClInclude Include="Defs.h" />
+    <ClInclude Include="EnemyLists\ActiveEnemies.h">
+      <Filter>EnemyLists</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyLists\InactiveEnemies.h">
+      <Filter>EnemyLists</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyLists\ShieldedEnemies.h">
+      <Filter>EnemyLists</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="Castle\Castle.cpp">
       <Filter>Castle</Filter>
     </ClCompile>
@@ -162,8 +280,20 @@
     <ClCompile Include="GUI\GUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Output\Output.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Demo_Main.cpp" />
+    <ClCompile Include="EnemyLists\ActiveEnemies.cpp">
+      <Filter>EnemyLists</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyLists\InactiveEnemies.cpp">
+      <Filter>EnemyLists</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyLists\ShieldedEnemies.cpp">
+      <Filter>EnemyLists</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADTs\ActiveEnemies.h">

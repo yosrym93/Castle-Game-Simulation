@@ -126,8 +126,6 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ADTs\ActiveEnemies.cpp" />
-    <ClCompile Include="ADTs\InactiveEnemies.cpp" />
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Castle\Castle.cpp" />
     <ClCompile Include="Castle\Tower.cpp" />
@@ -279,11 +277,14 @@
     <ClCompile Include="Enemies\Paver.cpp" />
     <ClCompile Include="Enemies\Shielded.cpp" />
     <ClCompile Include="Enemies\Tank.cpp" />
+    <ClCompile Include="EnemyLists\ActiveEnemies.cpp" />
+    <ClCompile Include="EnemyLists\InactiveEnemies.cpp" />
+    <ClCompile Include="EnemyLists\ShieldedEnemies.cpp" />
     <ClCompile Include="GUI\GUI.cpp" />
+    <ClCompile Include="Output\Output.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ADTs\ActiveEnemies.h" />
-    <ClInclude Include="ADTs\InactiveEnemies.h" />
+    <ClInclude Include="ADTs\Array.h" />
     <ClInclude Include="ADTs\List.h" />
     <ClInclude Include="ADTs\Node.h" />
     <ClInclude Include="ADTs\PrecondViolatedExcep.h" />
@@ -318,7 +319,11 @@
     <ClInclude Include="Enemies\Paver.h" />
     <ClInclude Include="Enemies\Shielded.h" />
     <ClInclude Include="Enemies\Tank.h" />
+    <ClInclude Include="EnemyLists\ActiveEnemies.h" />
+    <ClInclude Include="EnemyLists\InactiveEnemies.h" />
+    <ClInclude Include="EnemyLists\ShieldedEnemies.h" />
     <ClInclude Include="GUI\GUI.h" />
+    <ClInclude Include="Output\Output.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

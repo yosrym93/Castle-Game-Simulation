@@ -20,7 +20,12 @@ public:
 	void traverse(void (S::*func)(T), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
 													//that takes an element in the list as its parameter
 	template<typename S>
-	void condtionalRemove(bool (S::*func)());		//traverses through the list and removes an element if a condition is true
+	void condtionalRemove(bool (S::*conditionFn)());		//traverses through the list and removes an element if conditionFn
+															//is true (without deletion)
+
+	template<typename S>
+	void condtionalRemove(bool (S::*conditionFn)(T), S &fnCaller);		//traverses through the list and removes an element if conditionFn
+																		// is true (without deletion), func is called from fnCaller
 
 	void clear();									//deletes all items in the list
 	bool isEmpty() const;
@@ -30,6 +35,11 @@ public:
 
 	~List();
 };
+
+
+/*********************************************************************************************************/
+/******************************************** Implementations ********************************************/
+/*********************************************************************************************************/
 
 template <typename T>
 List<T>::List() {
@@ -134,20 +144,18 @@ template <typename S>
 void List<T>::traverse(void (S::*func)(T), S &fnCaller) {
 	Node<T>* ptr = head;
 	while (ptr != nullptr) {
-		(fnPara.*func)(ptr->getData());
+		(fnCaller.*func)(ptr->getData());
 		ptr = ptr->getNext();
 	}
 }
-//traverses through the list and removes an element if a condition is true
+//traverses through the list and removes an element if conditionFn is true (without deletion)
 template<typename T>
 template<typename S>
-void List<T>::condtionalRemove(bool(S::* func)())
+void List<T>::condtionalRemove(bool(S::* conditionFn)())
 {
-	Node<T>* tempDeleted;
-	while (head != nullptr && (head->getData()->*func)()) {
-		tempDeleted = head;
+	Node<T>* temp;
+	while (head != nullptr && (head->getData()->*conditionFn)()) {
 		head = head->getNext();
-		delete tempDeleted;
 		count--;
 	}
 
@@ -157,10 +165,36 @@ void List<T>::condtionalRemove(bool(S::* func)())
 	bool found = false;
 
 	while (ptr->getNext() != NULL) {
-		if ((ptr->getNext()->getData()->*func)()) {
-			tempDeleted = ptr->getNext();
-			ptr->setNext(tempDeleted->getNext());
-			delete tempDeleted;
+		if ((ptr->getNext()->getData()->*conditionFn)()) {
+			temp = ptr->getNext();
+			ptr->setNext(temp->getNext());
+			count--;
+		}
+		else {
+			ptr = ptr->getNext();
+		}
+	}
+}
+
+//traverses through the list and removes an element if func is true (without deletion), conditionFn is called from fnCaller
+template<typename T>
+template<typename S>
+void List<T>::condtionalRemove(bool (S::*conditionFn)(T), S &fnCaller) {
+	Node<T>* temp;
+	while (head != nullptr && (fnCaller.*conditionFn)(head->getData())) {
+		head = head->getNext();
+		count--;
+	}
+
+	if (head == nullptr) return;
+
+	Node<T>* ptr = head;
+	bool found = false;
+
+	while (ptr->getNext() != NULL) {
+		if ((fnCaller.*conditionFn)(ptr->getNext()->getData())) {
+			temp = ptr->getNext();
+			ptr->setNext(temp->getNext());
 			count--;
 		}
 		else {

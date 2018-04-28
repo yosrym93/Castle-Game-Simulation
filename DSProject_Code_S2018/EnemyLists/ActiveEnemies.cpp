@@ -1,5 +1,5 @@
 #include "ActiveEnemies.h"
-
+#include "..\Battle.h"
 
 
 ActiveEnemies::ActiveEnemies()
@@ -31,9 +31,10 @@ void ActiveEnemies::clear() {
 	enemiesList.clear();
 }
 
-void ActiveEnemies::update()
+//Removes killed enemies from the list and calls Battles' killEnemy(killedEnemy)
+void ActiveEnemies::removeKilled(Battle &b)
 {
-	enemiesList.condtionalRemove(&Enemy::isKilled);
+	enemiesList.condtionalRemove(&Battle::isKilledEnemy, b);
 }
 
 string ActiveEnemies::print()
