@@ -1,5 +1,5 @@
 #include "Enemy.h"
-
+#include"d:\thecastle\DSProject_Code_S2018\Battle.h"
 
 Enemy::Enemy(color r_c, REGION r_region, int d)
 {
@@ -140,4 +140,17 @@ bool Enemy::isKilled() {
 	if (health == 0)
 		return true;
 	return false;
+}
+
+bool Enemy::canAttack(Battle* b)
+{
+	if (b->getCurrentTime() >= arrivalTime && !isKilled() && ((b->getCurrentTime() - arrivalTime) % (reload + 1) == 0))
+		return true;
+	else 
+		return false;
+}
+
+void Enemy::Attack(Battle *b)
+{
+
 }

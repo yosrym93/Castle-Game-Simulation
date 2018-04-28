@@ -56,11 +56,11 @@ public:
 	REGION getRegion(char);			//converting char type into enum type
 	char getRegion(int);			//converting enum type into char type
 	void print(GUI*);				//print towers,active and inactive enemies info.
-	void timeCounter();
+	void timeCounter();				//counter for current time
 	void interactiveTime();
 	void stepByStepTime();
 	void silentTime();
-	
+	void healEnemies(int);				//increase enemies health in balloon fire time
 	/****************************  Inactive Enemies Functions  ****************************/
 	void activateEnemy(Enemy* inactiveEnemy);
 

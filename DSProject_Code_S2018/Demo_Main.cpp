@@ -1,6 +1,5 @@
 #include "Battle.h"
 #include "GUI\GUI.h"
-
 void Simulation(Battle *B, GUI *G);
 
 int main()

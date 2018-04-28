@@ -17,6 +17,8 @@ public:
 	void setFirePower(int );
 	int getMaxNum()const;
 	int getFirePower()const;
+	void damage(double);		//decrease tower health
+	bool isKilled();
 	//
 	// TODO: Add More Member Functions As Needed
 	//

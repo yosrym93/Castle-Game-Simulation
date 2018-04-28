@@ -20,6 +20,7 @@ public:
 	void setTowersHealth(double h);
 	void setTowersFirePower(int pow);
 	void setTowersNum(int n);
+	Tower* getTower(int);
 	//
 	// TODO: Add More Member Functions As Needed
 	//

@@ -2,9 +2,9 @@
 
 #include "..\Defs.h"
 #include "..\CMUgraphicsLib\CMUgraphics.h"
-
 // Enemy is the base class of each type of enemy
 // Enemy is an abstract class.
+class Battle;
 class Enemy
 {
 
@@ -15,7 +15,7 @@ protected:
 	int Distance;	//Horizontal distance between enemy & the tower of its region
 	                //Always positive (ranges from 2 to 60)
 	double health;	//Enemy health
-	bool canAttack;
+	//bool canAttack;
 	int K;
 	int arrivalTime;
 	int reload;
@@ -50,11 +50,11 @@ public:
 	double getHealth()const;
 	string getTypeStr() const; //return the type as a string 
 	bool isKilled();
-
+	bool canAttack(Battle* b);
 	// Virtual Functions: ----------------
 
 	//virtual void Move() = 0;	    //All enemies can move
-	//virtual void Attack() = 0;	//All enemies can attack (attacking is paving or shooting)
+	virtual void Attack(Battle*) = 0;	//All enemies can attack (attacking is paving or shooting)
 
 	//
 	// TODO: Add More Member Functions As Needed
