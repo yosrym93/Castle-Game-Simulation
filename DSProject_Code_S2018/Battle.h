@@ -65,6 +65,7 @@ public:
 	void load(GUI*);				//Loads all enemies to the inactive list
 	bool isFighting();				//Are there still ENEMIES ALIVE????!!
 	void print(GUI*);				//Prints towers,active and inactive enemies info.
+	void healEnemies(int);				//increase enemies health in balloon fire time
 
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();

@@ -30,6 +30,10 @@ void Castle::setTowersNum(int n)
 		towers[i].setNum(n);
 	}
 }
+Tower * Castle::getTower(int x)
+{
+	return &towers[x];
+}
 void Castle::setTowersFirePower(int pow)
 {
 	for (int i = 0; i < NoOfRegions; i++)

@@ -155,6 +155,10 @@ void Battle::silentTime()
 		currentTime++;
 	}
 }
+void Battle::healEnemies(int reNumber)
+{
+
+}
 // function that loads the inputs from the file 
 void Battle::load(GUI*pGUI)
 {

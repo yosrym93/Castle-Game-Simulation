@@ -1,6 +1,5 @@
 #include "Tower.h"
 
-
 void Tower::setHealth(double h)
 {
 	if(h > 0)
@@ -17,6 +16,17 @@ double Tower::getHealth() const
 int Tower::getFirePower()const
 {
 	return firePower;
+}
+void Tower::damage(double x)
+{
+	if (!isKilled())
+		health = health - x;
+}
+bool Tower::isKilled()
+{
+	if (health <= 0)
+		return true;
+	else return false;
 }
 int Tower::getMaxNum()const
 {
