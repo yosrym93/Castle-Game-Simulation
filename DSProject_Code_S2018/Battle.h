@@ -53,8 +53,13 @@ public:
 	void drawEnemies(GUI * pGUI);	//Draws enemies in the GUI array
 	void removeKilledGUI();			//Removes killed enemies from the GUI array
 
-
+	/********************************* Time Handling Functions ********************************/
+	void timeCounter();
+	void interactiveTime();
+	void stepByStepTime();
+	void silentTime();
 	
+	/***************************************************************************************/
 	void killRandom();				//Kills enemieas randomly according to phase 1.
 	void update(int);				//Updates all lists and the GUI array
 	void load(GUI*);				//Loads all enemies to the inactive list
