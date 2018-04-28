@@ -141,3 +141,35 @@ bool Enemy::isKilled() {
 		return true;
 	return false;
 }
+
+//Calculates the firstShotDelay (Parameter is firstShot time step)
+void Enemy::calcFD(int firstShotTime) {
+	if (firstShotTime >= arrivalTime)	//Checks for valid first-shot time
+		firstShotDelay = firstShotTime - arrivalTime;
+	else
+		firstShotDelay = -1;			//-1 indicates wrong first-shot time
+}
+
+//Calculates the killDelay (Parameter is kill time step)
+void Enemy::calcKD(int killTime) {
+	int firstShotTime = arrivalTime + firstShotDelay;
+	if (killTime >= firstShotTime)	//Checks for valid kill time
+		killDelay = killTime - firstShotTime;
+	else
+		killDelay = -1;				//-1 indicates wrong kill time
+}
+
+//Returns the firstShotDelay
+int Enemy::getFD() {
+	return firstShotDelay;
+}
+
+//Returns the killDelay
+int Enemy::getKD() {
+	return killDelay;
+}
+
+/***********************Output Functions ***************************/
+void Enemy::output() const {
+	
+}

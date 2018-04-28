@@ -21,12 +21,9 @@ protected:
 	int reload;
 	TYPE type;
 	double firePower;
-	int deathTime;
-	int firstShot;
 
-	//
-	// TODO: Add More Data Members As Needed
-	//
+	int firstShotDelay;	//T(first_shot) - T(arrival)
+	int killDelay;		//T(enemy_killed) - T(first_shot)
 
 public:
 	Enemy(color r_c, REGION r_region, int d = MaxDistance);
@@ -36,7 +33,8 @@ public:
 	REGION getRegion() const;
 	void decrementDist();
 	string print();
-	//setters and getters 
+
+	//Setters and getters 
 	void setId(int);
 	int getId() const;
 	void SetDistance(int d);
@@ -48,17 +46,22 @@ public:
 	void setType(int);
 	int getDistance() const;
 	double getHealth()const;
-	string getTypeStr() const; //return the type as a string 
+	string getTypeStr() const; //Returns the type as a string (for printing)
 	bool isKilled();
+	void calcFD(int firstShotTime);	//Calculates the firstShotDelay (Parameter is firstShot time step)
+	void calcKD(int killTime);		//Calculates the killDelay (Parameter is kill time step)
+	int getFD();					//Returns the firstShotDelay
+	int getKD();					//Return the killDelay
+
+	/****************Output Functions*****************/
+	void output() const;
 
 	// Virtual Functions: ----------------
 
 	//virtual void Move() = 0;	    //All enemies can move
 	//virtual void Attack() = 0;	//All enemies can attack (attacking is paving or shooting)
 
-	//
-	// TODO: Add More Member Functions As Needed
-	//
+
 
 };
 

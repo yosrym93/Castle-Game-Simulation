@@ -11,9 +11,11 @@
 #include "Castle\Castle.h"
 #include "Castle\Tower.h"
 
-#include "ADTs\ActiveEnemies.h"
-#include "ADTs\InactiveEnemies.h"
-#include "ShieldedEnemies.h"
+#include "EnemyLists\ActiveEnemies.h"
+#include "EnemyLists\InactiveEnemies.h"
+#include "EnemyLists\ShieldedEnemies.h"
+
+#include "Output\Output.h"
 
 
 // it is the controller of the project
@@ -21,11 +23,11 @@ class Battle
 {
 private:
 	Castle bCastle;
-	int enemyCount;									 //the actual number of enemies in the game
-	double c1, c2, c3;							     // input constants for priority equation
+	int enemyCount;									//The number of active enemies (enemies in the GUI Array)
+	double c1, c2, c3;							    //input constants for priority equation
 	int currentTime;
-	int Unpaved[NoOfRegions];						 // unpaved distance of each region
-	int killed[NoOfRegions];				//number of killed enemies in each region
+	int unpavedDistance[NoOfRegions];				// unpaved distance of each region
+	int nKilledEnemies[NoOfRegions];				//number of killed enemies in each region
 
 	/************************Inactive Enemies List(s)************************/
 	InactiveEnemies inactiveEnemies;				//all inactive enemies
@@ -37,27 +39,42 @@ private:
 	
 	/************************ GUI Array ************************/
 	Enemy * bEnemiesForDraw[MaxEnemyCount]; // This Array of Pointers is used for drawing elements in the GUI
-								  			
+
+	/************************ Output writer ************************/
+	Output writer;							//Writes data to the output file
 
 public:
 	
 	Battle();
-	void AddEnemy(Enemy* Ptr);		//Adds an enemy to the GUI array
-	void DrawEnemies(GUI * pGUI);	//Draws enemies in the GUI array
-	Castle * GetCastle();
-	void killRandom();				//Kills enemieas randomly according to phase 1.
-	void update(int);					//Updates all lists and the GUI array
-	int getCurrentTime() const;	
-	int getTotalAlive();			//Gets the number of alive enemies at any moment.
-	void print();					//Prints data for phase 1.
-	void Load(GUI*);				//Load all enemies to the inactive list
-	bool isFighting();				//are there still ENEMIES ALIVE????!!
-	REGION getRegion(char);			//converting char type into enum type
-	char getRegion(int);			//converting enum type into char type
-	void print(GUI*);				//print towers,active and inactive enemies info.
+
+	/************************ GUI array functions ************************/
+	void addEnemyGUI(Enemy* Ptr);	//Adds an enemy to the GUI array
+	void drawEnemies(GUI * pGUI);	//Draws enemies in the GUI array
+	void removeKilledGUI();			//Removes killed enemies from the GUI array
+
+
 	
+	void killRandom();				//Kills enemieas randomly according to phase 1.
+	void update(int);				//Updates all lists and the GUI array
+	void load(GUI*);				//Loads all enemies to the inactive list
+	bool isFighting();				//Are there still ENEMIES ALIVE????!!
+	void print(GUI*);				//Prints towers,active and inactive enemies info.
+
+	/****************************  Getter Functions  ****************************/
+	Castle * getCastle();
+	REGION getRegion(char);			//Converts char type into enum type
+	char getRegion(int);			//Converts enum type into char type
+	int getCurrentTime() const;		//Returns the current time step
+	int getTotalAlive();			//Gets the number of alive enemies at any moment.
+	int getUnpavedDist(int);		//Returns the unpaved distance of a region
+
 	/****************************  Inactive Enemies Functions  ****************************/
 	void activateEnemy(Enemy* inactiveEnemy);
+
+	/**************************** Enmies Killing / Output Functions  ****************************/
+	void removeKilledEnemies();		//Removes all killed enemies from all lists and sends them to the writer
+	bool isKilledEnemy(Enemy*);		//Returns true if an enemy is killed and sends it to the writer
+	void outputEnemy(Enemy*);		//Outputs enemy's data to output file (through writer)
 
 };
 

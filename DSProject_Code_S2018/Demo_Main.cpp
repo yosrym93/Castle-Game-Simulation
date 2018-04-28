@@ -21,7 +21,7 @@ int main()
 
 void Simulation(Battle *pGameBattle,GUI *pGUI)
 {
-	pGameBattle->Load(pGUI);
+	pGameBattle->load(pGUI);
 	Point p;
 	string msg;
 	int TimeStep = 0;
@@ -36,7 +36,7 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 		//printing info
 		pGameBattle->print(pGUI);
 		// Redraw the enemies
-		pGameBattle->DrawEnemies(pGUI);
+		pGameBattle->drawEnemies(pGUI);
 		pGameBattle->killRandom();
 
 		TimeStep++;

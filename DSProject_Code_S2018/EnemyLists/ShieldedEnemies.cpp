@@ -1,4 +1,6 @@
 #include "ShieldedEnemies.h"
+#include "..\Battle.h"
+
 ShieldedEnemies::ShieldedEnemies()
 {
 }
@@ -30,9 +32,10 @@ bool ShieldedEnemies::killRand()
 {
 	ShieldedArray.clear();
 }
- void ShieldedEnemies::update()
+ //Removes killed enemies from the list and calls Battles' killEnemy(killedEnemy)
+ void ShieldedEnemies::removeKilled(Battle &b)
  {
-	 ShieldedArray.condtionalRemove(&Enemy::isKilled);
+	 ShieldedArray.condtionalRemove(&Battle::isKilledEnemy, b);
  }
 
 string ShieldedEnemies::print()

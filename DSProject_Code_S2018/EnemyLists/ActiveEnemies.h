@@ -1,7 +1,10 @@
 #pragma once
 
 #include "../Enemies/Enemy.h"
-#include "List.h"
+#include "../ADTs/List.h"
+
+class Battle;
+
 class ActiveEnemies 
 {
 	List<Enemy*> enemiesList;
@@ -12,7 +15,7 @@ public:
 	int getCount() const;
 	bool isEmpty() const;
 	void clear();
-	void update();					//Updates enemies in the active list (removes the killed enemies)
+	void removeKilled(Battle &);	//Removes killed enemies from the list and calls Battles' killEnemy(killedEnemy)
 	string print();
 	~ActiveEnemies();
 };
