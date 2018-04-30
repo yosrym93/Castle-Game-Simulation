@@ -406,8 +406,10 @@ bool Battle::isKilledEnemy(Enemy* e) {
 		e->calcKD(currentTime);
 		writer.addEnemy(e);
 		nKilledEnemies[e->getRegion()]++;
-		if (!enemyKilledAtT)
+		if (!enemyKilledAtT) {
 			playDeathSound();
+			enemyKilledAtT = true;
+		}
 		return true;
 	}
 	return false;
