@@ -262,6 +262,15 @@ void Array<T>::traverse(void (S::*func)(T*), S &fnCaller) {
 		(fnCaller.*func)(arr[i]);
 }
 
+//traverses through the list and calls a function from each element
+//that takes fnParameter in the list as its parameter
+template <typename T>
+template<typename S1, typename S2>
+void Array<T>::traverse(void (S1::*func)(S2), S2 &fnParameter) {
+	for (int i = 0; i < size; i++)
+		(arr[i].*func)(fnParameter);
+}
+
 template<class T>
 Array<T>::~Array()
 {
