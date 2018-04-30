@@ -4,11 +4,6 @@ void Simulation(Battle *B, GUI *G);
 
 int main()
 {
-	//
-	// THIS IS JUST A DEMO
-	// THIS MAIN SHOULD BE CHANGED IN PHASE 1 AND PHASE 2
-	//
-
 	Battle* pGameBattle = new Battle;
 	GUI * pGUI = new GUI;
 	Simulation(pGameBattle, pGUI);
@@ -21,6 +16,7 @@ int main()
 void Simulation(Battle *pGameBattle,GUI *pGUI)
 {
 	pGameBattle->load(pGUI);
+	pGameBattle->createGUIArray();
 	Point p;
 	string msg;
 	int TimeStep = 0;

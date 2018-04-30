@@ -12,7 +12,6 @@ GUI::GUI()
 	ClearStatusBar();
 	ClearBattleArea();
 	DrawCastle();
-	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 GUI::~GUI()
@@ -178,6 +177,32 @@ void GUI::DrawCastle() const
 	pWind->DrawLine(CastleEndX + MaxDistance*EnemyWidth + MaxDistance +1, MenuBarHeight,
 		CastleEndX + MaxDistance*EnemyWidth + MaxDistance +1, WindHeight-StatusBarHeight);
 }
+//////////////////////////////////////////////////////////////////////////////////////////
+void GUI::DrawPaved(int* unpavedDistances) const {
+	int pavedDistance;
+	//Region A
+	pavedDistance = MaxDistance - unpavedDistances[0];
+	pWind->SetPen(LIGHTCYAN, 1);
+	pWind->SetBrush(LIGHTCYAN);
+	pWind->DrawRectangle(0, MenuBarHeight, pavedDistance*EnemyWidth , YHalfBattleArea - 1);
+	//Region B
+	pavedDistance = MaxDistance - unpavedDistances[1];
+	pWind->SetPen(LIGHTCYAN, 1);
+	pWind->SetBrush(LIGHTCYAN);
+	pWind->DrawRectangle(WindWidth, MenuBarHeight, WindWidth - (pavedDistance*EnemyWidth) , YHalfBattleArea - 1);
+	//Region C
+	pavedDistance = MaxDistance - unpavedDistances[2];
+	pWind->SetPen(LIGHTCYAN, 1);
+	pWind->SetBrush(LIGHTCYAN);
+	pWind->DrawRectangle(WindWidth, YHalfBattleArea + 2, WindWidth - (pavedDistance*EnemyWidth), WindHeight - StatusBarHeight);
+	//Region D
+	pavedDistance = MaxDistance - unpavedDistances[3];
+	pWind->SetPen(LIGHTCYAN, 1);
+	pWind->SetBrush(LIGHTCYAN);
+	pWind->DrawRectangle(0, YHalfBattleArea + 2, pavedDistance*EnemyWidth, WindHeight - StatusBarHeight);
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::DrawEnemy(const Enemy & E, int YPos) const       // It's a private function
 {
