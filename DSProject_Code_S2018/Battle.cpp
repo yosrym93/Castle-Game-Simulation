@@ -8,7 +8,7 @@ Battle::Battle()
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		nKilledEnemies[i] = 0;
-		unpavedDistance[i] = 60;
+		unpavedDistance[i] = MaxDistance;
 	}
 
 	bEnemiesForDraw = nullptr;
@@ -406,8 +406,10 @@ bool Battle::isKilledEnemy(Enemy* e) {
 		e->calcKD(currentTime);
 		writer.addEnemy(e);
 		nKilledEnemies[e->getRegion()]++;
-		if (!enemyKilledAtT)
+		if (!enemyKilledAtT) {
 			playDeathSound();
+			enemyKilledAtT = true;
+		}
 		return true;
 	}
 	return false;
