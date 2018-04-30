@@ -40,7 +40,11 @@ public:
 
 	template<typename S>
 	void traverse(void (S::*func)(T*), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
-													//that takes an element in the list as its parameter
+														//that takes an element in the list as its parameter
+
+	template<typename S1, typename S2>
+	void traverse(void (S1::*func)(S2), S2 &fnParameter);	//traverses through the list and calls a function from each element
+															//that takes fnParameter in the list as its parameter
 
 	~Array();
 };

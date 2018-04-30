@@ -19,6 +19,11 @@ public:
 	template<typename S>
 	void traverse(void (S::*func)(T), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
 													//that takes an element in the list as its parameter
+
+	template<typename S1, typename S2>
+	void traverse(void (S1::*func)(S2), S2 &fnParameter);	//traverses through the list and calls a function from each element
+															//that takes fnParameter in the list as its parameter
+
 	template<typename S>
 	void condtionalRemove(bool (S::*conditionFn)());		//traverses through the list and removes an element if conditionFn
 															//is true (without deletion)
@@ -148,6 +153,21 @@ void List<T>::traverse(void (S::*func)(T), S &fnCaller) {
 		ptr = ptr->getNext();
 	}
 }
+
+
+//traverses through the list and calls a function from each element
+//that takes fnParameter in the list as its parameter
+template<typename T>
+template<typename S1, typename S2>
+void List<T>::traverse(void (S1::*func)(S2), S2 &fnParameter) {
+	Node<T>* ptr = head;
+	while (ptr != nullptr) {
+		(ptr->getData()->*func)(fnParameter);
+		ptr = ptr->getNext();
+	}
+}
+
+
 //traverses through the list and removes an element if conditionFn is true (without deletion)
 template<typename T>
 template<typename S>
