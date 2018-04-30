@@ -8,7 +8,7 @@ Battle::Battle()
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		nKilledEnemies[i] = 0;
-		unpavedDistance[i] = 60;
+		unpavedDistance[i] = MaxDistance;
 	}
 
 	bEnemiesForDraw = nullptr;
