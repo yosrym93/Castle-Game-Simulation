@@ -8,6 +8,7 @@ Battle::Battle()
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		nKilledEnemies[i] = 0;
+		unpavedDistance[i] = 60;
 	}
 
 	bEnemiesForDraw = nullptr;
@@ -74,7 +75,6 @@ void Battle::removeKilledGUI() {
 	{
 		if (bEnemiesForDraw[i]->isKilled())
 		{
-			nKilledEnemies[bEnemiesForDraw[i]->getRegion()]++;
 			bEnemiesForDraw[i] = bEnemiesForDraw[enemyCount - 1];
 			enemyCount--;
 			i--;
@@ -96,6 +96,7 @@ void Battle::deleteGUIArray() {
 void Battle::update(int cTime)
 {
 	currentTime = cTime;
+	enemyKilledAtT = false;
 	
 	removeKilledEnemies();
 
@@ -404,16 +405,47 @@ bool Battle::isKilledEnemy(Enemy* e) {
 	if (e->isKilled()) {
 		e->calcKD(currentTime);
 		writer.addEnemy(e);
+		nKilledEnemies[e->getRegion()]++;
+		if (!enemyKilledAtT)
+			playDeathSound();
 		return true;
 	}
 	return false;
 }
 
-void Battle::outputEnemy(Enemy* e) {
+void Battle::writeEnemy(Enemy* e) {
 	writer.writeEnemy(e, currentTime);
 }
 
+/**************************** Audio Functions  ****************************/
 
+void Battle::playDeathSound() {
+	PlaySound(TEXT("Sounds\\EnemyDeath.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
+
+void Battle::playTowerDestructionSound() {
+	PlaySound(TEXT("Sounds\\TowerDestruction.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
+
+void Battle::playPavingSound() {
+	PlaySound(TEXT("Sounds\\Paving.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
+
+void Battle::playHealingSound() {
+	PlaySound(TEXT("Sounds\\Healing.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
+
+void Battle::playFreezingSound() {
+	PlaySound(TEXT("Sounds\\Freezing.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
+
+void Battle::playVictorySound() {
+	PlaySound(TEXT("Sounds\\Victory.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
+
+void Battle::playDefeatSound() {
+	PlaySound(TEXT("Sounds\\Defeat.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
 /****************************  Destructor ****************************/
 Battle::~Battle() {
 	deleteGUIArray();
