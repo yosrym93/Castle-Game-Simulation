@@ -277,7 +277,7 @@
     <ClCompile Include="Enemies\Fighter.cpp" />
     <ClCompile Include="Enemies\Paver.cpp" />
     <ClCompile Include="Enemies\Shielded.cpp" />
-    <ClCompile Include="Enemies\Tank.cpp" />
+    <ClCompile Include="Enemies\FreezeTank.cpp" />
     <ClCompile Include="EnemyLists\ActiveEnemies.cpp" />
     <ClCompile Include="EnemyLists\InactiveEnemies.cpp" />
     <ClCompile Include="EnemyLists\ShieldedEnemies.cpp" />
@@ -319,7 +319,7 @@
     <ClInclude Include="Enemies\Fighter.h" />
     <ClInclude Include="Enemies\Paver.h" />
     <ClInclude Include="Enemies\Shielded.h" />
-    <ClInclude Include="Enemies\Tank.h" />
+    <ClInclude Include="Enemies\FreezeTank.h" />
     <ClInclude Include="EnemyLists\ActiveEnemies.h" />
     <ClInclude Include="EnemyLists\InactiveEnemies.h" />
     <ClInclude Include="EnemyLists\ShieldedEnemies.h" />

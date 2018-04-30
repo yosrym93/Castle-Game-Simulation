@@ -123,9 +123,6 @@
     <ClInclude Include="Enemies\Shielded.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Enemies\Tank.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="GUI\GUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
@@ -142,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="EnemyLists\ShieldedEnemies.h">
       <Filter>EnemyLists</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies\FreezeTank.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -274,9 +274,6 @@
     <ClCompile Include="Enemies\Shielded.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Enemies\Tank.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="GUI\GUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
@@ -294,14 +291,11 @@
     <ClCompile Include="EnemyLists\ShieldedEnemies.cpp">
       <Filter>EnemyLists</Filter>
     </ClCompile>
+    <ClCompile Include="Enemies\FreezeTank.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ADTs\ActiveEnemies.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\InactiveEnemies.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
     <ClInclude Include="ADTs\List.h">
       <Filter>ADTs</Filter>
     </ClInclude>

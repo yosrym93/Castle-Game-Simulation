@@ -1,13 +1,14 @@
 #pragma once
 #include "Enemy.h"
 class Battle;
-class Tank :
+
+class FreezeTank :
 	public Enemy
 {
 
 public:
-	Tank(color r_c, REGION r_region, int d);
+	FreezeTank(color r_c, REGION r_region, int d);
 	void Attack(Battle*);
-	~Tank();
+	~FreezeTank();
 };
 

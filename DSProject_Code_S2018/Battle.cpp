@@ -4,10 +4,13 @@ Battle::Battle()
 {
 	currentTime = 0;
 	enemyCount = 0;
+	totalEnemiesCount = 0;
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		nKilledEnemies[i] = 0;
 	}
+
+	bEnemiesForDraw = nullptr;
 }
 void Battle::killRandom()
 {
@@ -36,27 +39,36 @@ void Battle::killRandom()
 }
 
 /*************************** GUI array functions ****************************/
+//Allocates the GUI array (or not) according to the mode
+void Battle::createGUIArray() {
+	if (1) 	//Replace 1 with "not silent mode" condition
+		bEnemiesForDraw = new Enemy*[totalEnemiesCount];
+}
 
 //Adds an enemy to the GUI array
 void Battle::addEnemyGUI(Enemy* Ptr)
 {
+	if (!bEnemiesForDraw)	//Checks if the array is allocated
+		return;
+
 	if (enemyCount < MaxEnemyCount)
 	{
 		bEnemiesForDraw[enemyCount++] = Ptr;
-		//enemyRegionalCount[Ptr->getRegion()]++;
 	}
-	// Note that this function doesn't allocate any enemy objects
-	// It only makes the first free pointer in the array
-	// points to what is pointed to by the passed pointer Ptr
 }
 
 //Draws enemies in the GUI array
 void Battle::drawEnemies(GUI * pGUI)
 {
+	if (!bEnemiesForDraw)	//Checks if the array is allocated
+		return;
 	pGUI->DrawEnemies(bEnemiesForDraw, enemyCount);
 }
 
 void Battle::removeKilledGUI() {
+
+	if (!bEnemiesForDraw)	//Checks if the array is allocated
+		return;
 
 	for (int i = 0; i < enemyCount; i++)
 	{
@@ -69,6 +81,11 @@ void Battle::removeKilledGUI() {
 
 		}
 	}
+}
+
+void Battle::deleteGUIArray() {
+	if (bEnemiesForDraw)			//Checks if the array was allocated
+		delete[]bEnemiesForDraw;	//deletes the array only, as the enemies themselves are deleted from their lists
 }
 
 
@@ -181,8 +198,6 @@ void Battle::load(GUI*pGUI)
 		bCastle.setTowersNum(maxNum);
 		bCastle.setTowersFirePower(tP);
 
-		int totalEnemiesCount = 0;
-
 		int id;
 		int type;
 		int arrTime, pow, rld;
@@ -213,7 +228,7 @@ void Battle::load(GUI*pGUI)
 				pEnemy = new Balloon(MAGENTA, region , MaxDistance);
 				break;
 			case 4:
-				pEnemy = new Tank(SNOW, region, MaxDistance);
+				pEnemy = new FreezeTank(SNOW, region, MaxDistance);
 				break;
 			default:
 				break;
@@ -331,33 +346,37 @@ int Battle::getUnpavedDist(int r) {
 /****************************  Inactive Enemies Functions  ****************************/
 void Battle::activateEnemy(Enemy* inactiveEnemy) {
 	int Reg = inactiveEnemy->getRegion();
-	if (dynamic_cast<Fighter*>(inactiveEnemy)) {
-		normalEnemies[Reg].addEnemy(inactiveEnemy);
+
+	if (1) //Replace 1 with "not in silent mode" condition
 		addEnemyGUI(inactiveEnemy);
-		return;
-	}
-	if (dynamic_cast<Paver*>(inactiveEnemy)) {
-		normalEnemies[Reg].addEnemy(inactiveEnemy);
-		addEnemyGUI(inactiveEnemy);
-		return;
-	}
-	if (dynamic_cast<Balloon*>(inactiveEnemy)) {
-		normalEnemies[Reg].addEnemy(inactiveEnemy);
-		addEnemyGUI(inactiveEnemy);
+
+	Enemy* newActiveEnemy = dynamic_cast<Fighter*>(inactiveEnemy);
+	if (newActiveEnemy) {
+		normalEnemies[Reg].addEnemy(newActiveEnemy);
 		return;
 	}
 
-	Enemy* tank = dynamic_cast<Tank*>(inactiveEnemy);
-	if (tank) {
-		tankEnemies[Reg].addEnemy(inactiveEnemy);
-		addEnemyGUI(inactiveEnemy);
+	newActiveEnemy = dynamic_cast<Paver*>(inactiveEnemy);
+	if (newActiveEnemy) {
+		normalEnemies[Reg].addEnemy(newActiveEnemy);
 		return;
 	}
 
-	Enemy* shieldedFighter = dynamic_cast<Shielded*>(inactiveEnemy);
-	if (shieldedFighter) {
-		shieldedEnemies[Reg].addEnemy(inactiveEnemy);
-		addEnemyGUI(inactiveEnemy);
+	newActiveEnemy = dynamic_cast<Balloon*>(inactiveEnemy);
+	if (newActiveEnemy) {
+		normalEnemies[Reg].addEnemy(newActiveEnemy);
+		return;
+	}
+
+	newActiveEnemy = dynamic_cast<FreezeTank*>(inactiveEnemy);
+	if (newActiveEnemy) {
+		tankEnemies[Reg].addEnemy(newActiveEnemy);
+		return;
+	}
+
+	newActiveEnemy = dynamic_cast<Shielded*>(inactiveEnemy);
+	if (newActiveEnemy) {
+		shieldedEnemies[Reg].addEnemy(newActiveEnemy);
 		return;
 	}
 }
@@ -373,7 +392,7 @@ void Battle::removeKilledEnemies() {
 	}
 
 	//Remove killed enemies from the GUI array
-	if (1)
+	if (1)	//Replace 1 with "not in silent mode" condition
 		removeKilledGUI();
 
 	//Writes removed enemies' data and delete them
@@ -392,5 +411,11 @@ bool Battle::isKilledEnemy(Enemy* e) {
 
 void Battle::outputEnemy(Enemy* e) {
 	writer.writeEnemy(e, currentTime);
+}
+
+
+/****************************  Destructor ****************************/
+Battle::~Battle() {
+	deleteGUIArray();
 }
 
