@@ -6,7 +6,7 @@
 #include "Enemies\Balloon.h"
 #include "Enemies\Paver.h"
 #include "Enemies\Shielded.h"
-#include "Enemies\Tank.h"
+#include "Enemies\FreezeTank.h"
 
 #include "Castle\Castle.h"
 #include "Castle\Tower.h"
@@ -24,6 +24,7 @@ class Battle
 private:
 	Castle bCastle;
 	int enemyCount;									//The number of active enemies (enemies in the GUI Array)
+	int totalEnemiesCount;							//Total number of enemies in the game (inactive, active and killed);
 	double c1, c2, c3;							    //input constants for priority equation
 	int currentTime;
 	int unpavedDistance[NoOfRegions];				// unpaved distance of each region
@@ -39,7 +40,7 @@ private:
 	ActiveEnemies tankEnemies[NoOfRegions];			//tanks
 	
 	/************************ GUI Array ************************/
-	Enemy * bEnemiesForDraw[MaxEnemyCount]; // This Array of Pointers is used for drawing elements in the GUI
+	Enemy ** bEnemiesForDraw; // This Array of Pointers is used for drawing elements in the GUI
 
 	/************************ Output writer ************************/
 	Output writer;							//Writes data to the output file
@@ -47,11 +48,13 @@ private:
 public:
 	
 	Battle();
-
+	~Battle();
 	/************************ GUI array functions ************************/
+	void createGUIArray();			//Allocates the GUI array (or not) according to the mode
 	void addEnemyGUI(Enemy* Ptr);	//Adds an enemy to the GUI array
 	void drawEnemies(GUI * pGUI);	//Draws enemies in the GUI array
 	void removeKilledGUI();			//Removes killed enemies from the GUI array
+	void deleteGUIArray();			//Deallocates the GUI array (if allocated)
 
 	/********************************* Time Handling Functions ********************************/
 	void timeCounter();
@@ -82,6 +85,8 @@ public:
 	void removeKilledEnemies();		//Removes all killed enemies from all lists and sends them to the writer
 	bool isKilledEnemy(Enemy*);		//Returns true if an enemy is killed and sends it to the writer
 	void outputEnemy(Enemy*);		//Outputs enemy's data to output file (through writer)
+
+
 
 };
 
