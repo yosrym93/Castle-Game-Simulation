@@ -49,17 +49,17 @@ public:
 	// Input Functions  ---------------------------
 	void GetPointClicked(Point &P) const; // waits a user click from the user
 	string GetString() const ; // reads a string (keyboard input) from the user
-
+	Action getUserAction();
 	// Output Functions  ---------------------------
 	void PrintMessage(string msg) const; // prints a message in the status bar
 	void updatePrintedMessage(string msg) const; // prints a message in the status bar
-
+	void drawFightingMenu(string , Mode);
 	void DrawString(const int iX, const int iY, const string Text); // prints a message in the passed coordinates
 
 	void DrawMenu() const;	// draws the game menu
 	void ClearStatusBar() const;    // clears the status bar
 	void ClearBattleArea() const;	// clears the Battle area from all drawn enemies
-
+	void clearToolbar();			// clears toolbar 
 	void setHeight(int);
 
 	void setWidth(int);

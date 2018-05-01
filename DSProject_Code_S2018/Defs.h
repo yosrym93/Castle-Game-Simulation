@@ -23,6 +23,26 @@ enum TYPE {
 	balloon,
 	tank
 };
+
+//modes
+enum Mode {
+	interactive,
+	stepbystep,
+	silent
+};
+enum Action //action to do
+{
+	ACTION_INTERACTIVE,
+	ACTION_STEPBYSTEP,
+	ACTION_SILENT,
+	ACTION_LOAD,
+	ACTION_EXIT,
+	BATTLE_AREA,  //A click on the battle area
+	STATUS,       //A click on the status bar
+	EMPTY        //A click on empty place in the toolbar
+
+
+};
 enum MenuItem
 {
 	//Note: menu icons are ordered here as they appear in menu
@@ -32,9 +52,6 @@ enum MenuItem
 	MENU_SILENT,
 	MENU_LOAD,
 	MENU_EXIT,
-
-
-
 	//TODO: Add more items names here
 	//      for the 3 modes of the application
 				

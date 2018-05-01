@@ -58,6 +58,38 @@ string GUI::GetString() const
 		PrintMessage(Label);
 	}
 }
+///////////////////////////////////////////////////////
+
+Action GUI::getUserAction()
+{
+	int x, y;
+	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+
+									//[1] User clicks on the Battle area
+	if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight)
+	{
+		return BATTLE_AREA;
+	}
+
+	//[2] If user clicks on the Toolbar
+	else if (y >= 0 && y < MenuBarHeight) {
+		//Check whick Menu item was clicked
+		//==> This assumes that menu items are lined up horizontally <==
+		int ClickedItemOrder = (x / MenuItemWidth);
+		//Divide x coord of the point clicked by the menu item width (int division)
+		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+		switch (ClickedItemOrder)
+		{
+		case MENU_INTERACTIVE:return ACTION_INTERACTIVE;
+		case MENU_STEPBYSTEP:return ACTION_STEPBYSTEP;
+		case MENU_SILENT:return ACTION_SILENT;
+		case MENU_LOAD:return ACTION_LOAD;
+		case MENU_EXIT:return ACTION_EXIT;
+		default: return EMPTY;
+		}
+	}
+	return STATUS;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // ================================== OUTPUT FUNCTIONS ===================================
@@ -74,13 +106,39 @@ void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 }
 void GUI::updatePrintedMessage(string msg) const	//Prints a message on status bar
 {
-
 	pWind->SetPen(DARKRED);
 	pWind->SetFont(18, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(width, WindHeight - (int)(height), msg); // You may need to change these coordinates later 
 															   // to be able to write multi-line
 }
 
+void GUI::drawFightingMenu(string fileName,Mode rmode)
+{
+	clearToolbar();
+	string mode;
+	switch (rmode)
+	{
+	case interactive:
+		mode = "Interactive";
+		break;
+	case stepbystep:
+		mode = "Step By Step";
+		break;
+	case silent:
+		mode = "Silent";
+		break;
+	}
+	pWind->SetBrush(LIGHTYELLOW);
+	pWind->DrawRectangle(0, 0, WindWidth, WindHeight- MenuBarHeight);
+	pWind->SetPen(DARKRED);
+	pWind->SetFont(24, BOLD, BY_NAME, "Helvetica");
+	pWind->DrawString( 20 , 10 ,"File Name:"+fileName);
+	pWind->SetPen(DARKRED);
+	pWind->SetFont(24, BOLD, BY_NAME, "Helvetica");
+	pWind->DrawString(180, 10, "Mode:" + mode);
+	pWind->SetPen(BLACK, 3);
+	pWind->DrawLine(0, MenuBarHeight, WindWidth, MenuBarHeight);
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::DrawString(const int iX, const int iY, const string Text)
 {
@@ -131,6 +189,17 @@ void GUI::ClearBattleArea() const
 	pWind->SetPen(KHAKI, 3);
 	pWind->SetBrush(KHAKI);
 	pWind->DrawRectangle(0, MenuBarHeight, WindWidth, WindHeight - StatusBarHeight);
+}
+///////////////////////////////////////////////////////////////////////////////////
+void GUI::clearToolbar()
+{
+	pWind->SetPen(WHITE, 3);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, WindWidth, WindHeight - MenuBarHeight);
+
+	pWind->SetPen(BROWN, 3);
+	pWind->DrawLine(0, WindHeight - MenuBarHeight, WindWidth, WindHeight - MenuBarHeight);
+
 }
 ///////////////////////////////////////////////////////////////////////////////////
 void GUI::DrawCastle() const

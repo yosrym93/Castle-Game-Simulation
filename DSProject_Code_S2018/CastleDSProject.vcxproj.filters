@@ -389,9 +389,6 @@
     <ClInclude Include="Enemies\Shielded.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Enemies\Tank.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="GUI\GUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
