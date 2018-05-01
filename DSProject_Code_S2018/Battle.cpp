@@ -8,6 +8,8 @@ Battle::Battle()
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		nKilledEnemies[i] = 0;
+		activeEnemies[i] = 0;
+		unpavedDistance[i] = 30;
 	}
 
 	bEnemiesForDraw = nullptr;
@@ -41,7 +43,7 @@ void Battle::killRandom()
 /*************************** GUI array functions ****************************/
 //Allocates the GUI array (or not) according to the mode
 void Battle::createGUIArray() {
-	if (1) 	//Replace 1 with "not silent mode" condition
+	if (mode!=silent) 	
 		bEnemiesForDraw = new Enemy*[totalEnemiesCount];
 }
 
@@ -111,36 +113,30 @@ void Battle::print(GUI *pGUI)
 	string region;
 	string enemies;
 	pGUI->setHeight(0);
-	pGUI->setWidth(0);
-	pGUI->updatePrintedMessage("Format of printing: Enemy(Type,ID,Health,ArrivalTime,FirePwr,Rld), Tower(Health,Firepwr,No. of Enemies)" );
-	pGUI->setHeight(1);
 	pGUI->updatePrintedMessage("Castle info: (at T = " + to_string(currentTime) + ")");
 	for (int i = 0; i < NoOfRegions; i++)
 	{
-		pGUI->setHeight(2+2*i);
+		pGUI->setHeight(1+2*i);
 		castleInfo = bCastle.print(i);
 		region = getRegion(i);
 		pGUI->setWidth(0);
-		pGUI->updatePrintedMessage(("Region " + region+ ". Killed Enemies:"+to_string(nKilledEnemies[i])+"  "+castleInfo));
+		pGUI->updatePrintedMessage("Region " + region + "  " + castleInfo+" Unpaved distance:"+to_string(unpavedDistance[i]));
 		pGUI->setWidth(0);
-		pGUI->setHeight(3 + 2*i);
-		pGUI->updatePrintedMessage("Active Enemies info: ");
-		enemies=normalEnemies[i].print()+tankEnemies[i].print()+ shieldedEnemies[i].print();
-		pGUI->setWidth(3);
-		pGUI->updatePrintedMessage(enemies);
+		pGUI->setHeight(2 + 2*i);
+		pGUI->updatePrintedMessage("Active Enemies : "+ to_string(activeEnemies[i]) + ". Killed Enemies:" + to_string(nKilledEnemies[i]));
 	}
 }
 void Battle::timeCounter()
 {
 		switch (mode)
 		{
-		case MENU_INTERACTIVE:        //interactive mode
+		case interactive:        //interactive mode
 			interactiveTime();
 			break;
-		case MENU_STEPBYSTEP:        //step by step mode
+		case stepbystep:        //step by step mode
 			stepByStepTime();
 			break;
-		case MENU_SILENT:             //silent mode
+		case silent:             //silent mode
 			silentTime();
 			break;
 		}
@@ -176,10 +172,57 @@ void Battle::healEnemies(int reNumber)
 {
 
 }
+//load the file and decide the mode 
+bool Battle::input(GUI *pGUI) 
+{
+	bool bload = false;
+	bool bmode = false;
+	Action action;
+	while (!bload || !bmode)
+	{
+		action = pGUI->getUserAction();
+		switch (action)
+		{
+		case ACTION_INTERACTIVE:
+			bmode = true;
+			mode = interactive;
+			break;
+		case ACTION_STEPBYSTEP:
+			bmode = true;
+			mode = stepbystep;
+			break;
+		case ACTION_SILENT:
+			bmode = true;
+			mode = silent;
+			break;
+		case ACTION_LOAD:
+			bload = true;
+			load(pGUI);
+			break;
+		case ACTION_EXIT:
+			return false;
+			break;
+		default:
+			pGUI->PrintMessage("choose an icon");
+		}
+		if (bload == true && bmode == false)
+		{
+			pGUI->PrintMessage("File loaded ,please choose a mode");
+		}
+		if (bload == false && bmode == true)
+		{
+			pGUI->PrintMessage("Mode choosen,please choose a file");
+		}
+	}
+	pGUI->drawFightingMenu(fileName,mode);
+	createGUIArray();
+	return true;
+}
+
 // function that loads the inputs from the file 
 void Battle::load(GUI*pGUI)
 {
-	string fileName;
+	inactiveEnemies.clear();
 	ifstream inFile;
 	pGUI->PrintMessage("Enter the file name ");
 	fileName = pGUI->GetString();
@@ -242,6 +285,7 @@ void Battle::load(GUI*pGUI)
 				pEnemy->setHealth(health);
 				pEnemy->setPow(pow);
 				pEnemy->setRld(rld);
+				activeEnemies[region]++;
 				totalEnemiesCount++;
 			}
 			inactiveEnemies.addEnemy(pEnemy);
@@ -347,7 +391,7 @@ int Battle::getUnpavedDist(int r) {
 void Battle::activateEnemy(Enemy* inactiveEnemy) {
 	int Reg = inactiveEnemy->getRegion();
 
-	if (1) //Replace 1 with "not in silent mode" condition
+	if (mode!=silent) 
 		addEnemyGUI(inactiveEnemy);
 
 	Enemy* newActiveEnemy = dynamic_cast<Fighter*>(inactiveEnemy);
@@ -392,7 +436,7 @@ void Battle::removeKilledEnemies() {
 	}
 
 	//Remove killed enemies from the GUI array
-	if (1)	//Replace 1 with "not in silent mode" condition
+	if (mode!=silent)	
 		removeKilledGUI();
 
 	//Writes removed enemies' data and delete them

@@ -10,9 +10,7 @@ string Castle::print(int p)
 {
 	string printInfo;
 	string health = to_string((int)towers[p].getHealth());
-	string fP = to_string(towers[p].getFirePower());
-	string maxNum = to_string(towers[p].getMaxNum());
-	printInfo =  "TowerInfo(" + health + ", " + fP + ", " + maxNum+")";
+	printInfo =  "TowerHealth(" + health +")";
 	return printInfo;
 }
 

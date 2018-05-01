@@ -28,9 +28,10 @@ private:
 	double c1, c2, c3;							    //input constants for priority equation
 	int currentTime;
 	int unpavedDistance[NoOfRegions];				// unpaved distance of each region
+	int activeEnemies[NoOfRegions];
 	int nKilledEnemies[NoOfRegions];				//number of killed enemies in each region
-	MenuItem mode;
-
+	Mode mode;
+	string fileName;
 	/************************Inactive Enemies List(s)************************/
 	InactiveEnemies inactiveEnemies;				//all inactive enemies
 
@@ -68,8 +69,8 @@ public:
 	void load(GUI*);				//Loads all enemies to the inactive list
 	bool isFighting();				//Are there still ENEMIES ALIVE????!!
 	void print(GUI*);				//Prints towers,active and inactive enemies info.
-	void healEnemies(int);				//increase enemies health in balloon fire time
-
+	void healEnemies(int);			//increase enemies health in balloon fire time
+	bool input(GUI*);               //load the file and decide the mode
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();
 	REGION getRegion(char);			//Converts char type into enum type
