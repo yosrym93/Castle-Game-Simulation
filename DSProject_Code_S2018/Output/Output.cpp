@@ -45,7 +45,7 @@ void Output::writeEnemies(Battle &b) {
 	
 	enemiesList.sort(&Enemy::getFD);
 
-	enemiesList.traverse(&Battle::outputEnemy, b);	//Writes enemies data
+	enemiesList.traverse(&Battle::writeEnemy, b);	//Writes enemies data
 	enemiesList.clear();							//Deletes the enemies
 }
 

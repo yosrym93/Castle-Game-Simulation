@@ -40,10 +40,6 @@ private:
 	                                                          // to make any region carry 15 enemies + 1 for more space
 	                                                          // also 1 blank pixel between vertical enemies
 
-	// 
-	// TODO: Add more members if needed
-	//
-
 	void DrawEnemy(const Enemy & E, int YPos) const;	//draws one enemy - is not needed to be public
 
 public:
@@ -69,6 +65,7 @@ public:
 	void setWidth(int);
 
 	void DrawCastle() const;	    // draws the castle with the towers and 4 regions
+	void DrawPaved(int* unpavedDistances) const;			// Draws the paved areas
 	void DrawEnemies(Enemy* enemies[],int size) const;  
 									// No matter what list type you are using to hold enemies, 
 									// you must pass the enemies to the DrawEnemies as an array of enemy pointers. 

@@ -40,7 +40,11 @@ public:
 
 	template<typename S>
 	void traverse(void (S::*func)(T*), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
-													//that takes an element in the list as its parameter
+														//that takes an element in the list as its parameter
+
+	template<typename S1, typename S2>
+	void traverse(void (S1::*func)(S2), S2 &fnParameter);	//traverses through the list and calls a function from each element
+															//that takes fnParameter in the list as its parameter
 
 	~Array();
 };
@@ -256,6 +260,15 @@ template <typename S>
 void Array<T>::traverse(void (S::*func)(T*), S &fnCaller) {
 	for (int i = 0; i < size; i++)
 		(fnCaller.*func)(arr[i]);
+}
+
+//traverses through the list and calls a function from each element
+//that takes fnParameter in the list as its parameter
+template <typename T>
+template<typename S1, typename S2>
+void Array<T>::traverse(void (S1::*func)(S2), S2 &fnParameter) {
+	for (int i = 0; i < size; i++)
+		(arr[i].*func)(fnParameter);
 }
 
 template<class T>

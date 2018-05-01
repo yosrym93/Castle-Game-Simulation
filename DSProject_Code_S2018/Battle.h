@@ -1,5 +1,7 @@
 #pragma once
 #include <fstream>
+#include <Windows.h>
+#include <mmsystem.h>
 
 #include "Enemies\Enemy.h"
 #include "Enemies\Fighter.h"
@@ -30,6 +32,7 @@ private:
 	int unpavedDistance[NoOfRegions];				// unpaved distance of each region
 	int activeEnemies[NoOfRegions];
 	int nKilledEnemies[NoOfRegions];				//number of killed enemies in each region
+	bool enemyKilledAtT;							//true if an enemy was killed in this current step
 	Mode mode;
 	string fileName;
 	/************************Inactive Enemies List(s)************************/
@@ -45,7 +48,6 @@ private:
 
 	/************************ Output writer ************************/
 	Output writer;							//Writes data to the output file
-
 public:
 	
 	Battle();
@@ -85,9 +87,15 @@ public:
 	/**************************** Enmies Killing / Output Functions  ****************************/
 	void removeKilledEnemies();		//Removes all killed enemies from all lists and sends them to the writer
 	bool isKilledEnemy(Enemy*);		//Returns true if an enemy is killed and sends it to the writer
-	void outputEnemy(Enemy*);		//Outputs enemy's data to output file (through writer)
+	void writeEnemy(Enemy*);		//Outputs enemy's data to output file (through writer)
 
-
-
+	/**************************** Audio Functions  ****************************/
+	void playDeathSound();
+	void playTowerDestructionSound();
+	void playPavingSound();
+	void playHealingSound();
+	void playFreezingSound();
+	void playVictorySound();
+	void playDefeatSound();
 };
 
