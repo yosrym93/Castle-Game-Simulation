@@ -57,7 +57,7 @@ void Battle::clearGUI(GUI* pGUI) {
 void Battle::updateGUI(GUI* pGUI) {
 	print(pGUI);
 	drawEnemies(pGUI);
-	pGUI->DrawPaved();
+	pGUI->DrawPaved(unpavedDistance);
 }
 
 /*************************** GUI array functions ****************************/
