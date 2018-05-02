@@ -30,7 +30,7 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 		pGUI->ClearStatusBar();
 		pGUI->ClearBattleArea();
 		pGUI->DrawCastle();
-		pGameBattle->update(TimeStep);
+		pGameBattle->update();
 		//printing info
 		pGameBattle->print(pGUI);
 		// Redraw the enemies

@@ -52,6 +52,9 @@ public:
 	
 	Battle();
 	~Battle();
+	/*************************** GUI updating functions ****************************/
+	void clearGUI(GUI* pGUI);		//Clears the GUI for redrawing
+	void updateGUI(GUI* pGUI);		//Redraws the GUI
 	/************************ GUI array functions ************************/
 	void createGUIArray();			//Allocates the GUI array (or not) according to the mode
 	void addEnemyGUI(Enemy* Ptr);	//Adds an enemy to the GUI array
@@ -65,7 +68,7 @@ public:
 	
 	/***************************************************************************************/
 	void killRandom();				//Kills enemieas randomly according to phase 1.
-	void update(int);				//Updates all lists and the GUI array
+	void update();				//Updates all lists and the GUI array
 	void load(GUI*);				//Loads all enemies to the inactive list
 	bool isFighting();				//Are there still ENEMIES ALIVE????!!
 	void print(GUI*);				//Prints towers,active and inactive enemies info.

@@ -1,5 +1,6 @@
 #include "Battle.h"
 #include<chrono>
+#include<thread>
 
 using Clock = std::chrono::high_resolution_clock;
 
@@ -42,6 +43,21 @@ void Battle::killRandom()
 		}
 
 	}
+}
+
+/*************************** GUI updating functions ****************************/
+//Clears the GUI for redrawing
+void Battle::clearGUI(GUI* pGUI) {
+	pGUI->ClearStatusBar();
+	pGUI->ClearBattleArea();
+	pGUI->DrawCastle();
+}
+
+//Redraws the GUI
+void Battle::updateGUI(GUI* pGUI) {
+	print(pGUI);
+	drawEnemies(pGUI);
+	pGUI->DrawPaved();
 }
 
 /*************************** GUI array functions ****************************/
@@ -104,17 +120,20 @@ void Battle::timeCounter(GUI*p)
 		while (isFighting())
 		{
 			p->GetPointClicked(x);
+			update();
 			currentTime++;
 		}
 	}
 		break;
 	case stepbystep:        //step by step mode
 	{
+		auto next = Clock::now() + 1s;
 		while (isFighting())
 		{
-			Sleep(1000);
-			currentTime++;
-
+			 update();
+			 currentTime++;
+			 this_thread::sleep_until(next); 
+			 next += 1s; 
 		}
 	}
 		break;
@@ -122,6 +141,7 @@ void Battle::timeCounter(GUI*p)
 	{
 		while (isFighting())
 		{
+			update();
 			currentTime++;
 		}
 
@@ -137,9 +157,8 @@ void Battle::timeCounter(GUI*p)
 /*************************************/
 
 //Updates all lists and the GUI array
-void Battle::update(int cTime)
+void Battle::update()
 {
-	currentTime = cTime;
 	enemyKilledAtT = false;
 	
 	removeKilledEnemies();
