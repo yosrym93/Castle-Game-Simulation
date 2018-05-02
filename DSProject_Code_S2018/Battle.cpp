@@ -94,49 +94,45 @@ void Battle::deleteGUIArray() {
 }
 
 /********************************* Time Handling Functions ********************************/
-void Battle::timeCounter()
+void Battle::timeCounter(GUI*p)
 {
 	switch (mode)
 	{
 	case interactive:        //interactive mode
-		interactiveTime();
+	{
+		Point x;
+		while (isFighting())
+		{
+			p->GetPointClicked(x);
+			currentTime++;
+		}
+	}
 		break;
 	case stepbystep:        //step by step mode
-		stepByStepTime();
+	{
+		while (isFighting())
+		{
+			Sleep(1000);
+			currentTime++;
+
+		}
+	}
 		break;
 	case silent:             //silent mode
-		silentTime();
+	{
+		while (isFighting())
+		{
+			currentTime++;
+		}
+
+	}
 		break;
 	}
-
 }
 
-void Battle::interactiveTime()
-{
-	Point x;
-	GUI*p;
-	while (isFighting())
-	{
-		p->GetPointClicked(x);
-		currentTime++;
-	}
-}
-void Battle::stepByStepTime()
-{
-	while (isFighting())
-	{
-		Sleep(500);
-		currentTime++;
 
-	}
-}
-void Battle::silentTime()
-{
-	while (isFighting())
-	{
-		currentTime++;
-	}
-}
+
+
 
 /*************************************/
 
