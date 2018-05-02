@@ -1,4 +1,5 @@
 #include "Battle.h"
+#include<thread>
 
 Battle::Battle()
 {
@@ -89,8 +90,56 @@ void Battle::deleteGUIArray() {
 		delete[]bEnemiesForDraw;	//deletes the array only, as the enemies themselves are deleted from their lists
 }
 
+/********************************* Time Handling Functions ********************************/
+void Battle::timeCounter()
+{
+	switch (mode)
+	{
+	case interactive:        //interactive mode
+		interactiveTime();
+		break;
+	case stepbystep:        //step by step mode
+		stepByStepTime();
+		break;
+	case silent:             //silent mode
+		silentTime();
+		break;
+	}
+
+}
+
+void Battle::interactiveTime()
+{
+	Point x;
+	GUI*p;
+	while (isFighting())
+	{
+		p->GetPointClicked(x);
+		currentTime++;
+	}
+}
+void Battle::stepByStepTime()
+{
+	while (isFighting())
+	{
+		Sleep(500);
+		currentTime++;
+
+	}
+}
+void Battle::silentTime()
+{
+	while (isFighting())
+	{
+		currentTime++;
+	}
+}
 
 /*************************************/
+void Battle::updateAsync() {
+	std::thread([this]() { update(currentTime); }).detach();
+}
+
 
 
 //Updates all lists and the GUI array
@@ -124,48 +173,6 @@ void Battle::print(GUI *pGUI)
 		pGUI->setWidth(0);
 		pGUI->setHeight(2 + 2*i);
 		pGUI->updatePrintedMessage("Active Enemies : "+ to_string(activeEnemies[i]) + ". Killed Enemies:" + to_string(nKilledEnemies[i]));
-	}
-}
-void Battle::timeCounter()
-{
-		switch (mode)
-		{
-		case interactive:        //interactive mode
-			interactiveTime();
-			break;
-		case stepbystep:        //step by step mode
-			stepByStepTime();
-			break;
-		case silent:             //silent mode
-			silentTime();
-			break;
-		}
-
-}
-void Battle::interactiveTime()
-{
-	Point x;
-	GUI*p;
-	while (isFighting())
-	{
-		p->GetPointClicked(x);
-		currentTime++;
-	}
-}
-void Battle::stepByStepTime()
-{
-	while (isFighting())
-	{
-		Sleep(500);
-		currentTime++;
-
-	}
-}
-void Battle::silentTime()
-{
-	while (isFighting())
-	{
-		currentTime++;
 	}
 }
 void Battle::healEnemies(int reNumber)
@@ -203,7 +210,7 @@ bool Battle::input(GUI *pGUI)
 			return false;
 			break;
 		default:
-			pGUI->PrintMessage("choose an icon");
+			pGUI->PrintMessage("Pick the mode and load input file");
 		}
 		if (bload == true && bmode == false)
 		{
