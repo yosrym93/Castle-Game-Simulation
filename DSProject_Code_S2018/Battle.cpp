@@ -1,5 +1,8 @@
 #include "Battle.h"
-#include<thread>
+#include<chrono>
+
+using Clock = std::chrono::high_resolution_clock;
+
 
 Battle::Battle()
 {
@@ -136,11 +139,6 @@ void Battle::silentTime()
 }
 
 /*************************************/
-void Battle::updateAsync() {
-	std::thread([this]() { update(currentTime); }).detach();
-}
-
-
 
 //Updates all lists and the GUI array
 void Battle::update(int cTime)
