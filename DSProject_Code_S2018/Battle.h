@@ -60,10 +60,8 @@ public:
 	void deleteGUIArray();			//Deallocates the GUI array (if allocated)
 
 	/********************************* Time Handling Functions ********************************/
-	void timeCounter();
-	void interactiveTime();
-	void stepByStepTime();
-	void silentTime();
+	void timeCounter(GUI*);
+
 	
 	/***************************************************************************************/
 	void killRandom();				//Kills enemieas randomly according to phase 1.
