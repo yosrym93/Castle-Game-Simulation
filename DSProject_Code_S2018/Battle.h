@@ -66,7 +66,6 @@ public:
 	void silentTime();
 	
 	/***************************************************************************************/
-	void updateAsync();				//Calls update function asynchronously
 	void killRandom();				//Kills enemieas randomly according to phase 1.
 	void update(int);				//Updates all lists and the GUI array
 	void load(GUI*);				//Loads all enemies to the inactive list
