@@ -1,4 +1,10 @@
 #include "Tower.h"
+#include "..\Battle.h"
+Tower::Tower()
+{
+	isKilled = false;
+	canAttack = true;
+}
 
 void Tower::setHealth(double h)
 {
@@ -19,14 +25,28 @@ int Tower::getFirePower()const
 }
 void Tower::damage(double x)
 {
-	if (!isKilled())
+	if (!isKilled)
 		health = health - x;
-}
-bool Tower::isKilled()
-{
+
 	if (health <= 0)
-		return true;
-	else return false;
+	{
+		health = 0;
+		isKilled = true;
+	}
+}
+bool Tower::getIsKilled() const
+{
+	return isKilled;
+}
+bool Tower::getCanAttack(int currentTime) const
+{
+	if (currentTime == freezeTime)
+		return false;
+	return true;
+}
+void Tower::freeze(int x)
+{
+	freezeTime = x;
 }
 int Tower::getMaxNum()const
 {
