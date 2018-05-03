@@ -6,6 +6,7 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	Clr = r_c;
 	Region = r_region;
 	SetDistance(d);
+	maxHealth = health;
 }
 
 string Enemy::print()
@@ -14,6 +15,12 @@ string Enemy::print()
 	string type=getTypeStr();
 	printInfo =  "( "+ type +" ,"+to_string(id) +" ,"+ to_string((int)health)+" ,"+ to_string(arrivalTime) +" ," +to_string((int)firePower) +" ,"+ to_string(reload)+" )";
 	return printInfo;
+}
+void Enemy::heal()
+{
+	health = health + (5.0 / 100.0)*maxHealth;
+	if (health > maxHealth)
+		health = maxHealth;
 }
 Enemy::~Enemy()
 {
@@ -142,9 +149,9 @@ bool Enemy::isKilled() {
 	return false;
 }
 
-bool Enemy::canAttack(Battle* b)
+bool Enemy::canAttack(int x)
 {
-	if (b->getCurrentTime() >= arrivalTime && !isKilled() && ((b->getCurrentTime() - arrivalTime) % (reload + 1) == 0))
+	if (x >= arrivalTime && !isKilled() && ((x - arrivalTime) % (reload + 1) == 0))
 		return true;
 	else 
 		return false;
@@ -181,6 +188,16 @@ int Enemy::getFD() {
 //Returns the killDelay
 int Enemy::getKD() {
 	return killDelay;
+}
+
+double Enemy::getMaxHealth() const
+{
+	return maxHealth;
+}
+
+double Enemy::getFirePower() const
+{
+	return firePower;
 }
 
 /***********************Output Functions ***************************/

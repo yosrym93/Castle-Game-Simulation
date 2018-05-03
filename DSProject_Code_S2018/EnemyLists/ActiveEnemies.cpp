@@ -55,3 +55,13 @@ string ActiveEnemies::print()
 ActiveEnemies::~ActiveEnemies()
 {
 }
+
+void ActiveEnemies::traverseToAttack(Battle* b)
+{
+	enemiesList.traverse(&Enemy::Attack , b);
+}
+
+void ActiveEnemies::traverseToHeal()
+{
+	enemiesList.traverse(&Enemy::heal);
+}

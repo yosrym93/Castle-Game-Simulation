@@ -53,6 +53,14 @@ string ShieldedEnemies::print()
 	 }
 	 return print;
  }
+void ShieldedEnemies::traverseToAttack(Battle *b)
+{
+	//ShieldedArray.traverse(&Enemy::Attack, b);
+}
+void ShieldedEnemies::traverseToHeal()
+{
+	//ShieldedArray.traverse(Enemy::heal);
+}
 ShieldedEnemies::~ShieldedEnemies()
 {
 }

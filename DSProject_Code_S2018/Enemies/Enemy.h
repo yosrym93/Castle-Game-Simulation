@@ -15,6 +15,7 @@ protected:
 	int Distance;	//Horizontal distance between enemy & the tower of its region
 	                //Always positive (ranges from 2 to 60)
 	double health;	//Enemy health
+	double maxHealth;  //health of enemy before being attacked
 	//bool canAttack;
 	int K;
 	int arrivalTime;
@@ -33,7 +34,7 @@ public:
 	REGION getRegion() const;
 	void decrementDist();
 	string print();
-
+	void heal();	//increases enemy health by 5% of initial health during balloon attack time
 	//Setters and getters 
 	void setId(int);
 	int getId() const;
@@ -48,12 +49,13 @@ public:
 	double getHealth()const;
 	string getTypeStr() const; //Returns the type as a string (for printing)
 	bool isKilled();
-	bool canAttack(Battle* b);
+	bool canAttack(int);
 	void calcFD(int firstShotTime);	//Calculates the firstShotDelay (Parameter is firstShot time step)
 	void calcKD(int killTime);		//Calculates the killDelay (Parameter is kill time step)
 	int getFD();					//Returns the firstShotDelay
 	int getKD();					//Return the killDelay
-
+	double getMaxHealth()const;		//Returns Maximum health
+	double getFirePower()const;
 	/****************Output Functions*****************/
 	void output() const;
 

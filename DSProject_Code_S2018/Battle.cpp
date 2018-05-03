@@ -188,9 +188,11 @@ void Battle::print(GUI *pGUI)
 		pGUI->updatePrintedMessage("Active Enemies : "+ to_string(activeEnemies[i]) + ". Killed Enemies:" + to_string(nKilledEnemies[i]));
 	}
 }
-void Battle::healEnemies(int reNumber)
+void Battle::healEnemies(int regNumber)
 {
-
+	normalEnemies[regNumber].traverseToHeal();
+	tankEnemies[regNumber].traverseToHeal();
+	shieldedEnemies[regNumber].traverseToHeal();
 }
 //load the file and decide the mode 
 bool Battle::input(GUI *pGUI) 
@@ -237,6 +239,22 @@ bool Battle::input(GUI *pGUI)
 	pGUI->drawFightingMenu(fileName,mode);
 	createGUIArray();
 	return true;
+}
+
+void Battle::enemiesAttack()
+{
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		normalEnemies[i].traverseToAttack(this);
+		tankEnemies[i].traverseToAttack(this);
+		shieldedEnemies[i].traverseToAttack(this);
+	}
+}
+
+void Battle::pave(int regNumber, int distance, double firePower)
+{
+	if (distance - unpavedDistance[regNumber] <= int(firePower))
+		unpavedDistance[regNumber] = unpavedDistance[regNumber] - int(firePower);
 }
 
 // function that loads the inputs from the file 
