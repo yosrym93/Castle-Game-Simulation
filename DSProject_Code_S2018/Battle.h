@@ -72,7 +72,7 @@ public:
 	void resetBattle();				//Resets all lists and output file to start over
 	void killRandom();				//Kills enemieas randomly according to phase 1.
 	void update();					//Updates all lists and the GUI array
-	string load(GUI*);				//Loads all enemies to the inactive list
+	void load(GUI*);				//Loads all enemies to the inactive list
 	bool isFighting();				//Are there still ENEMIES ALIVE????!!
 	void print(GUI*);				//Prints towers,active and inactive enemies info.
 	void healEnemies(int);				//traverses enemies lists to icrease health in balloon fire time
