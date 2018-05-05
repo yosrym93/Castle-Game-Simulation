@@ -266,18 +266,18 @@ void Battle::print(GUI *pGUI)
 	string castleInfo;
 	string region;
 	string enemies;
-	pGUI->setHeight(0);
-	pGUI->updatePrintedMessage("Castle info: (at T = " + to_string(currentTime) + ")");
+	pGUI->setHeight(1);
+	pGUI->updatePrintedMessage("    Castle info: (at T = " + to_string(currentTime) + ")");
 	for (int i = 0; i < NoOfRegions; i++)
 	{
-		pGUI->setHeight(1+2*i);
+		pGUI->setHeight(2+2*i);
 		castleInfo = bCastle.print(i);
 		region = getRegion(i);
 		pGUI->setWidth(0);
-		pGUI->updatePrintedMessage("Region " + region + "  " + castleInfo+" Unpaved distance:"+to_string(unpavedDistance[i]));
+		pGUI->updatePrintedMessage("    Region " + region + "  " + castleInfo+"    Unpaved distance:"+to_string(unpavedDistance[i]));
 		pGUI->setWidth(0);
-		pGUI->setHeight(2 + 2*i);
-		pGUI->updatePrintedMessage("Active Enemies : "+ to_string(activeEnemies[i]) + ". Killed Enemies:" + to_string(nKilledEnemies[i]));
+		pGUI->setHeight(3 + 2*i);
+		pGUI->updatePrintedMessage("    Active Enemies : "+ to_string(activeEnemies[i]) + "    Killed Enemies:" + to_string(nKilledEnemies[i]));
 	}
 }
 void Battle::healEnemies(int regNumber)
@@ -293,7 +293,6 @@ void Battle::input(GUI *pGUI)
 	bool bload = false;
 	bool bmode = false;
 	ACTION action;
-	string fileName;
 
 	while (!bload || !bmode)
 	{
@@ -314,7 +313,7 @@ void Battle::input(GUI *pGUI)
 			break;
 		case ACTION_LOAD:
 			bload = true;
-			fileName = load(pGUI);
+			load(pGUI);
 			break;
 		case ACTION_EXIT:
 			throw ActionException(ACTION_EXIT);
@@ -352,7 +351,7 @@ void Battle::pave(int regNumber, int distance, double firePower)
 }
 
 // function that loads the inputs from the file 
-string Battle::load(GUI*pGUI)
+void Battle::load(GUI*pGUI)
 {
 	inactiveEnemies.clear();
 	ifstream inFile;
@@ -436,8 +435,6 @@ string Battle::load(GUI*pGUI)
 	}
 	if (inFile.is_open())
 		inFile.close();
-
-	return fileName;
 }
 
 
