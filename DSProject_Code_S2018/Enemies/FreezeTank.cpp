@@ -11,6 +11,7 @@ void FreezeTank::Attack(Battle *b)
 	if (canAttack(b->getCurrentTime()))
 	{
 		b->getCastle()->getTower(getRegion())->freeze(b->getCurrentTime());
+		b->playFreezingSound();
 	}
 }
 

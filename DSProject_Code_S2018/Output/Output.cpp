@@ -106,6 +106,19 @@ void Output::setTowerStartingHealth(double h) {
 	towerStartingHealth = h;
 }
 
+void Output::reset() {
+	//Open the file to truncate it and write the first line
+	ofstream writer;
+	writer.open("game_output.txt", ios::trunc);
+
+	if (writer.is_open())
+		writer << "KTS" << '\t' << "S" << '\t' << "FD" << '\t' << "KD" << '\t' << "LT" << endl;
+
+	writer.close();
+
+	enemiesList.clear();
+}
+
 Output::~Output()
 {
 }

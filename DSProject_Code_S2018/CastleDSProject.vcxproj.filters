@@ -25,15 +25,15 @@
     <Filter Include="EnemyLists">
       <UniqueIdentifier>{ea64bc7f-abd6-4aa0-8124-ddd98ee477d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Exceptions">
+      <UniqueIdentifier>{a7e5107e-e016-4b17-99a6-18726dfb65aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADTs\List.h">
       <Filter>ADTs</Filter>
     </ClInclude>
     <ClInclude Include="ADTs\Node.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
-    <ClInclude Include="ADTs\PrecondViolatedExcep.h">
       <Filter>ADTs</Filter>
     </ClInclude>
     <ClInclude Include="ADTs\Queue.h">
@@ -142,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="Enemies\FreezeTank.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions\ActionException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions\PrecondViolatedExcep.h">
+      <Filter>Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="Enemies\FreezeTank.cpp">
       <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions\ActionException.cpp">
+      <Filter>Exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

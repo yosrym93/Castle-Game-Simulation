@@ -1,6 +1,6 @@
 #pragma once
 #include "Node.h"
-#include "PrecondViolatedExcep.h"
+#include "..\Exceptions\PrecondViolatedExcep.h"
 template <typename T>
 class List {
 	Node<T>* head;
@@ -49,6 +49,7 @@ public:
 template <typename T>
 List<T>::List() {
 	head = nullptr;
+	tail = nullptr;
 	count = 0;
 }
 
@@ -232,6 +233,10 @@ void List<T>::clear() {
 		head = head->getNext();
 		delete temp;
 	}
+
+	count = 0;
+	head = nullptr;
+	tail = nullptr;
 }
 //returns the number of elements in the list
 template<typename T>

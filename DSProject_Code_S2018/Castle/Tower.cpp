@@ -34,7 +34,7 @@ void Tower::damage(double x)
 		isKilled = true;
 	}
 }
-bool Tower::getIsKilled() const
+bool Tower::isDestroyed() const
 {
 	return isKilled;
 }

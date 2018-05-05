@@ -281,6 +281,7 @@
     <ClCompile Include="EnemyLists\ActiveEnemies.cpp" />
     <ClCompile Include="EnemyLists\InactiveEnemies.cpp" />
     <ClCompile Include="EnemyLists\ShieldedEnemies.cpp" />
+    <ClCompile Include="Exceptions\ActionException.cpp" />
     <ClCompile Include="GUI\GUI.cpp" />
     <ClCompile Include="Output\Output.cpp" />
   </ItemGroup>
@@ -288,7 +289,6 @@
     <ClInclude Include="ADTs\Array.h" />
     <ClInclude Include="ADTs\List.h" />
     <ClInclude Include="ADTs\Node.h" />
-    <ClInclude Include="ADTs\PrecondViolatedExcep.h" />
     <ClInclude Include="ADTs\Queue.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Castle\Castle.h" />
@@ -323,6 +323,8 @@
     <ClInclude Include="EnemyLists\ActiveEnemies.h" />
     <ClInclude Include="EnemyLists\InactiveEnemies.h" />
     <ClInclude Include="EnemyLists\ShieldedEnemies.h" />
+    <ClInclude Include="Exceptions\ActionException.h" />
+    <ClInclude Include="Exceptions\PrecondViolatedExcep.h" />
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="Output\Output.h" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <Windows.h>
 #include <mmsystem.h>
+#include "Exceptions\ActionException.h"
 
 #include "Enemies\Enemy.h"
 #include "Enemies\Fighter.h"
@@ -33,15 +34,15 @@ private:
 	int activeEnemies[NoOfRegions];
 	int nKilledEnemies[NoOfRegions];				//number of killed enemies in each region
 	bool enemyKilledAtT;							//true if an enemy was killed in this current step
-	Mode mode;
-	string fileName;
+	MODE mode;
+
 	/************************Inactive Enemies List(s)************************/
 	InactiveEnemies inactiveEnemies;				//all inactive enemies
 
 	/************************Active Enemies List(s)************************/
 	ActiveEnemies normalEnemies[NoOfRegions];		//pavers, fighters and balloons
 	ShieldedEnemies shieldedEnemies[NoOfRegions];	//shielded fighters
-	ActiveEnemies tankEnemies[NoOfRegions];			//tanks
+	ActiveEnemies freezeTankEnemies[NoOfRegions];			//tanks
 	
 	/************************ GUI Array ************************/
 	Enemy ** bEnemiesForDraw; // This Array of Pointers is used for drawing elements in the GUI
@@ -67,15 +68,18 @@ public:
 
 	
 	/***************************************************************************************/
+	void startBattle(GUI* pGUI);	//Initiates the battle
+	void resetBattle();				//Resets all lists and output file to start over
 	void killRandom();				//Kills enemieas randomly according to phase 1.
-	void update();				//Updates all lists and the GUI array
-	void load(GUI*);				//Loads all enemies to the inactive list
+	void update();					//Updates all lists and the GUI array
+	string load(GUI*);				//Loads all enemies to the inactive list
 	bool isFighting();				//Are there still ENEMIES ALIVE????!!
 	void print(GUI*);				//Prints towers,active and inactive enemies info.
 	void healEnemies(int);				//traverses enemies lists to icrease health in balloon fire time
-	bool input(GUI*);               //load the file and decide the mode
+	void input(GUI*);               //load the file and decide the mode
 	void enemiesAttack();			//traverse enemies lists and call attack function for each enemy
 	void pave(int,int,double);					//decrease paved distance during paver attack time
+
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();
 	REGION getRegion(char);			//Converts char type into enum type
@@ -93,11 +97,11 @@ public:
 	void writeEnemy(Enemy*);		//Outputs enemy's data to output file (through writer)
 
 	/**************************** Audio Functions  ****************************/
-	void playDeathSound();
+	void playDeathSound();				//done
 	void playTowerDestructionSound();
-	void playPavingSound();
-	void playHealingSound();
-	void playFreezingSound();
+	void playPavingSound();				
+	void playHealingSound();			//done
+	void playFreezingSound();			//done
 	void playVictorySound();
 	void playDefeatSound();
 };

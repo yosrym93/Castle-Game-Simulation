@@ -20,6 +20,8 @@ public:
 
 	void setTotalEnemies(int);
 	void setTowerStartingHealth(double);
+
+	void reset();
 	~Output();
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "PrecondViolatedExcep.h"
+#include "..\Exceptions\PrecondViolatedExcep.h"
 using namespace std;
 template <class T>
 class Array
@@ -268,7 +268,7 @@ template <typename T>
 template<typename S1, typename S2>
 void Array<T>::traverse(void (S1::*func)(S2), S2 &fnParameter) {
 	for (int i = 0; i < size; i++)
-		(arr[i].*func)(fnParameter);
+		(arr[i]->*func)(fnParameter);
 }
 
 template<class T>

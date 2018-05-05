@@ -9,9 +9,7 @@
 class Castle
 {
 	Tower towers[NoOfRegions];
-	//
-	// TODO: Add More Data Members As Needed
-	//
+
 	
 public:
 
@@ -21,7 +19,5 @@ public:
 	void setTowersFirePower(int pow);
 	void setTowersNum(int n);
 	Tower* getTower(int);
-	//
-	// TODO: Add More Member Functions As Needed
-	//
+	bool isDestroyed();			//Returns true if all towers all destroyed
 };

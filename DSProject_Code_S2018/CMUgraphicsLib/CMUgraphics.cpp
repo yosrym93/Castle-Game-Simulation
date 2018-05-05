@@ -559,6 +559,27 @@ clicktype window::WaitMouseClick(int &iX, int &iY) {
 	}
 }
 
+bool window::WaitMouseClick(int &iX, int &iY, const msDuration &waitTime) {
+
+	mqueuenode* mqueTmp;
+
+	auto stopTime = Clock::now() + waitTime;
+
+	while (Clock::now() < stopTime) {
+		ProcessMessage(); // Kludge
+
+		mqueTmp = mqueInput.Remove();
+		if (mqueTmp != NULL) {
+			iX = mqueTmp->iX;
+			iY = mqueTmp->iY;
+
+			delete mqueTmp;
+			return true;
+		}
+	}
+	return false;
+}
+
 keytype window::WaitKeyPress(char &cKey) {
 
 	kqueuenode* kqueTmp;

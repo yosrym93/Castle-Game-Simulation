@@ -25,12 +25,12 @@ enum TYPE {
 };
 
 //modes
-enum Mode {
-	interactive,
-	stepbystep,
-	silent
+enum MODE {
+	MODE_INTERACTIVE,
+	MODE_STEPBYSTEP,
+	MODE_SILENT
 };
-enum Action //action to do
+enum ACTION //action to do
 {
 	ACTION_INTERACTIVE,
 	ACTION_STEPBYSTEP,

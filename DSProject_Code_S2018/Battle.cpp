@@ -30,7 +30,7 @@ void Battle::killRandom()
 		switch (list)
 		{
 		case 1:
-			tankEnemies[region].killRand();
+			freezeTankEnemies[region].killRand();
 			break;
 		case 2:
 			shieldedEnemies[region].killRand();
@@ -63,7 +63,7 @@ void Battle::updateGUI(GUI* pGUI) {
 /*************************** GUI array functions ****************************/
 //Allocates the GUI array (or not) according to the mode
 void Battle::createGUIArray() {
-	if (mode!=silent) 	
+	if (mode!=MODE_SILENT) 	
 		bEnemiesForDraw = new Enemy*[totalEnemiesCount];
 }
 
@@ -107,47 +107,106 @@ void Battle::removeKilledGUI() {
 void Battle::deleteGUIArray() {
 	if (bEnemiesForDraw)			//Checks if the array was allocated
 		delete[]bEnemiesForDraw;	//deletes the array only, as the enemies themselves are deleted from their lists
+
+	bEnemiesForDraw = nullptr;
 }
 
 /********************************* Time Handling Functions ********************************/
-void Battle::timeCounter(GUI*p)
+void Battle::timeCounter(GUI* pGUI)
 {
-	switch (mode)
-	{
-	case interactive:        //interactive mode
-	{
-		Point x;
-		while (isFighting())
-		{
-			p->GetPointClicked(x);
-			update();
-			currentTime++;
-		}
-	}
-		break;
-	case stepbystep:        //step by step mode
-	{
-		auto next = Clock::now() + 1s;
-		while (isFighting())
-		{
-			 update();
-			 currentTime++;
-			 this_thread::sleep_until(next); 
-			 next += 1s; 
-		}
-	}
-		break;
-	case silent:             //silent mode
-	{
-		while (isFighting())
-		{
-			update();
-			currentTime++;
+	ACTION userAction;
+	bool modeChange = false;	//Flags for a mode change
+
+	do {
+		try {	//To throw mode change exceptions
+			modeChange = false;
+			switch (mode)
+			{
+			case MODE_INTERACTIVE:        //interactive mode
+			{
+				Point x;
+				while (isFighting())
+				{
+					userAction = pGUI->getUserAction();
+					//If a different action is picked throw an exception
+					if (userAction == ACTION_STEPBYSTEP || userAction == ACTION_SILENT || 
+						userAction == ACTION_LOAD || userAction == ACTION_EXIT)	
+						throw ActionException(userAction);
+					clearGUI(pGUI);
+					update();
+					updateGUI(pGUI);
+					currentTime++;
+				}
+			}
+			break;
+			case MODE_STEPBYSTEP:        //step by step mode
+			{
+				auto next = Clock::now() + 1s;
+				while (isFighting())
+				{
+					clearGUI(pGUI);
+					update();
+					updateGUI(pGUI);
+					currentTime++;
+					userAction = pGUI->getUserAction(next - Clock::now());
+					//If a different action is picked throw an exception
+					if (userAction == ACTION_INTERACTIVE || userAction == ACTION_SILENT ||
+						userAction == ACTION_LOAD || userAction == ACTION_EXIT)
+						throw ActionException(userAction);
+					
+					this_thread::sleep_until(next);
+					next += 1s;
+				}
+			}
+			break;
+			case MODE_SILENT:             //silent mode
+			{
+				while (isFighting())
+				{
+					update();
+					currentTime++;
+				}
+
+			}
+			break;
+			}
 		}
 
-	}
-		break;
-	}
+		catch (ActionException actExc) {
+			ACTION newAction = actExc.getExceptionAction();
+			switch (newAction) {
+				case ACTION_INTERACTIVE: 
+				{
+					mode = MODE_INTERACTIVE;	//Setting the new mode
+					modeChange = true;			//To enter the loop again
+					break;
+				}
+				case ACTION_STEPBYSTEP: 
+				{
+					mode = MODE_STEPBYSTEP;	//Setting the new mode
+					modeChange = true;		//To enter the loop again
+					break;
+				}
+				case ACTION_SILENT: 
+				{
+					mode = MODE_SILENT;	//Setting the new mode
+					modeChange = true;	//To enter the loop again
+					break;
+				}
+				case ACTION_LOAD: 
+				{
+					resetBattle();
+					load(pGUI);
+					createGUIArray();
+					modeChange = true;	//To enter the loop again
+					break;
+				}
+
+				case ACTION_EXIT:
+					throw;
+			}
+		}
+	} while (modeChange);
 }
 
 
@@ -155,12 +214,45 @@ void Battle::timeCounter(GUI*p)
 
 
 /*************************************/
+//Initiates the battle
+void Battle::startBattle(GUI* pGUI) {
+	try {
+		//Inputs data from the user (input file & mode)
+		input(pGUI);
+		//Starts counting time and updating according to the chosen mode
+		timeCounter(pGUI);
+	}
+	catch (ActionException) {
+		return;
+	}
+}
+
+//Resets all lists and output file to start over
+void Battle::resetBattle() {
+	for (int i = 0; i < NoOfRegions; i++) {
+		unpavedDistance[i] = MaxDistance;
+		activeEnemies[i] = 0;
+		nKilledEnemies[i] = 0;
+		normalEnemies[i].clear();
+		shieldedEnemies[i].clear();
+		freezeTankEnemies[i].clear();
+	}
+
+	currentTime = 0;
+	enemyCount = 0;
+	totalEnemiesCount = 0;
+
+	writer.reset();
+	deleteGUIArray();
+}
 
 //Updates all lists and the GUI array
 void Battle::update()
 {
 	enemyKilledAtT = false;
 	
+	killRandom();		//For testing
+
 	removeKilledEnemies();
 
 	inactiveEnemies.activateEnemies(*this);
@@ -191,15 +283,18 @@ void Battle::print(GUI *pGUI)
 void Battle::healEnemies(int regNumber)
 {
 	normalEnemies[regNumber].traverseToHeal();
-	tankEnemies[regNumber].traverseToHeal();
+	freezeTankEnemies[regNumber].traverseToHeal();
 	shieldedEnemies[regNumber].traverseToHeal();
+	playHealingSound();
 }
 //load the file and decide the mode 
-bool Battle::input(GUI *pGUI) 
+void Battle::input(GUI *pGUI) 
 {
 	bool bload = false;
 	bool bmode = false;
-	Action action;
+	ACTION action;
+	string fileName;
+
 	while (!bload || !bmode)
 	{
 		action = pGUI->getUserAction();
@@ -207,22 +302,22 @@ bool Battle::input(GUI *pGUI)
 		{
 		case ACTION_INTERACTIVE:
 			bmode = true;
-			mode = interactive;
+			mode = MODE_INTERACTIVE;
 			break;
 		case ACTION_STEPBYSTEP:
 			bmode = true;
-			mode = stepbystep;
+			mode = MODE_STEPBYSTEP;
 			break;
 		case ACTION_SILENT:
 			bmode = true;
-			mode = silent;
+			mode = MODE_SILENT;
 			break;
 		case ACTION_LOAD:
 			bload = true;
-			load(pGUI);
+			fileName = load(pGUI);
 			break;
 		case ACTION_EXIT:
-			return false;
+			throw ActionException(ACTION_EXIT);
 			break;
 		default:
 			pGUI->PrintMessage("Pick the mode and load input file");
@@ -236,9 +331,8 @@ bool Battle::input(GUI *pGUI)
 			pGUI->PrintMessage("Mode choosen,please choose a file");
 		}
 	}
-	pGUI->drawFightingMenu(fileName,mode);
+	//pGUI->drawFightingMenu(fileName,mode);
 	createGUIArray();
-	return true;
 }
 
 void Battle::enemiesAttack()
@@ -246,7 +340,7 @@ void Battle::enemiesAttack()
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		normalEnemies[i].traverseToAttack(this);
-		tankEnemies[i].traverseToAttack(this);
+		freezeTankEnemies[i].traverseToAttack(this);
 		shieldedEnemies[i].traverseToAttack(this);
 	}
 }
@@ -258,12 +352,12 @@ void Battle::pave(int regNumber, int distance, double firePower)
 }
 
 // function that loads the inputs from the file 
-void Battle::load(GUI*pGUI)
+string Battle::load(GUI*pGUI)
 {
 	inactiveEnemies.clear();
 	ifstream inFile;
 	pGUI->PrintMessage("Enter the file name ");
-	fileName = pGUI->GetString();
+	string fileName = pGUI->GetString();
 	inFile.open(fileName+".txt"); //opening the file that we are going to read the data from it
 	if (inFile.is_open()) //check if the file is open to access the data 
 	{
@@ -323,7 +417,6 @@ void Battle::load(GUI*pGUI)
 				pEnemy->setHealth(health);
 				pEnemy->setPow(pow);
 				pEnemy->setRld(rld);
-				activeEnemies[region]++;
 				totalEnemiesCount++;
 			}
 			inactiveEnemies.addEnemy(pEnemy);
@@ -343,12 +436,17 @@ void Battle::load(GUI*pGUI)
 	}
 	if (inFile.is_open())
 		inFile.close();
+
+	return fileName;
 }
+
+
 bool Battle::isFighting()
 {
 	bool isFig = false;
 	for (int i = 0; i < NoOfRegions;i++)
-		isFig = isFig || (!tankEnemies[i].isEmpty() || !shieldedEnemies[i].isEmpty() || !normalEnemies[i].isEmpty() || !inactiveEnemies.isEmpty());
+		isFig = isFig || (!freezeTankEnemies[i].isEmpty() || !shieldedEnemies[i].isEmpty() || !normalEnemies[i].isEmpty() 
+			|| !inactiveEnemies.isEmpty());
 	return isFig;
 }
 
@@ -428,8 +526,9 @@ int Battle::getUnpavedDist(int r) {
 /****************************  Inactive Enemies Functions  ****************************/
 void Battle::activateEnemy(Enemy* inactiveEnemy) {
 	int Reg = inactiveEnemy->getRegion();
+	activeEnemies[Reg]++;
 
-	if (mode!=silent) 
+	if (mode!=MODE_SILENT) 
 		addEnemyGUI(inactiveEnemy);
 
 	Enemy* newActiveEnemy = dynamic_cast<Fighter*>(inactiveEnemy);
@@ -452,7 +551,7 @@ void Battle::activateEnemy(Enemy* inactiveEnemy) {
 
 	newActiveEnemy = dynamic_cast<FreezeTank*>(inactiveEnemy);
 	if (newActiveEnemy) {
-		tankEnemies[Reg].addEnemy(newActiveEnemy);
+		freezeTankEnemies[Reg].addEnemy(newActiveEnemy);
 		return;
 	}
 
@@ -470,11 +569,11 @@ void Battle::removeKilledEnemies() {
 	for (int i = 0; i < NoOfRegions; i++) {
 		normalEnemies[i].removeKilled(*this);
 		shieldedEnemies[i].removeKilled(*this);
-		tankEnemies[i].removeKilled(*this);
+		freezeTankEnemies[i].removeKilled(*this);
 	}
 
 	//Remove killed enemies from the GUI array
-	if (mode!=silent)	
+	if (mode!=MODE_SILENT)	
 		removeKilledGUI();
 
 	//Writes removed enemies' data and delete them
