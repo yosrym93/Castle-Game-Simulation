@@ -1,4 +1,5 @@
 #include "GUI.h"
+
 int height=150;
 int width=0;
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -60,10 +61,11 @@ string GUI::GetString() const
 }
 ///////////////////////////////////////////////////////
 
-Action GUI::getUserAction()
+ACTION GUI::getUserAction(const msDuration &waitTime)
 {
 	int x, y;
-	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+
+	pWind->WaitMouseClick(x, y, waitTime);	//Get the coordinates of the user click
 
 									//[1] User clicks on the Battle area
 	if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight)
@@ -112,19 +114,19 @@ void GUI::updatePrintedMessage(string msg) const	//Prints a message on status ba
 															   // to be able to write multi-line
 }
 
-void GUI::drawFightingMenu(string fileName,Mode rmode)
+void GUI::drawFightingMenu(string fileName,MODE rmode)
 {
 	clearToolbar();
 	string mode;
 	switch (rmode)
 	{
-	case interactive:
+	case MODE_INTERACTIVE:
 		mode = "Interactive";
 		break;
-	case stepbystep:
+	case MODE_STEPBYSTEP:
 		mode = "Step By Step";
 		break;
-	case silent:
+	case MODE_SILENT:
 		mode = "Silent";
 		break;
 	}

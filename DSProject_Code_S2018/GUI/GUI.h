@@ -5,6 +5,11 @@
 #include "..\Enemies\Enemy.h"
 
 #include <string>
+#include <chrono>
+
+using Clock = std::chrono::high_resolution_clock;
+using msDuration = std::chrono::duration<double, std::milli>;
+
 using namespace std;
 
 class GUI
@@ -49,11 +54,11 @@ public:
 	// Input Functions  ---------------------------
 	void GetPointClicked(Point &P) const; // waits a user click from the user
 	string GetString() const ; // reads a string (keyboard input) from the user
-	Action getUserAction();
+	ACTION getUserAction(const msDuration &waitTime = 3600000ms);
 	// Output Functions  ---------------------------
 	void PrintMessage(string msg) const; // prints a message in the status bar
 	void updatePrintedMessage(string msg) const; // prints a message in the status bar
-	void drawFightingMenu(string , Mode);
+	void drawFightingMenu(string , MODE);
 	void DrawString(const int iX, const int iY, const string Text); // prints a message in the passed coordinates
 
 	void DrawMenu() const;	// draws the game menu

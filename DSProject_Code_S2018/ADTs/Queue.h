@@ -1,6 +1,6 @@
 #pragma once
 #include "Node.h"
-#include "PrecondViolatedExcep.h"
+#include "..\Exceptions\PrecondViolatedExcep.h"
 
 template <typename T>
 class Queue {
@@ -27,6 +27,7 @@ public:
 template <typename T>
 Queue<T>::Queue() {
 	head = nullptr;
+	tail = nullptr;
 	count = 0;
 }
 
@@ -88,6 +89,10 @@ void Queue<T>::clear() {
 		head = head->getNext();
 		delete temp;
 	}
+
+	count = 0;
+	head = nullptr;
+	tail = nullptr;
 }
 
 template <typename T>

@@ -39,3 +39,12 @@ void Castle::setTowersFirePower(int pow)
 		towers[i].setFirePower(pow);
 	}
 }
+
+bool Castle::isDestroyed() {
+	bool destroyed = true;
+	for (int i = 0; i < NoOfRegions; i++) {
+		destroyed = destroyed && towers[i].isDestroyed();
+	}
+
+	return destroyed;
+}

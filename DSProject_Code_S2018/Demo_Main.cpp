@@ -6,12 +6,9 @@ int main()
 {
 	Battle* pGameBattle = new Battle;
 	GUI * pGUI = new GUI;
-	if (!(pGameBattle->input(pGUI))) //added by amr 
-		return 0;
-	pGUI->ClearStatusBar();
-	pGUI->ClearBattleArea();
-	pGUI->DrawCastle();
-	Simulation(pGameBattle, pGUI);
+	
+	pGameBattle->startBattle(pGUI);
+
 	delete pGUI;
 	delete pGameBattle;
 	

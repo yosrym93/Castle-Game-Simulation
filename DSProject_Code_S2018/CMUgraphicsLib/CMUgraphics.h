@@ -18,6 +18,10 @@ This file was last modified on 05.16.1999
 #include "image.h"
 #include "colors.h"
 #include "version.h"
+#include <chrono>
+
+using Clock = std::chrono::high_resolution_clock;
+using msDuration = std::chrono::duration<double, std::milli>;
 
 // Aproximate value of Pi, used in some calculations
 const double cdPi = 3.141592653589793238462643383279;
@@ -190,6 +194,11 @@ class window {
     // if there is a mouse click event in the queue, otherwise
     // it will wait for one
 	clicktype WaitMouseClick(int &iX, int &iY);
+
+	// WaitMouseClick works the same as above but it takes
+	// an additional parameter, wait time
+	// returns true if a mouse click happened during the wait time
+	bool WaitMouseClick(int &iX, int &iY, const msDuration &waitTime);
  	  
     // Removes the next keyboard event from the queue
     // stuffs the key value into ucKey, and returns the
