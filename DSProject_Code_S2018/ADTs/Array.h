@@ -39,6 +39,9 @@ public:
 	void quickSort(int start, int pivot, int (S::*sortFn)());	//Sorts elements according to the value of sortFn (ascending).
 
 	template<typename S>
+	void traverse(void (S::*func)());				//traverses through the list and calls a function for each object
+
+	template<typename S>
 	void traverse(void (S::*func)(T*), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
 														//that takes an element in the list as its parameter
 
@@ -250,6 +253,16 @@ void Array<T>::quickSort(int start, int pivot, int (S::*sortFn)())
 	swap(arr[wall], arr[pivot]);
 	quickSort(start, wall - 1, sortFn);
 	quickSort(wall + 1, pivot, sortFn);
+
+}
+
+//traverses through the list and calls a function for each object
+template <typename T>
+template <typename S>
+void Array<T>::traverse(void (S::*func)())
+{
+	for (int i = 0; i < size; i++)
+		(arr[i]->*func)();
 
 }
 

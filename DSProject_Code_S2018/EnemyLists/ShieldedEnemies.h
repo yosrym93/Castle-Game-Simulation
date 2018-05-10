@@ -18,7 +18,8 @@ public:
 	void removeKilled(Battle &);		//Removes killed enemies from the list and calls Battles' killEnemy(killedEnemy)
 	~ShieldedEnemies();
 	string print();
-	void traverseToAttack(Battle*);        //traverse the list to call attack for each enemy
+	void traverseToAttack(Battle*);			//traverse the list to call attack for each enemy
+	void traverseToMove(Battle*);			//traverse the list to call move for each enemy
 	void traverseToHeal();					//traverse the list to call heal for each enemy
 };
 

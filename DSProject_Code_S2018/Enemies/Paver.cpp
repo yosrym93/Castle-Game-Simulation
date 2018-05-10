@@ -10,7 +10,9 @@ void Paver::Attack(Battle *b)
 {
 	if (canAttack(b->getCurrentTime()))
 	{
-		b->pave(getRegion(),getDistance(),getFirePower());
+		for (int i = 0; i < firePower; i++)
+			decrementDist();
+		b->pave(Region,Distance);
 	}
 }
 

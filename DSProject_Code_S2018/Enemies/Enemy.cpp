@@ -7,6 +7,7 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	Region = r_region;
 	SetDistance(d);
 	maxHealth = health;
+	speed = 1;
 }
 
 string Enemy::print()
@@ -40,6 +41,17 @@ void Enemy::decrementDist()
 {
 	if (Distance > MinDistance)
 		Distance--;
+}
+void Enemy::move(Battle * B)
+{
+	int unp = B->getUnpavedDist(getRegion());
+	
+		if ((Distance - speed) > unp)
+			for (int i = 0; i < speed;i++)
+				decrementDist();
+		else Distance = unp;
+
+
 }
 void Enemy::setId(int rid)
 {
@@ -141,6 +153,13 @@ void Enemy::setType(int rtype)
 	default:
 		break;
 	}
+}
+
+void Enemy::setSpeed(int spd)
+{
+	if (spd > 0)
+		speed = spd;
+	else speed = 1;
 }
 
 bool Enemy::isKilled() {

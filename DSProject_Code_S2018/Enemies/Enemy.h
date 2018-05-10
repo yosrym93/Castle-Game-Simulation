@@ -14,6 +14,7 @@ protected:
 	REGION Region;  //Region of this enemy
 	int Distance;	//Horizontal distance between enemy & the tower of its region
 	                //Always positive (ranges from 2 to 60)
+	int speed;		//How many distance units could be covered per time step
 	double health;	//Enemy health
 	double maxHealth;  //health of enemy before being attacked
 	//bool canAttack;
@@ -33,6 +34,7 @@ public:
 	color getColor() const;
 	REGION getRegion() const;
 	void decrementDist();
+	void move(Battle* B);
 	string print();
 	void heal();	//increases enemy health by 5% of initial health during balloon attack time
 	//Setters and getters 
@@ -45,6 +47,7 @@ public:
 	void setPow(int);
 	void setRld(int);
 	void setType(int);
+	void setSpeed(int);
 	int getDistance() const;
 	double getHealth()const;
 	string getTypeStr() const; //Returns the type as a string (for printing)
