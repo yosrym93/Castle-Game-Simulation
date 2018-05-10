@@ -13,7 +13,7 @@ Battle::Battle()
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		nKilledEnemies[i] = 0;
-		unpavedDistance[i] = MaxDistance;
+		unpavedDistance[i] = MaxDistance/2;
 		activeEnemies[i] = 0;
 	}
 
@@ -56,8 +56,8 @@ void Battle::clearGUI(GUI* pGUI) {
 //Redraws the GUI
 void Battle::updateGUI(GUI* pGUI) {
 	print(pGUI);
-	drawEnemies(pGUI);
 	pGUI->DrawPaved(unpavedDistance);
+	drawEnemies(pGUI);
 }
 
 /*************************** GUI array functions ****************************/
@@ -250,9 +250,22 @@ void Battle::resetBattle() {
 void Battle::update()
 {
 	enemyKilledAtT = false;
-	
-	killRandom();		//For testing
-
+	int sumunpavedA = 0, sumunpavedB = 0;
+	//killRandom();		//For testing
+	for (int i = 0; i < NoOfRegions;i++)
+	{
+		sumunpavedA += unpavedDistance[i];
+		normalEnemies[i].traverseToAttack(this);
+		shieldedEnemies[i].traverseToAttack(this);
+		freezeTankEnemies[i].traverseToAttack(this);
+		normalEnemies[i].traverseToMove(this);
+		shieldedEnemies[i].traverseToMove(this);
+		freezeTankEnemies[i].traverseToMove(this);
+	}
+	for (int i = 0; i < NoOfRegions;i++)
+		sumunpavedB += unpavedDistance[i];
+	if (sumunpavedA != sumunpavedB)
+		playPavingSound();
 	removeKilledEnemies();
 
 	inactiveEnemies.activateEnemies(*this);
@@ -344,10 +357,9 @@ void Battle::enemiesAttack()
 	}
 }
 
-void Battle::pave(int regNumber, int distance, double firePower)
+void Battle::pave(int regNumber, int distance)
 {
-	if (distance - unpavedDistance[regNumber] <= int(firePower))
-		unpavedDistance[regNumber] = unpavedDistance[regNumber] - int(firePower);
+	unpavedDistance[regNumber] = (unpavedDistance[regNumber] < distance) ? unpavedDistance[regNumber] : distance;
 }
 
 // function that loads the inputs from the file 
@@ -357,7 +369,7 @@ void Battle::load(GUI*pGUI)
 	ifstream inFile;
 	pGUI->PrintMessage("Enter the file name ");
 	string fileName = pGUI->GetString();
-	inFile.open(fileName+".txt"); //opening the file that we are going to read the data from it
+	inFile.open(fileName + ".txt"); //opening the file that we are going to read the data from it
 	if (inFile.is_open()) //check if the file is open to access the data 
 	{
 		double tH;
@@ -374,32 +386,32 @@ void Battle::load(GUI*pGUI)
 
 		int id;
 		int type;
-		int arrTime, pow, rld;
+		int arrTime, pow, rld, spd;
 		double health;
 		char cRegion;
 		REGION region;
 		Enemy*pEnemy;
 		inFile >> id;
-		while (!inFile.eof()&&(id!=-1)) // looping until the end of the file (entering -1 )
+		while (!inFile.eof() && (id != -1)) // looping until the end of the file (entering -1 )
 		{
-			pEnemy=nullptr;
+			pEnemy = nullptr;
 			// read the data of the enemy
-			inFile >> type >> arrTime >> health >> pow >> rld >> cRegion;
+			inFile >> type >> arrTime >> health >> pow >> rld >> spd >> cRegion;
 			region = getRegion(cRegion);
 			//indicating the type of the enemy t assign the data to it
 			switch (type)
 			{
 			case 0:
-				pEnemy = new Paver(DARKBLUE,region,MaxDistance);
+				pEnemy = new Paver(DARKBLUE, region, MaxDistance);
 				break;
 			case 1:
-				pEnemy = new Fighter(DARKOLIVEGREEN, region , MaxDistance);
+				pEnemy = new Fighter(DARKOLIVEGREEN, region, MaxDistance);
 				break;
 			case 2:
-				pEnemy = new Shielded(ORANGERED, region , MaxDistance);
+				pEnemy = new Shielded(ORANGERED, region, MaxDistance);
 				break;
 			case 3:
-				pEnemy = new Balloon(MAGENTA, region , MaxDistance);
+				pEnemy = new Balloon(MAGENTA, region, MaxDistance);
 				break;
 			case 4:
 				pEnemy = new FreezeTank(SNOW, region, MaxDistance);
@@ -416,6 +428,7 @@ void Battle::load(GUI*pGUI)
 				pEnemy->setHealth(health);
 				pEnemy->setPow(pow);
 				pEnemy->setRld(rld);
+				pEnemy->setSpeed(spd);
 				totalEnemiesCount++;
 			}
 			inactiveEnemies.addEnemy(pEnemy);

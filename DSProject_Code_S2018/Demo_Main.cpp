@@ -6,7 +6,6 @@ int main()
 {
 	Battle* pGameBattle = new Battle;
 	GUI * pGUI = new GUI;
-	
 	pGameBattle->startBattle(pGUI);
 
 	delete pGUI;
