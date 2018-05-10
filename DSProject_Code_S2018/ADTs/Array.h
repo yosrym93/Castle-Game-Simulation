@@ -39,8 +39,12 @@ public:
 	void quickSort(int start, int pivot, int (S::*sortFn)());	//Sorts elements according to the value of sortFn (ascending).
 
 	template<typename S>
-	void traverse(void (S::*func)(T*), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
-														//that takes an element in the list as its parameter
+	void traverse(void (S::*func)(T*), S &fnCaller);	//traverses through the list and calls a function from object 
+														//fnCaller that takes an element in the list as its parameter
+
+	template<typename S>
+	void traverse(void (S::*func)(T*), S &fnCaller, int n);	//traverses through the first n elements and calls a function from
+															//object fnCaller that takes an element in the list as its parameter
 
 	template<typename S1, typename S2>
 	void traverse(void (S1::*func)(S2), S2 &fnParameter);	//traverses through the list and calls a function from each element
@@ -258,7 +262,17 @@ void Array<T>::quickSort(int start, int pivot, int (S::*sortFn)())
 template <typename T>
 template <typename S>
 void Array<T>::traverse(void (S::*func)(T*), S &fnCaller) {
-	for (int i = 0; i < size; i++)
+	traverse(func, fnCaller, size);
+}
+
+//traverses through the first n elements and calls a function from object fnCaller
+//that takes an element in the list as its parameter
+template <typename T>
+template <typename S>
+void Array<T>::traverse(void (S::*func)(T*), S &fnCaller, int n) {
+	if (n > size)
+		n = size;
+	for (int i = 0; i < n; i++)
 		(fnCaller.*func)(arr[i]);
 }
 

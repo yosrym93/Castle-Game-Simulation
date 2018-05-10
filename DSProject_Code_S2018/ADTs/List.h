@@ -17,8 +17,12 @@ public:
 	void traverse(void (S::*func)());				//traverses through the list and calls a function for each object
 
 	template<typename S>
-	void traverse(void (S::*func)(T), S &fnCaller);	//traverses through the list and calls a function from object fnCaller
-													//that takes an element in the list as its parameter
+	void traverse(void (S::*func)(T), S &fnCaller);	//traverses through the list and calls a function from object 
+													//fnCaller that takes an element in the list as its parameter
+
+	template<typename S>
+	void traverse(void (S::*func)(T), S &fnCaller, int n);	//traverses through the first n elements and calls a function from
+															//object fnCaller that takes an element in the list as its parameter
 
 	template<typename S1, typename S2>
 	void traverse(void (S1::*func)(S2), S2 &fnParameter);	//traverses through the list and calls a function from each element
@@ -143,8 +147,9 @@ void List<T>::traverse(void (S::*func)()) {
 		ptr = ptr->getNext();
 	}
 }
-//traverses through the list and calls a function from object fnCaller
-//that takes an element in the list as its parameter
+
+//traverses through the list and calls a function from
+//object fnCaller that takes an element in the list as its parameter
 template <typename T>
 template <typename S>
 void List<T>::traverse(void (S::*func)(T), S &fnCaller) {
@@ -152,6 +157,21 @@ void List<T>::traverse(void (S::*func)(T), S &fnCaller) {
 	while (ptr != nullptr) {
 		(fnCaller.*func)(ptr->getData());
 		ptr = ptr->getNext();
+	}
+}
+//traverses through the first n elements and calls a function from
+//object fnCaller that takes an element in the list as its parameter
+template <typename T>
+template <typename S>
+void List<T>::traverse(void (S::*func)(T), S &fnCaller, int n) {
+	Node<T>* ptr = head;
+	if (n > count)
+		n = count;
+	int i = 0;
+	while (ptr != nullptr && i < n) {
+		(fnCaller.*func)(ptr->getData());
+		ptr = ptr->getNext();
+		i++;
 	}
 }
 
