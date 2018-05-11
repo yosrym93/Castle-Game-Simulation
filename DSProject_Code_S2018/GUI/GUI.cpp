@@ -188,9 +188,10 @@ void GUI::ClearStatusBar() const
 void GUI::ClearBattleArea() const
 {
 	// Clearing the battle area
-	pWind->SetPen(KHAKI, 3);
-	pWind->SetBrush(KHAKI);
-	pWind->DrawRectangle(0, MenuBarHeight, WindWidth, WindHeight - StatusBarHeight);
+	//pWind->SetPen(KHAKI, 3);
+	//pWind->SetBrush(KHAKI);
+	//pWind->DrawRectangle(0, MenuBarHeight, WindWidth, WindHeight - StatusBarHeight);
+	pWind->DrawImage("images\\MenuItems\\background.jpg", 0, MenuBarHeight, WindWidth, WindHeight - MenuBarHeight - StatusBarHeight);
 }
 ///////////////////////////////////////////////////////////////////////////////////
 void GUI::clearToolbar()
@@ -212,7 +213,7 @@ void GUI::DrawCastle() const
 	//pWind->SetPen(BROWN);
 	//pWind->SetBrush(BROWN);
 	//pWind->DrawRectangle(CastleStartX, CastleStartY, CastleEndX, CastleEndY);
-	pWind->DrawImage("images\\MenuItems\\castle.jpg", CastleStartX, CastleStartY, CastleWidth, CastleWidth);
+	pWind->DrawImage("images\\MenuItems\\castle2.jpg", CastleStartX, CastleStartY, CastleWidth, CastleWidth);
 	// 2- Drawing the 2 brown crossed lines (for making 4 regions)
 	pWind->SetPen(BROWN, 3);
 	pWind->DrawLine(0, YHalfBattleArea, WindWidth, YHalfBattleArea);
@@ -253,24 +254,32 @@ void GUI::DrawPaved(int* unpavedDistances) const {
 	int pavedDistance;
 	//Region A
 	pavedDistance = MaxDistance - unpavedDistances[0];
-	pWind->SetPen(LIGHTCYAN, 1);
-	pWind->SetBrush(LIGHTCYAN);
+	pWind->SetPen(PAVED, 1);
+	pWind->SetBrush(PAVED);
 	pWind->DrawRectangle(0, MenuBarHeight, pavedDistance/float(MaxDistance)*(WindWidth / 2 - CastleWidth / 2)+EnemyWidth, YHalfBattleArea - 1);
 	//Region B
 	pavedDistance = MaxDistance - unpavedDistances[1];
-	pWind->SetPen(LIGHTCYAN, 1);
-	pWind->SetBrush(LIGHTCYAN);
 	pWind->DrawRectangle(WindWidth, MenuBarHeight, WindWidth - (pavedDistance / float(MaxDistance)*(WindWidth / 2 - CastleWidth / 2) + EnemyWidth) , YHalfBattleArea - 1);
 	//Region C
 	pavedDistance = MaxDistance - unpavedDistances[2];
-	pWind->SetPen(LIGHTCYAN, 1);
-	pWind->SetBrush(LIGHTCYAN);
 	pWind->DrawRectangle(WindWidth, YHalfBattleArea + 2, WindWidth - (pavedDistance / float(MaxDistance)*(WindWidth / 2 - CastleWidth / 2) + EnemyWidth), WindHeight - StatusBarHeight);
 	//Region D
 	pavedDistance = MaxDistance - unpavedDistances[3];
-	pWind->SetPen(LIGHTCYAN, 1);
-	pWind->SetBrush(LIGHTCYAN);
 	pWind->DrawRectangle(0, YHalfBattleArea + 2, pavedDistance / float(MaxDistance)*(WindWidth / 2 - CastleWidth / 2) + EnemyWidth, WindHeight - StatusBarHeight);
+}
+
+void GUI::drawDestroyedCastle(bool *b) const
+{
+	if(b[0])
+		pWind->DrawImage("images\\MenuItems\\upperleft.jpg", CastleStartX, CastleStartY, CastleWidth/2, CastleWidth/2);
+	if(b[1])
+		pWind->DrawImage("images\\MenuItems\\upperright.jpg", CastleStartX+ CastleWidth / 2, CastleStartY, CastleWidth/2, CastleWidth/2);
+	if(b[2])
+		pWind->DrawImage("images\\MenuItems\\lowerright.jpg", CastleStartX + CastleWidth / 2, CastleStartY + CastleWidth / 2, CastleWidth / 2, CastleWidth / 2);
+	if(b[3])
+		pWind->DrawImage("images\\MenuItems\\lowerleft.jpg", CastleStartX, CastleStartY + CastleWidth / 2, CastleWidth / 2, CastleWidth / 2);
+
+
 }
 
 

@@ -52,6 +52,7 @@ void Battle::clearGUI(GUI* pGUI) {
 	pGUI->ClearStatusBar();
 	pGUI->ClearBattleArea();
 	pGUI->DrawCastle();
+	pGUI->drawDestroyedCastle(isDestroyed);
 }
 
 //Redraws the GUI
@@ -295,6 +296,7 @@ void Battle::update()
 	castleAttack(currentTime);
 	enemyKilledAtT = false;
 	enemiesAttack();
+	checkTowers();
 	enemiesMove();
 	removeKilledEnemies();
 

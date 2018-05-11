@@ -40,6 +40,10 @@ Tower * Castle::getTower(int x)
 {
 	return &towers[x];
 }
+void Castle::testKill(int i)
+{
+	towers[i].damage(10000);
+}
 void Castle::setTowersFirePower(int pow)
 {
 	for (int i = 0; i < NoOfRegions; i++)
