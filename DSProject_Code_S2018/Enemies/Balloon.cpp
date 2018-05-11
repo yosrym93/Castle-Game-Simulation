@@ -4,15 +4,16 @@
 
 Balloon::Balloon(color r_c, REGION r_region, int d):Enemy(r_c,r_region,d)
 {
-	if (firePower > 20)
-		firePower = 20;
+	K = 1;
+	if (firePower > 15)
+		firePower = 15;
 }
 
 void Balloon::Attack(Battle *b)
 {
 	int Arr[2];
 	Arr[0] = Distance;
-	Arr[1] = int(firePower);
+	Arr[1] = firePower;
 	int*A = Arr;
 	if (canAttack(b->getCurrentTime()))
 	{

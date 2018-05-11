@@ -22,7 +22,7 @@ protected:
 	int arrivalTime;
 	int reload;
 	TYPE type;
-	double firePower;
+	int firePower;
 
 	int firstShotDelay;	//T(first_shot) - T(arrival)
 	int killDelay;		//T(enemy_killed) - T(first_shot)
