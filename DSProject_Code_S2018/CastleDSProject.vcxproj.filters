@@ -311,9 +311,6 @@
     <ClInclude Include="ADTs\Node.h">
       <Filter>ADTs</Filter>
     </ClInclude>
-    <ClInclude Include="ADTs\PrecondViolatedExcep.h">
-      <Filter>ADTs</Filter>
-    </ClInclude>
     <ClInclude Include="ADTs\Queue.h">
       <Filter>ADTs</Filter>
     </ClInclude>

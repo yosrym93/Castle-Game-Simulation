@@ -33,10 +33,10 @@ public:
 																		//is true (without deletion), func is called from fnCaller
 	
 	template<typename S>
-	void sort(int (S::*sortFn)());						//Sorts elements according to the value of sortFn (ascending)
+	void sort(double (S::*sortFn)());						//Sorts elements according to the value of sortFn (ascending)
 
 	template<typename S>
-	void quickSort(int start, int pivot, int (S::*sortFn)());	//Sorts elements according to the value of sortFn (ascending).
+	void quickSort(int start, int pivot, double (S::*sortFn)());	//Sorts elements according to the value of sortFn (ascending).
 
 	template<typename S>
 	void traverse(void (S::*func)());				//traverses through the list and calls a function for each object
@@ -229,7 +229,7 @@ void Array<T>::condtionalRemove(bool (S::*conditionFn)(T*), S &fnCaller)
 //Sorts elements according to the value of sortFn (ascending)
 template<typename T>
 template<typename S>
-void Array<T>::sort(int (S::*sortFn)())
+void Array<T>::sort(double (S::*sortFn)())
 {
 	quickSort(0, size - 1, sortFn);
 }
@@ -237,7 +237,7 @@ void Array<T>::sort(int (S::*sortFn)())
 //Sorts elements according to the value of sortFn (ascending) using quicksort.
 template<typename T>
 template<typename S>
-void Array<T>::quickSort(int start, int pivot, int (S::*sortFn)())
+void Array<T>::quickSort(int start, int pivot, double (S::*sortFn)())
 {
 	if (start >= pivot)
 		return;

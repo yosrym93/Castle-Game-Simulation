@@ -13,6 +13,29 @@ void Shielded::Attack(Battle *b)
 	}
 }
 
+void Shielded::updateEnemy(Battle *b)
+{
+	double Term1 = (firePower / Distance)* (b->getC1());
+	double Term2 = (b->getC2()) / (getRemainingTime(b->getCurrentTime())+1);
+	double Term3 = health*(b->getC3());
+	Priority = (Term1 + Term2 + Term3);
+}
+
+
+int Shielded::getRemainingTime(int CT )
+{
+	int RT;
+	if ((CT - arrivalTime) % (reload + 1) == 0)
+		RT = 0;
+	else
+		RT = (reload + 1)-(CT - arrivalTime) % (reload + 1);
+	return RT;
+}
+
+double Shielded::getPriority()
+{
+	return -Priority;
+}
 
 Shielded::~Shielded()
 {

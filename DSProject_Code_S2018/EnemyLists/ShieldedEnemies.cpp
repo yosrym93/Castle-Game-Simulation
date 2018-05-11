@@ -53,6 +53,15 @@ string ShieldedEnemies::print()
 	 }
 	 return print;
  }
+void ShieldedEnemies::calcPriority(Battle *b)
+{
+	ShieldedArray.traverse(&Enemy::updateEnemy,*b);
+}
+void ShieldedEnemies::towerAttack(Tower*tower, int num)
+{
+	ShieldedArray.sort(&Enemy::getPriority);
+	ShieldedArray.traverse(&Tower::attackEnemy, *tower, num);
+}
 void ShieldedEnemies::traverseToAttack(Battle *b)
 {
 	ShieldedArray.traverse(&Enemy::Attack, b);

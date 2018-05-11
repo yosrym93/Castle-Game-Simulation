@@ -53,6 +53,13 @@ public:
 	
 	Battle();
 	~Battle();
+	/*************************** Getters for the lists  ****************************/
+	ActiveEnemies* getNormalEnemies();		
+	ShieldedEnemies* getShieldedEnemies();	
+	ActiveEnemies* getFreezeTankEnemies();
+	double getC1();
+	double getC2();
+	double getC3();
 	/*************************** GUI updating functions ****************************/
 	void clearGUI(GUI* pGUI);		//Clears the GUI for redrawing
 	void updateGUI(GUI* pGUI);		//Redraws the GUI
@@ -72,6 +79,7 @@ public:
 	void resetBattle();				//Resets all lists and output file to start over
 	void killRandom();				//Kills enemieas randomly according to phase 1.
 	void update();					//Updates all lists and the GUI array
+	void updateShielded();			//Updates the pirority of the shielded lists
 	void load(GUI*);				//Loads all enemies to the inactive list
 	bool isFighting();				//Are there still ENEMIES ALIVE????!!
 	void print(GUI*);				//Prints towers,active and inactive enemies info.
@@ -79,7 +87,7 @@ public:
 	void input(GUI*);               //load the file and decide the mode
 	void enemiesAttack();			//traverse enemies lists and call attack function for each enemy
 	void pave(int,int);				//decrease paved distance during paver attack time
-
+	void castleAttack();			//traverse enemies lists and call attack function for each enemy
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();
 	REGION getRegion(char);			//Converts char type into enum type

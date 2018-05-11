@@ -1,4 +1,5 @@
 #pragma once
+#include "../Enemies/Enemy.h"
 class Battle;
 class Tower
 {
@@ -18,11 +19,12 @@ public:
 	void setFirePower(int );
 	int getMaxNum()const;
 	int getFirePower()const;
-	void damage(double);		//decrease tower health
-	bool isDestroyed()const;		//returns true when tower is completely damaged
+	//---------------------------------------------------------------------------------
+	void damage(double);				//decrease tower health
+	bool isDestroyed()const;			//returns true when tower is completely damaged
 	bool getCanAttack(int)const;		//returns false during freezeTank attack time - USE CURRENT TIME AS A PARAMETER
 	void freeze(int);					//freeze the tower during freezeTank attack time 
-
-
+	void attack(Battle*,int);			//attack of the tower
+	void attackEnemy(Enemy*);			//attack the enemy
 };
 

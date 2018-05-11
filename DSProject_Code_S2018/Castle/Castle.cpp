@@ -21,6 +21,13 @@ void Castle::setTowersHealth(double h)
 		towers[i].setHealth(h);
 	}
 }
+void Castle::towersAttack(Battle*b)
+{
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		towers[i].attack(b,i);
+	}
+}
 void Castle::setTowersNum(int n)
 {
 	for (int i = 0; i < NoOfRegions; i++)

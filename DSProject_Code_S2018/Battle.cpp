@@ -249,6 +249,8 @@ void Battle::resetBattle() {
 //Updates all lists and the GUI array
 void Battle::update()
 {
+	updateShielded();
+	//castleAttack();
 	enemyKilledAtT = false;
 	int sumunpavedA = 0, sumunpavedB = 0;
 	//killRandom();		//For testing
@@ -269,6 +271,12 @@ void Battle::update()
 	removeKilledEnemies();
 
 	inactiveEnemies.activateEnemies(*this);
+}
+
+void Battle::updateShielded()
+{
+	for (int i = 0; i < NoOfRegions; i++)
+		shieldedEnemies[i].calcPriority(this);
 }
 
 
@@ -356,7 +364,36 @@ void Battle::enemiesAttack()
 		shieldedEnemies[i].traverseToAttack(this);
 	}
 }
-
+//-------------Tower Attack----------------
+void Battle::castleAttack()
+{
+	bCastle.towersAttack(this);
+}
+ActiveEnemies* Battle::getNormalEnemies()
+{
+	return normalEnemies;
+}
+ShieldedEnemies* Battle::getShieldedEnemies()
+{
+	return shieldedEnemies;
+}
+ActiveEnemies* Battle::getFreezeTankEnemies()
+{
+	return freezeTankEnemies;
+}
+double Battle::getC1()
+{
+	return c1;
+}
+double Battle::getC2()
+{
+	return c2;
+}
+double Battle::getC3()
+{
+	return c3;
+}
+//------------------------------------------
 void Battle::pave(int regNumber, int distance)
 {
 	unpavedDistance[regNumber] = (unpavedDistance[regNumber] < distance) ? unpavedDistance[regNumber] : distance;

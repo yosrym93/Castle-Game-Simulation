@@ -52,6 +52,10 @@ string ActiveEnemies::print()
 	return print;
 }
 
+void ActiveEnemies::towerAttack(Tower*tower,int num)
+{
+	enemiesList.traverse(&Tower::attackEnemy, *tower, num);
+}
 ActiveEnemies::~ActiveEnemies()
 {
 }
