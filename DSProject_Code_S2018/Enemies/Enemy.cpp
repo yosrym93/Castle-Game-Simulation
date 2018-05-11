@@ -2,10 +2,36 @@
 #include"..\Battle.h"
 #include<cmath>
 
+REGION Enemy::enuminizeRegion(int cRegion)
+{
+	REGION r;
+	switch (cRegion)
+	{
+	case 0:
+		r = A_REG;
+		break;
+	case 1:
+		r = B_REG;
+		break;
+	case 2:
+		r = C_REG;
+		break;
+	case 3:
+		r = D_REG;
+		break;
+	default:
+		r = A_REG;//default (this case should never happen)
+		break;
+
+	}
+	return r;
+}
+
 Enemy::Enemy(color r_c, REGION r_region, int d)
 {
 	Clr = r_c;
 	Region = r_region;
+	oRegion = r_region;
 	SetDistance(d);
 	maxHealth = health;
 	speed = 1;
@@ -104,6 +130,12 @@ void Enemy::setHealth(double rhealth)
 void Enemy::setPow(int rpow)
 {
 	firePower = (rpow > 0) ? rpow : 10;//assuming that the default is 10
+}
+
+void Enemy::setCRegion(int reg)
+{
+	if (reg >= 0 && reg < NoOfRegions)
+		Region = enuminizeRegion(reg);
 }
 
 void Enemy::setRld(int rld)

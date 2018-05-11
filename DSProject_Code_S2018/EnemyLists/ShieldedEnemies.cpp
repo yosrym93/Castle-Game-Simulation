@@ -28,6 +28,10 @@ bool ShieldedEnemies::killRand()
  {
 	 return ShieldedArray.isEmpty();
  }
+ void ShieldedEnemies::importOther(ShieldedEnemies &other)
+ {
+	 ShieldedArray.importOther(other.ShieldedArray);
+ }
  void ShieldedEnemies::clear()
 {
 	ShieldedArray.clear();
@@ -64,6 +68,10 @@ void ShieldedEnemies::traverseToMove(Battle *b)
 void ShieldedEnemies::traverseToHeal(int*A)
 {
 	ShieldedArray.traverse(&Enemy::heal , A);
+}
+void ShieldedEnemies::traverseToTravel(int n)
+{
+	ShieldedArray.traverse(&Enemy::setCRegion, n);
 }
 ShieldedEnemies::~ShieldedEnemies()
 {

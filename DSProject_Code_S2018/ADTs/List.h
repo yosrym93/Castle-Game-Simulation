@@ -12,6 +12,8 @@ public:
 	bool remove(const T&);							//removes an item by its value, returns false if value not in the list
 	bool remove(int pos);							//removes an item by its position, returns false if position is out of range
 	T get(int pos) throw (PrecondViolatedExcep);	//returns an item at a certain position,  
+	void importOther(List&);						//Empties another array in the current array
+	T Export();										//Returns the last element then removes it from the list
 													//throws an exceptions if pos is out of range
 	template<typename S>
 	void traverse(void (S::*func)());				//traverses through the list and calls a function for each object
@@ -135,6 +137,29 @@ T List<T>::get(int pos) {
 	for (int i = 0; i < pos; i++)
 		ptr = ptr->getNext();
 	return ptr->getData();
+}
+
+template<typename T>
+inline void List<T>::importOther(List &other)
+{
+	while (!other.isEmpty())
+		push(other.Export());
+}
+
+template<typename T>
+inline T List<T>::Export()
+{
+	if (!head) 
+	{
+		string message = "Export called for an empty list";
+		throw (new PrecondViolatedExcep(message));
+	}
+	Node<T>*temp = head;
+	head = head->getNext();
+	T exported = temp->getData();
+	delete temp;
+	count--;
+	return exported;
 }
 
 //traverses through the list and calls a function for each object

@@ -31,6 +31,11 @@ void ActiveEnemies::clear() {
 	enemiesList.clear();
 }
 
+void ActiveEnemies::importOther(ActiveEnemies &other)
+{
+	enemiesList.importOther(other.enemiesList);
+}
+
 //Removes killed enemies from the list and calls Battles' killEnemy(killedEnemy)
 void ActiveEnemies::removeKilled(Battle &b)
 {
@@ -69,4 +74,9 @@ void ActiveEnemies::traverseToMove(Battle *b)
 void ActiveEnemies::traverseToHeal(int*A)
 {
 	enemiesList.traverse(&Enemy::heal , A);
+}
+
+void ActiveEnemies::traverseToTravel(int n)
+{
+	enemiesList.traverse(&Enemy::setCRegion, n);
 }

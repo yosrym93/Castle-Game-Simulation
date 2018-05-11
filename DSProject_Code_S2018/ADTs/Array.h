@@ -21,6 +21,8 @@ public:
 	bool remove(T*);						//Removes a specific pointer from the array.
 	void clear();							//Clears and deletes all the pointers from the array.
 	bool isEmpty();							//Checks whether the array is empty.
+	void importOther(Array&);				//Empties another array in the current array
+	T* Export();							//Returns the last element then removes it from the list
 	T* pickRand();							//Returns a random enemy from the array or NULL if it's empty.
 	T* get(int) throw (PrecondViolatedExcep);//Gets an item using it's index if it exists.
 
@@ -183,6 +185,23 @@ template<class T>
 bool Array<T>::isEmpty()
 {
 	return (size == 0);
+}
+
+template<class T>
+inline void Array<T>::importOther(Array &other)
+{
+	for (int i = 0; i < other.size;)
+		insert(other.Export());
+}
+
+template<class T>
+inline T * Array<T>::Export()
+{
+	if (size == 0)
+		return NULL;
+	T* exported = arr[size - 1];
+	size--;
+	return exported;
 }
 
 template<class T>
