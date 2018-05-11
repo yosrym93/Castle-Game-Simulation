@@ -36,7 +36,6 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	
 	speed = 1;
 	killed = false;
-	K = 1;
 }
 
 string Enemy::print()

@@ -65,22 +65,22 @@ ActiveEnemies::~ActiveEnemies()
 {
 }
 
-void ActiveEnemies::traverseToAttack(Battle* b)
+void ActiveEnemies::enemiesAttack(Battle* b)
 {
 	enemiesList.traverse(&Enemy::Attack , b);
 }
 
-void ActiveEnemies::traverseToMove(Battle *b)
+void ActiveEnemies::enemiesMove(Battle *b)
 {
 	enemiesList.traverse(&Enemy::move , b);
 }
 
-void ActiveEnemies::traverseToHeal(int*A)
+void ActiveEnemies::enemiesHeal(int*A)
 {
 	enemiesList.traverse(&Enemy::heal , A);
 }
 
-void ActiveEnemies::traverseToTravel(int n)
+void ActiveEnemies::enemiesTravel(int n)
 {
 	enemiesList.traverse(&Enemy::setCRegion, n);
 }

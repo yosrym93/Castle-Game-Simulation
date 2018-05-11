@@ -19,9 +19,10 @@ public:
 	void removeKilled(Battle &);		//Removes killed enemies from the list and calls Battles' killEnemy(killedEnemy)
 	~ShieldedEnemies();
 	string print();
-	void traverseToAttack(Battle*);			//traverse the list to call attack for each enemy
-	void traverseToMove(Battle*);			//traverse the list to call move for each enemy
-	void traverseToHeal();					//traverse the list to call heal for each enemy
+	void enemiesAttack(Battle*);			//traverse the list to call attack for each enemy
+	void enemiesMove(Battle*);			//traverse the list to call move for each enemy
+	void enemiesHeal(int* A);					//traverse the list to call heal for each enemy
+	void enemiesTravel(int n);
 	void towerAttack(Tower*, int);			//traverse the list to attack the enemies by the tower
 	void calcPriority(Battle*);				//calculate the priority of the shielded enemies
 };
