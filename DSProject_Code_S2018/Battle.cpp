@@ -249,28 +249,24 @@ void Battle::resetBattle() {
 //Updates all lists and the GUI array
 void Battle::update()
 {
+	inactiveEnemies.activateEnemies(*this);
 	updateShielded();
-	//castleAttack();
+	castleAttack();
 	enemyKilledAtT = false;
-	int sumunpavedA = 0, sumunpavedB = 0;
 	//killRandom();		//For testing
-	for (int i = 0; i < NoOfRegions;i++)
+	enemiesAttack();
+	enemiesMove();
+	removeKilledEnemies();
+
+}
+void Battle::enemiesMove()
+{
+	for (int i = 0; i < NoOfRegions; i++)
 	{
-		sumunpavedA += unpavedDistance[i];
-		normalEnemies[i].traverseToAttack(this);
-		shieldedEnemies[i].traverseToAttack(this);
-		freezeTankEnemies[i].traverseToAttack(this);
 		normalEnemies[i].traverseToMove(this);
 		shieldedEnemies[i].traverseToMove(this);
 		freezeTankEnemies[i].traverseToMove(this);
 	}
-	for (int i = 0; i < NoOfRegions;i++)
-		sumunpavedB += unpavedDistance[i];
-	if (sumunpavedA != sumunpavedB)
-		playPavingSound();
-	removeKilledEnemies();
-
-	inactiveEnemies.activateEnemies(*this);
 }
 
 void Battle::updateShielded()
@@ -357,12 +353,18 @@ void Battle::input(GUI *pGUI)
 
 void Battle::enemiesAttack()
 {
+	int sumunpavedA = 0, sumunpavedB = 0;
 	for (int i = 0; i < NoOfRegions; i++)
 	{
+		sumunpavedA += unpavedDistance[i];
 		normalEnemies[i].traverseToAttack(this);
 		freezeTankEnemies[i].traverseToAttack(this);
 		shieldedEnemies[i].traverseToAttack(this);
 	}
+	for (int i = 0; i < NoOfRegions; i++)
+		sumunpavedB += unpavedDistance[i];
+	if (sumunpavedA != sumunpavedB)
+		playPavingSound();
 }
 //-------------Tower Attack----------------
 void Battle::castleAttack()

@@ -5,7 +5,7 @@ class Tower
 {
 	double health;
 	int N; // max number of elements tower can attack in time step
-	int firePower;
+	double firePower;
 	bool isKilled;
 	bool canAttack;
 	int freezeTime;		//attack time of freeze tank

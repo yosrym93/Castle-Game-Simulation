@@ -88,6 +88,7 @@ public:
 	void enemiesAttack();			//traverse enemies lists and call attack function for each enemy
 	void pave(int,int);				//decrease paved distance during paver attack time
 	void castleAttack();			//traverse enemies lists and call attack function for each enemy
+	void enemiesMove();				//traverse to move enemies
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();
 	REGION getRegion(char);			//Converts char type into enum type

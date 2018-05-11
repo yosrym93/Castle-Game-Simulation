@@ -9,6 +9,7 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	maxHealth = health;
 	speed = 1;
 	killed = false;
+	K = 1;
 }
 
 string Enemy::print()
@@ -133,13 +134,14 @@ string Enemy::getTypeStr () const
 }
 void Enemy::damage(double rdamage)
 {
-	if (!killed)
+	if (!isKilled())
+		health = health - rdamage;
+
+	if (health <= 0)
 	{
-		health -= rdamage;
-		health = (health >= 0) ? health : 0;
+		health = 0;
+		killed = true;
 	}
-	if(health==0)
-		killed=true;
 }
 void Enemy::setType(int rtype)
 {
@@ -195,7 +197,7 @@ void Enemy::Attack(Battle *b)
 {
 
 }
-void Enemy::updateEnemy(Battle b)
+void Enemy::updateEnemy(Battle* b)
 {
 
 }

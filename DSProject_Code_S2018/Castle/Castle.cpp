@@ -9,7 +9,8 @@ Castle::Castle()
 string Castle::print(int p)
 {
 	string printInfo;
-	string health = to_string((int)towers[p].getHealth());
+	double ihealth = int(round(towers[p].getHealth() * 100)) / 100.0;
+	string health = to_string(ihealth);
 	printInfo =  "TowerHealth(" + health +")";
 	return printInfo;
 }

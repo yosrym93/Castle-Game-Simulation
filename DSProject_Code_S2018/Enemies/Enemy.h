@@ -68,7 +68,7 @@ public:
 
 	//virtual void Move() = 0;	    //All enemies can move
 	virtual void Attack(Battle*) = 0;	//All enemies can attack (attacking is paving or shooting)
-	virtual void updateEnemy(Battle);
+	virtual void updateEnemy(Battle*);
 //	virtual bool operator>(Enemy*);
 	virtual double getPriority();
 
