@@ -2,6 +2,7 @@
 #include<chrono>
 #include<thread>
 
+
 using Clock = std::chrono::high_resolution_clock;
 
 
@@ -221,6 +222,8 @@ void Battle::startBattle(GUI* pGUI) {
 	try {
 		//Inputs data from the user (input file & mode)
 		input(pGUI);
+		//Play background music
+		playBackgroundMusic();
 		//Starts counting time and updating according to the chosen mode
 		timeCounter(pGUI);
 	}
@@ -691,6 +694,13 @@ void Battle::writeEnemy(Enemy* e) {
 }
 
 /**************************** Audio Functions  ****************************/
+
+void Battle::playBackgroundMusic() {
+	if (mode != MODE_SILENT) {
+		if (backgroundMusic.openFromFile("Sounds\\Fantascape.wav"))
+			backgroundMusic.play();
+	}
+}
 
 void Battle::playDeathSound() {
 	if (mode != MODE_SILENT)

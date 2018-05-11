@@ -19,7 +19,7 @@
 #include "EnemyLists\ShieldedEnemies.h"
 
 #include "Output\Output.h"
-
+#include<SFML\Audio.hpp>
 
 // it is the controller of the project
 class Battle
@@ -50,6 +50,9 @@ private:
 
 	/************************ Output writer ************************/
 	Output writer;							//Writes data to the output file
+	/************************* Background Music Player ******************/
+	sf::Music backgroundMusic;
+
 public:
 	
 	Battle();
@@ -109,6 +112,7 @@ public:
 	void writeEnemy(Enemy*);		//Outputs enemy's data to output file (through writer)
 
 	/**************************** Audio Functions  ****************************/
+	void playBackgroundMusic();
 	void playDeathSound();				//done
 	void playTowerDestructionSound();
 	void playPavingSound();				
