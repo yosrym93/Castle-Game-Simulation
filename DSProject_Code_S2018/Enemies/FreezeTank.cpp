@@ -4,12 +4,13 @@
 
 FreezeTank::FreezeTank(color r_c, REGION r_region, int d):Enemy(r_c,r_region,d)
 {
-	if (int(firePower) < 10)
+	K = 2;
+	if (firePower < 10)
 		firePower = 10;
-	else if (int(firePower) > 60)
-		firePower = 60;
+	else if (firePower > 50)
+		firePower = 50;
 	else 
-		firePower = int(firePower);
+		firePower = firePower;
 
 }
 

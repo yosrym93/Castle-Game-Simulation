@@ -4,6 +4,7 @@
 
 Paver::Paver(color r_c, REGION r_region,int d):Enemy(r_c,r_region,d)
 {
+	K = 1;
 }
 
 void Paver::Attack(Battle *b)
