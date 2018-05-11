@@ -697,8 +697,10 @@ void Battle::writeEnemy(Enemy* e) {
 
 void Battle::playBackgroundMusic() {
 	if (mode != MODE_SILENT) {
-		if (backgroundMusic.openFromFile("Sounds\\Fantascape.wav"))
+		if (backgroundMusic.openFromFile("Sounds\\Fantascape.wav")) {
 			backgroundMusic.play();
+			backgroundMusic.setLoop(true);
+		}
 	}
 }
 
