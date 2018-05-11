@@ -9,6 +9,7 @@ class FreezeTank :
 public:
 	FreezeTank(color r_c, REGION r_region, int d);
 	void Attack(Battle*);
+	virtual void setPow(int);
 	~FreezeTank();
 };
 
