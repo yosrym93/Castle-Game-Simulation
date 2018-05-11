@@ -21,6 +21,12 @@ void Castle::setTowersHealth(double h)
 		towers[i].setHealth(h);
 	}
 }
+void Castle::testKill(int i)
+{
+	if (i >= 0 && i < NoOfRegions)
+		towers[i].testKill();
+
+}
 void Castle::setTowersNum(int n)
 {
 	for (int i = 0; i < NoOfRegions; i++)
@@ -47,4 +53,11 @@ bool Castle::isDestroyed() {
 	}
 
 	return destroyed;
+}
+
+bool Castle::isDestroyed(int i)
+{
+	if (i >= 0 && i < NoOfRegions)
+		return towers[i].isDestroyed();
+	return false;
 }

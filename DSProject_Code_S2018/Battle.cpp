@@ -12,6 +12,7 @@ Battle::Battle()
 	totalEnemiesCount = 0;
 	for (int i = 0; i < NoOfRegions; i++)
 	{
+		isDestroyed[i] = false;
 		nKilledEnemies[i] = 0;
 		unpavedDistance[i] = MaxDistance/2;
 		activeEnemies[i] = 0;
@@ -135,6 +136,8 @@ void Battle::timeCounter(GUI* pGUI)
 					clearGUI(pGUI);
 					update();
 					updateGUI(pGUI);
+					if (currentTime == 31)
+						bCastle.testKill(2);
 					currentTime++;
 				}
 			}
@@ -246,6 +249,46 @@ void Battle::resetBattle() {
 	deleteGUIArray();
 }
 
+void Battle::checkTowers()
+{
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		if (!isDestroyed[i] && bCastle.isDestroyed(i))
+		{
+			isDestroyed[i] = true;
+			regionalMove(i);
+			playTowerDestructionSound();
+		}
+	}
+}
+
+void Battle::regionalMove(int i)
+{
+	if (bCastle.isDestroyed())
+		return;
+
+	int next = i + 1;
+	if (next == NoOfRegions)
+		next = 0;
+	while (bCastle.isDestroyed(next))
+	{
+		next++;
+		if (next == NoOfRegions)
+			next = 0;
+	}
+	normalEnemies[next].importOther(normalEnemies[i]);
+	freezeTankEnemies[next].importOther(freezeTankEnemies[i]);
+	shieldedEnemies[next].importOther(shieldedEnemies[i]);
+	normalEnemies[next].traverseToTravel(next);
+	shieldedEnemies[next].traverseToTravel(next);
+	freezeTankEnemies[next].traverseToTravel(next);
+	while (activeEnemies[i] > 0)
+	{
+		activeEnemies[i]--;
+		activeEnemies[next]++;
+	}
+}
+
 //Updates all lists and the GUI array
 void Battle::update()
 {
@@ -267,6 +310,7 @@ void Battle::update()
 	if (sumunpavedA != sumunpavedB)
 		playPavingSound();
 	removeKilledEnemies();
+	checkTowers();
 
 	inactiveEnemies.activateEnemies(*this);
 }
@@ -612,31 +656,38 @@ void Battle::writeEnemy(Enemy* e) {
 /**************************** Audio Functions  ****************************/
 
 void Battle::playDeathSound() {
-	PlaySound(TEXT("Sounds\\EnemyDeath.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	if (mode != MODE_SILENT)
+		PlaySound(TEXT("Sounds\\EnemyDeath.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void Battle::playTowerDestructionSound() {
-	PlaySound(TEXT("Sounds\\TowerDestruction.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	if (mode != MODE_SILENT)
+		PlaySound(TEXT("Sounds\\TowerDestruction.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void Battle::playPavingSound() {
-	PlaySound(TEXT("Sounds\\Paving.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	if (mode != MODE_SILENT)
+		PlaySound(TEXT("Sounds\\Paving.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void Battle::playHealingSound() {
-	PlaySound(TEXT("Sounds\\Healing.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	if (mode != MODE_SILENT)
+		PlaySound(TEXT("Sounds\\Healing.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void Battle::playFreezingSound() {
-	PlaySound(TEXT("Sounds\\Freezing.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	if (mode != MODE_SILENT)
+		PlaySound(TEXT("Sounds\\Freezing.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void Battle::playVictorySound() {
-	PlaySound(TEXT("Sounds\\Victory.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	if (mode != MODE_SILENT)
+		PlaySound(TEXT("Sounds\\Victory.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void Battle::playDefeatSound() {
-	PlaySound(TEXT("Sounds\\Defeat.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	if (mode != MODE_SILENT)
+		PlaySound(TEXT("Sounds\\Defeat.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 /****************************  Destructor ****************************/
 Battle::~Battle() {

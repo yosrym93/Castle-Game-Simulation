@@ -12,6 +12,7 @@ protected:
 	int id;         //Each enemy has a unique ID (sequence number)
 	color Clr;	    //Color of the enemy (will be set depending on the enemy type: Paver, ...etc.)
 	REGION Region;  //Region of this enemy
+	REGION oRegion; //Original entrance region
 	int Distance;	//Horizontal distance between enemy & the tower of its region
 	                //Always positive (ranges from 2 to 60)
 	int speed;		//How many distance units could be covered per time step
@@ -23,7 +24,7 @@ protected:
 	int reload;
 	TYPE type;
 	double firePower;
-
+	REGION enuminizeRegion(int);
 	int firstShotDelay;	//T(first_shot) - T(arrival)
 	int killDelay;		//T(enemy_killed) - T(first_shot)
 
@@ -45,6 +46,7 @@ public:
 	int getArrTime();
 	void setHealth(double);
 	void setPow(int);
+	void setCRegion(int);
 	void setRld(int);
 	void setType(int);
 	void setSpeed(int);

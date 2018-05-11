@@ -15,12 +15,15 @@ public:
 	int getCount() const;
 	bool isEmpty() const;
 	void clear();
+	void importOther(ActiveEnemies&);	//Moves enemies from one region to another	
 	void removeKilled(Battle &);	//Removes killed enemies from the list and calls Battles' killEnemy(killedEnemy)
 	string print();
 	~ActiveEnemies();
 	void traverseToAttack(Battle*);			//traverse the list to call attack for each enemy
 	void traverseToMove(Battle*);			//traverse the list to call move for each enemy
 	void traverseToHeal();					//traverse the list to call heal for each enemy
+	void traverseToTravel(int);				//traverse the list to change region for each enemy
+
 };
 
 

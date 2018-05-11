@@ -34,6 +34,7 @@ private:
 	int activeEnemies[NoOfRegions];
 	int nKilledEnemies[NoOfRegions];				//number of killed enemies in each region
 	bool enemyKilledAtT;							//true if an enemy was killed in this current step
+	bool isDestroyed[NoOfRegions];
 	MODE mode;
 
 	/************************Inactive Enemies List(s)************************/
@@ -70,6 +71,8 @@ public:
 	/***************************************************************************************/
 	void startBattle(GUI* pGUI);	//Initiates the battle
 	void resetBattle();				//Resets all lists and output file to start over
+	void checkTowers();				//Checks whether there's a dead tower and calls the appropriate fns.
+	void regionalMove(int);			//Moves Enemies from a dead tower's region to the following one
 	void killRandom();				//Kills enemieas randomly according to phase 1.
 	void update();					//Updates all lists and the GUI array
 	void load(GUI*);				//Loads all enemies to the inactive list
