@@ -31,7 +31,7 @@ void Simulation(Battle *pGameBattle,GUI *pGUI)
 		pGameBattle->print(pGUI);
 		// Redraw the enemies
 		pGameBattle->drawEnemies(pGUI);
-		pGameBattle->killRandom();
+	//	pGameBattle->killRandom();
 
 		TimeStep++;
 	}

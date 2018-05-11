@@ -35,6 +35,8 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	SetDistance(d);
 	maxHealth = health;
 	speed = 1;
+	killed = false;
+	K = 1;
 }
 
 string Enemy::print()
@@ -166,7 +168,17 @@ string Enemy::getTypeStr () const
 		return"";
 	}
 }
+void Enemy::damage(double rdamage)
+{
+	if (!isKilled())
+		health = health - rdamage;
 
+	if (health <= 0)
+	{
+		health = 0;
+		killed = true;
+	}
+}
 void Enemy::setType(int rtype)
 {
 	switch (rtype)
@@ -212,11 +224,24 @@ bool Enemy::canAttack(int x)
 		return false;
 }
 
+int Enemy::getK()
+{
+	return K;
+}
+/***************Virtual FN.s**********************/
 void Enemy::Attack(Battle *b)
 {
 
 }
+void Enemy::updateEnemy(Battle* b)
+{
 
+}
+double Enemy::getPriority()
+{
+	return 0;//only shielded enemies have priority
+}
+/****************************************/ 
 
 //Calculates the firstShotDelay (Parameter is firstShot time step)
 void Enemy::calcFD(int firstShotTime) {
@@ -236,7 +261,7 @@ void Enemy::calcKD(int killTime) {
 }
 
 //Returns the firstShotDelay
-int Enemy::getFD() {
+double Enemy::getFD() {
 	return firstShotDelay;
 }
 

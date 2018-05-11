@@ -9,7 +9,8 @@ Castle::Castle()
 string Castle::print(int p)
 {
 	string printInfo;
-	string health = to_string((int)towers[p].getHealth());
+	double ihealth = int(round(towers[p].getHealth() * 100)) / 100.0;
+	string health = to_string(ihealth);
 	printInfo =  "TowerHealth(" + health +")";
 	return printInfo;
 }
@@ -21,11 +22,12 @@ void Castle::setTowersHealth(double h)
 		towers[i].setHealth(h);
 	}
 }
-void Castle::testKill(int i)
+void Castle::towersAttack(Battle*b)
 {
-	if (i >= 0 && i < NoOfRegions)
-		towers[i].testKill();
-
+	for (int i = 0; i < NoOfRegions; i++)
+	{
+		towers[i].attack(b,i);
+	}
 }
 void Castle::setTowersNum(int n)
 {

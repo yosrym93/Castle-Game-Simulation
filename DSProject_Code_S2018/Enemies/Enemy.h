@@ -25,6 +25,7 @@ protected:
 	TYPE type;
 	double firePower;
 	REGION enuminizeRegion(int);
+	bool killed;
 	int firstShotDelay;	//T(first_shot) - T(arrival)
 	int killDelay;		//T(enemy_killed) - T(first_shot)
 
@@ -37,7 +38,8 @@ public:
 	void decrementDist();
 	void move(Battle* B);
 	string print();
-	void heal(int*);	//increases enemy health by 10% of initial health during balloon attack time
+	void damage(double);
+	void heal();	//increases enemy health by 5% of initial health during balloon attack time
 	//Setters and getters 
 	void setId(int);
 	int getId() const;
@@ -55,9 +57,10 @@ public:
 	string getTypeStr() const; //Returns the type as a string (for printing)
 	bool isKilled();
 	bool canAttack(int);
+	int getK();
 	void calcFD(int firstShotTime);	//Calculates the firstShotDelay (Parameter is firstShot time step)
 	void calcKD(int killTime);		//Calculates the killDelay (Parameter is kill time step)
-	int getFD();					//Returns the firstShotDelay
+	double getFD();					//Returns the firstShotDelay
 	int getKD();					//Return the killDelay
 	double getMaxHealth()const;		//Returns Maximum health
 	double getFirePower()const;
@@ -68,8 +71,9 @@ public:
 
 	//virtual void Move() = 0;	    //All enemies can move
 	virtual void Attack(Battle*) = 0;	//All enemies can attack (attacking is paving or shooting)
-
-
+	virtual void updateEnemy(Battle*);
+//	virtual bool operator>(Enemy*);
+	virtual double getPriority();
 
 };
 

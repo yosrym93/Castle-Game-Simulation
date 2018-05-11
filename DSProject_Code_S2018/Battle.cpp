@@ -292,27 +292,30 @@ void Battle::regionalMove(int i)
 //Updates all lists and the GUI array
 void Battle::update()
 {
+	inactiveEnemies.activateEnemies(*this);
+	updateShielded();
+	castleAttack();
 	enemyKilledAtT = false;
-	int sumunpavedA = 0, sumunpavedB = 0;
 	//killRandom();		//For testing
-	for (int i = 0; i < NoOfRegions;i++)
+	enemiesAttack();
+	enemiesMove();
+	removeKilledEnemies();
+
+}
+void Battle::enemiesMove()
+{
+	for (int i = 0; i < NoOfRegions; i++)
 	{
-		sumunpavedA += unpavedDistance[i];
-		normalEnemies[i].traverseToAttack(this);
-		shieldedEnemies[i].traverseToAttack(this);
-		freezeTankEnemies[i].traverseToAttack(this);
 		normalEnemies[i].traverseToMove(this);
 		shieldedEnemies[i].traverseToMove(this);
 		freezeTankEnemies[i].traverseToMove(this);
 	}
-	for (int i = 0; i < NoOfRegions;i++)
-		sumunpavedB += unpavedDistance[i];
-	if (sumunpavedA != sumunpavedB)
-		playPavingSound();
-	removeKilledEnemies();
-	checkTowers();
+}
 
-	inactiveEnemies.activateEnemies(*this);
+void Battle::updateShielded()
+{
+	for (int i = 0; i < NoOfRegions; i++)
+		shieldedEnemies[i].calcPriority(this);
 }
 
 
@@ -393,14 +396,49 @@ void Battle::input(GUI *pGUI)
 
 void Battle::enemiesAttack()
 {
+	int sumunpavedA = 0, sumunpavedB = 0;
 	for (int i = 0; i < NoOfRegions; i++)
 	{
+		sumunpavedA += unpavedDistance[i];
 		normalEnemies[i].traverseToAttack(this);
 		freezeTankEnemies[i].traverseToAttack(this);
 		shieldedEnemies[i].traverseToAttack(this);
 	}
+	for (int i = 0; i < NoOfRegions; i++)
+		sumunpavedB += unpavedDistance[i];
+	if (sumunpavedA != sumunpavedB)
+		playPavingSound();
 }
-
+//-------------Tower Attack----------------
+void Battle::castleAttack()
+{
+	bCastle.towersAttack(this);
+}
+ActiveEnemies* Battle::getNormalEnemies()
+{
+	return normalEnemies;
+}
+ShieldedEnemies* Battle::getShieldedEnemies()
+{
+	return shieldedEnemies;
+}
+ActiveEnemies* Battle::getFreezeTankEnemies()
+{
+	return freezeTankEnemies;
+}
+double Battle::getC1()
+{
+	return c1;
+}
+double Battle::getC2()
+{
+	return c2;
+}
+double Battle::getC3()
+{
+	return c3;
+}
+//------------------------------------------
 void Battle::pave(int regNumber, int distance)
 {
 	unpavedDistance[regNumber] = (unpavedDistance[regNumber] < distance) ? unpavedDistance[regNumber] : distance;

@@ -23,6 +23,31 @@ int Tower::getFirePower()const
 {
 	return firePower;
 }
+void Tower::attack(Battle*b,int region)
+{
+	if (!isKilled)
+	{
+		ActiveEnemies* normal = b->getNormalEnemies();
+		ActiveEnemies* tank = b->getFreezeTankEnemies();
+		ShieldedEnemies* shielded = b->getShieldedEnemies();
+		int num = N;
+		tank[region].towerAttack(this, num);
+		num -= tank[region].getCount();
+		if (num > 0)
+		{
+			shielded[region].towerAttack(this, num);
+			num -= shielded[region].getCount();
+		}
+		if (num > 0)
+			normal[region].towerAttack(this, num);
+	}
+}
+void Tower::attackEnemy(Enemy*enemy)
+{
+	double t1 = (1.0 / enemy->getDistance());
+	double damage = t1*firePower*(1 / enemy->getK());
+	enemy->damage(damage);
+}
 void Tower::damage(double x)
 {
 	if (!isKilled)

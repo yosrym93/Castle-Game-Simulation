@@ -12,8 +12,8 @@ class Castle
 
 	
 public:
-
 	Castle();
+	void towersAttack(Battle*);
 	string print(int);
 	void setTowersHealth(double h);
 	void testKill(int);		//tests killing a tower
