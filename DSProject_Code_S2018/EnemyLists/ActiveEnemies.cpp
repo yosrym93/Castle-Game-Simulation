@@ -66,7 +66,7 @@ void ActiveEnemies::traverseToMove(Battle *b)
 	enemiesList.traverse(&Enemy::move , b);
 }
 
-void ActiveEnemies::traverseToHeal()
+void ActiveEnemies::traverseToHeal(int*A)
 {
-	enemiesList.traverse(&Enemy::heal);
+	enemiesList.traverse(&Enemy::heal , A);
 }

@@ -293,11 +293,11 @@ void Battle::print(GUI *pGUI)
 		pGUI->updatePrintedMessage("    Active Enemies : "+ to_string(activeEnemies[i]) + "    Killed Enemies:" + to_string(nKilledEnemies[i]));
 	}
 }
-void Battle::healEnemies(int regNumber)
+void Battle::healEnemies(int regNumber,int* A)
 {
-	normalEnemies[regNumber].traverseToHeal();
-	freezeTankEnemies[regNumber].traverseToHeal();
-	shieldedEnemies[regNumber].traverseToHeal();
+	normalEnemies[regNumber].traverseToHeal(A);
+	freezeTankEnemies[regNumber].traverseToHeal(A);
+	shieldedEnemies[regNumber].traverseToHeal(A);
 	playHealingSound();
 }
 //load the file and decide the mode 

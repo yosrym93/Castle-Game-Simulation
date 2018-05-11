@@ -36,7 +36,7 @@ public:
 	void decrementDist();
 	void move(Battle* B);
 	string print();
-	void heal();	//increases enemy health by 5% of initial health during balloon attack time
+	void heal(int*);	//increases enemy health by 10% of initial health during balloon attack time
 	//Setters and getters 
 	void setId(int);
 	int getId() const;

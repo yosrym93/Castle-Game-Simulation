@@ -75,7 +75,7 @@ public:
 	void load(GUI*);				//Loads all enemies to the inactive list
 	bool isFighting();				//Are there still ENEMIES ALIVE????!!
 	void print(GUI*);				//Prints towers,active and inactive enemies info.
-	void healEnemies(int);			//traverses enemies lists to icrease health in balloon fire time
+	void healEnemies(int,int*);			//traverses enemies lists to icrease health in balloon fire time
 	void input(GUI*);               //load the file and decide the mode
 	void enemiesAttack();			//traverse enemies lists and call attack function for each enemy
 	void pave(int,int);				//decrease paved distance during paver attack time

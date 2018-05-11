@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include"..\Battle.h"
+#include<cmath>
 
 Enemy::Enemy(color r_c, REGION r_region, int d)
 {
@@ -17,11 +18,14 @@ string Enemy::print()
 	printInfo =  "( "+ type +" ,"+to_string(id) +" ,"+ to_string((int)health)+" ,"+ to_string(arrivalTime) +" ," +to_string((int)firePower) +" ,"+ to_string(reload)+" )";
 	return printInfo;
 }
-void Enemy::heal()
+void Enemy::heal(int*A)
 {
-	health = health + (5.0 / 100.0)*maxHealth;
-	if (health > maxHealth)
-		health = maxHealth;
+	if (Distance > A[0] - A[1] && Distance < A[0] + A[1])
+	{
+		health = health + ((A[1]-abs(Distance-A[0]))/100.0)*maxHealth;
+		if (health > maxHealth)
+			health = maxHealth;
+	}
 }
 Enemy::~Enemy()
 {
