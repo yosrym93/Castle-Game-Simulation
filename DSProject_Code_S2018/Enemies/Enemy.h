@@ -18,14 +18,13 @@ protected:
 	int speed;		//How many distance units could be covered per time step
 	double health;	//Enemy health
 	double maxHealth;  //health of enemy before being attacked
-	//bool canAttack;
+	bool isFirstShot;
 	int K;
 	int arrivalTime;
 	int reload;
 	TYPE type;
 	double firePower;
 	REGION enuminizeRegion(int);
-	bool killed;
 	int firstShotDelay;	//T(first_shot) - T(arrival)
 	int killDelay;		//T(enemy_killed) - T(first_shot)
 

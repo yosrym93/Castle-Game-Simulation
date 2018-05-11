@@ -33,9 +33,7 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	Region = r_region;
 	oRegion = r_region;
 	SetDistance(d);
-	
-	speed = 1;
-	killed = false;
+	isFirstShot = false;
 }
 
 string Enemy::print()
@@ -170,13 +168,11 @@ string Enemy::getTypeStr () const
 }
 void Enemy::damage(double rdamage)
 {
-	if (!isKilled())
-		health = health - rdamage;
+	health = health - rdamage;
 
 	if (health <= 0)
 	{
 		health = 0;
-		killed = true;
 	}
 }
 void Enemy::setType(int rtype)
@@ -245,10 +241,13 @@ double Enemy::getPriority()
 
 //Calculates the firstShotDelay (Parameter is firstShot time step)
 void Enemy::calcFD(int firstShotTime) {
-	if (firstShotTime >= arrivalTime)	//Checks for valid first-shot time
-		firstShotDelay = firstShotTime - arrivalTime;
-	else
-		firstShotDelay = -1;			//-1 indicates wrong first-shot time
+	if (!isFirstShot) {
+		if (firstShotTime >= arrivalTime)	//Checks for valid first-shot time
+			firstShotDelay = firstShotTime - arrivalTime;
+		else
+			firstShotDelay = -1;			//-1 indicates wrong first-shot time
+		isFirstShot = true;
+	}
 }
 
 //Calculates the killDelay (Parameter is kill time step)

@@ -24,8 +24,10 @@ int Tower::getFirePower()const
 {
 	return firePower;
 }
-void Tower::attack(Battle*b,int region)
+void Tower::attack(Battle*b, int region, int currTime)
 {
+	currentTime = currTime;
+
 	if (!isKilled)
 	{
 		ActiveEnemies* normal = b->getNormalEnemies();
@@ -48,11 +50,11 @@ void Tower::attackEnemy(Enemy*enemy)
 	double t1 = (1.0 / enemy->getDistance());
 	double damage = t1*firePower*(1.0 / enemy->getK());
 	enemy->damage(damage);
+	enemy->calcFD(currentTime);
 }
 void Tower::damage(double x)
 {
-	if (!isKilled)
-		health = health - x;
+	health = health - x;
 
 	if (health <= 0)
 	{

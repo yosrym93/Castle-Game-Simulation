@@ -292,7 +292,7 @@ void Battle::update()
 {
 	inactiveEnemies.activateEnemies(*this);
 	updateShielded();
-	castleAttack();
+	castleAttack(currentTime);
 	enemyKilledAtT = false;
 	enemiesAttack();
 	enemiesMove();
@@ -407,9 +407,9 @@ void Battle::enemiesAttack()
 		playPavingSound();
 }
 //-------------Tower Attack----------------
-void Battle::castleAttack()
+void Battle::castleAttack(int currTime)
 {
-	bCastle.towersAttack(this);
+	bCastle.towersAttack(this, currTime);
 }
 ActiveEnemies* Battle::getNormalEnemies()
 {
