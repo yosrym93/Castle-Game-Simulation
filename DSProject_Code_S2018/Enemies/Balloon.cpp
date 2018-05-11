@@ -5,8 +5,7 @@
 Balloon::Balloon(color r_c, REGION r_region, int d):Enemy(r_c,r_region,d)
 {
 	K = 1;
-	if (firePower > 15)
-		firePower = 15;
+
 }
 
 void Balloon::Attack(Battle *b)
@@ -19,6 +18,13 @@ void Balloon::Attack(Battle *b)
 	{
 		b->healEnemies(getRegion(),A);
 	}
+}
+
+void Balloon::setPow(int rpow)
+{
+	firePower = (rpow > 0) ? rpow : 10;//assuming that the default is 10
+	if (firePower > 15)
+		firePower = 15;
 }
 
 

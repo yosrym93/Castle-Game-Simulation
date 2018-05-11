@@ -33,7 +33,7 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	Region = r_region;
 	oRegion = r_region;
 	SetDistance(d);
-	maxHealth = health;
+	
 	speed = 1;
 	killed = false;
 	K = 1;
@@ -127,6 +127,7 @@ int Enemy::getArrTime()
 void Enemy::setHealth(double rhealth)
 {
 	health = (rhealth >= 0) ? rhealth : 10;//assuming 10 is the default
+	maxHealth = health;
 }
 
 void Enemy::setPow(int rpow)
