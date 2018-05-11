@@ -66,11 +66,13 @@ public:
 	void ClearBattleArea() const;	// clears the Battle area from all drawn enemies
 	void clearToolbar();			// clears toolbar 
 	void setHeight(int);
+	
 
 	void setWidth(int);
 
 	void DrawCastle() const;	    // draws the castle with the towers and 4 regions
 	void DrawPaved(int* unpavedDistances) const;			// Draws the paved areas
+	void drawDestroyedCastle(bool*) const;					//Draws the damaged towers	
 	void DrawEnemies(Enemy* enemies[],int size) const;  
 									// No matter what list type you are using to hold enemies, 
 									// you must pass the enemies to the DrawEnemies as an array of enemy pointers. 
