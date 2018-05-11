@@ -45,7 +45,7 @@ public:
 	void setArrTime(int);
 	int getArrTime();
 	void setHealth(double);
-	void setPow(int);
+	virtual void setPow(int);
 	void setCRegion(int);
 	void setRld(int);
 	void setType(int);
