@@ -8,6 +8,7 @@ class Tower
 	double firePower;
 	bool isKilled;
 	bool canAttack;
+	int currentTime;
 	int freezeTime;		//attack time of freeze tank
 
 public:
@@ -24,7 +25,7 @@ public:
 	bool isDestroyed()const;			//returns true when tower is completely damaged
 	bool getCanAttack(int)const;		//returns false during freezeTank attack time - USE CURRENT TIME AS A PARAMETER
 	void freeze(int);					//freeze the tower during freezeTank attack time 
-	void attack(Battle*,int);			//attack of the tower
+	void attack(Battle*,int reg, int currTime);			//attack of the tower
 	void attackEnemy(Enemy*);			//attack the enemy
 };
 

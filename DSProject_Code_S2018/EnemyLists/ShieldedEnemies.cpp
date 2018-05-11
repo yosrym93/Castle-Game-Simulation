@@ -66,19 +66,19 @@ void ShieldedEnemies::towerAttack(Tower*tower, int num)
 	ShieldedArray.sort(&Enemy::getPriority);
 	ShieldedArray.traverse(&Tower::attackEnemy, *tower, num);
 }
-void ShieldedEnemies::traverseToAttack(Battle *b)
+void ShieldedEnemies::enemiesAttack(Battle *b)
 {
 	ShieldedArray.traverse(&Enemy::Attack, b);
 }
-void ShieldedEnemies::traverseToMove(Battle *b)
+void ShieldedEnemies::enemiesMove(Battle *b)
 {
 	ShieldedArray.traverse(&Enemy::move, b);
 }
-void ShieldedEnemies::traverseToHeal(int*A)
+void ShieldedEnemies::enemiesHeal(int*A)
 {
 	ShieldedArray.traverse(&Enemy::heal , A);
 }
-void ShieldedEnemies::traverseToTravel(int n)
+void ShieldedEnemies::enemiesTravel(int n)
 {
 	ShieldedArray.traverse(&Enemy::setCRegion, n);
 }

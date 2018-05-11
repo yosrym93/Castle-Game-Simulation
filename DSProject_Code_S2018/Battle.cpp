@@ -136,8 +136,6 @@ void Battle::timeCounter(GUI* pGUI)
 					clearGUI(pGUI);
 					update();
 					updateGUI(pGUI);
-					if (currentTime == 31)
-						bCastle.testKill(2);
 					currentTime++;
 				}
 			}
@@ -233,7 +231,7 @@ void Battle::startBattle(GUI* pGUI) {
 //Resets all lists and output file to start over
 void Battle::resetBattle() {
 	for (int i = 0; i < NoOfRegions; i++) {
-		unpavedDistance[i] = MaxDistance;
+		unpavedDistance[i] = MaxDistance/2;
 		activeEnemies[i] = 0;
 		nKilledEnemies[i] = 0;
 		normalEnemies[i].clear();
@@ -279,9 +277,9 @@ void Battle::regionalMove(int i)
 	normalEnemies[next].importOther(normalEnemies[i]);
 	freezeTankEnemies[next].importOther(freezeTankEnemies[i]);
 	shieldedEnemies[next].importOther(shieldedEnemies[i]);
-	normalEnemies[next].traverseToTravel(next);
-	shieldedEnemies[next].traverseToTravel(next);
-	freezeTankEnemies[next].traverseToTravel(next);
+	normalEnemies[next].enemiesTravel(next);
+	shieldedEnemies[next].enemiesTravel(next);
+	freezeTankEnemies[next].enemiesTravel(next);
 	while (activeEnemies[i] > 0)
 	{
 		activeEnemies[i]--;
@@ -294,9 +292,8 @@ void Battle::update()
 {
 	inactiveEnemies.activateEnemies(*this);
 	updateShielded();
-	castleAttack();
+	castleAttack(currentTime);
 	enemyKilledAtT = false;
-	//killRandom();		//For testing
 	enemiesAttack();
 	enemiesMove();
 	removeKilledEnemies();
@@ -306,9 +303,9 @@ void Battle::enemiesMove()
 {
 	for (int i = 0; i < NoOfRegions; i++)
 	{
-		normalEnemies[i].traverseToMove(this);
-		shieldedEnemies[i].traverseToMove(this);
-		freezeTankEnemies[i].traverseToMove(this);
+		normalEnemies[i].enemiesMove(this);
+		shieldedEnemies[i].enemiesMove(this);
+		freezeTankEnemies[i].enemiesMove(this);
 	}
 }
 
@@ -342,9 +339,9 @@ void Battle::print(GUI *pGUI)
 }
 void Battle::healEnemies(int regNumber,int* A)
 {
-	normalEnemies[regNumber].traverseToHeal(A);
-	freezeTankEnemies[regNumber].traverseToHeal(A);
-	shieldedEnemies[regNumber].traverseToHeal(A);
+	normalEnemies[regNumber].enemiesHeal(A);
+	freezeTankEnemies[regNumber].enemiesHeal(A);
+	shieldedEnemies[regNumber].enemiesHeal(A);
 	playHealingSound();
 }
 //load the file and decide the mode 
@@ -400,9 +397,9 @@ void Battle::enemiesAttack()
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		sumunpavedA += unpavedDistance[i];
-		normalEnemies[i].traverseToAttack(this);
-		freezeTankEnemies[i].traverseToAttack(this);
-		shieldedEnemies[i].traverseToAttack(this);
+		normalEnemies[i].enemiesAttack(this);
+		freezeTankEnemies[i].enemiesAttack(this);
+		shieldedEnemies[i].enemiesAttack(this);
 	}
 	for (int i = 0; i < NoOfRegions; i++)
 		sumunpavedB += unpavedDistance[i];
@@ -410,9 +407,9 @@ void Battle::enemiesAttack()
 		playPavingSound();
 }
 //-------------Tower Attack----------------
-void Battle::castleAttack()
+void Battle::castleAttack(int currTime)
 {
-	bCastle.towersAttack(this);
+	bCastle.towersAttack(this, currTime);
 }
 ActiveEnemies* Battle::getNormalEnemies()
 {

@@ -4,6 +4,7 @@ Tower::Tower()
 {
 	isKilled = false;
 	canAttack = true;
+	freezeTime = 0;
 }
 
 void Tower::setHealth(double h)
@@ -23,8 +24,10 @@ int Tower::getFirePower()const
 {
 	return firePower;
 }
-void Tower::attack(Battle*b,int region)
+void Tower::attack(Battle*b, int region, int currTime)
 {
+	currentTime = currTime;
+
 	if (!isKilled)
 	{
 		ActiveEnemies* normal = b->getNormalEnemies();
@@ -45,13 +48,13 @@ void Tower::attack(Battle*b,int region)
 void Tower::attackEnemy(Enemy*enemy)
 {
 	double t1 = (1.0 / enemy->getDistance());
-	double damage = t1*firePower*(1 / enemy->getK());
+	double damage = t1*firePower*(1.0 / enemy->getK());
 	enemy->damage(damage);
+	enemy->calcFD(currentTime);
 }
 void Tower::damage(double x)
 {
-	if (!isKilled)
-		health = health - x;
+	health = health - x;
 
 	if (health <= 0)
 	{
@@ -59,15 +62,12 @@ void Tower::damage(double x)
 		isKilled = true;
 	}
 }
-void Tower::testKill()
-{
-	health = 0;
-	isKilled = true;
-}
+
 bool Tower::isDestroyed() const
 {
 	return isKilled;
 }
+
 bool Tower::getCanAttack(int currentTime) const
 {
 	if (currentTime == freezeTime)

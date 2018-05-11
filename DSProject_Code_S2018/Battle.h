@@ -90,7 +90,7 @@ public:
 	void input(GUI*);               //load the file and decide the mode
 	void enemiesAttack();			//traverse enemies lists and call attack function for each enemy
 	void pave(int,int);				//decrease paved distance during paver attack time
-	void castleAttack();			//traverse enemies lists and call attack function for each enemy
+	void castleAttack(int currTime);	//traverse enemies lists and call attack function for each enemy
 	void enemiesMove();				//traverse to move enemies
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();
