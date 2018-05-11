@@ -61,9 +61,9 @@ void ShieldedEnemies::traverseToMove(Battle *b)
 {
 	ShieldedArray.traverse(&Enemy::move, b);
 }
-void ShieldedEnemies::traverseToHeal()
+void ShieldedEnemies::traverseToHeal(int*A)
 {
-	ShieldedArray.traverse(&Enemy::heal);
+	ShieldedArray.traverse(&Enemy::heal , A);
 }
 ShieldedEnemies::~ShieldedEnemies()
 {
