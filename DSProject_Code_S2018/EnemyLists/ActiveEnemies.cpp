@@ -80,7 +80,9 @@ void ActiveEnemies::enemiesHeal(int*A)
 	enemiesList.traverse(&Enemy::heal , A);
 }
 
-void ActiveEnemies::enemiesTravel(int n)
+void ActiveEnemies::enemiesTravel(int n, int d)
 {
 	enemiesList.traverse(&Enemy::setCRegion, n);
+	enemiesList.traverse(&Enemy::setNDistance, d);
+
 }
