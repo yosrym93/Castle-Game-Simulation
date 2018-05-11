@@ -22,7 +22,7 @@ public:
 	void enemiesAttack(Battle*);			//traverse the list to call attack for each enemy
 	void enemiesMove(Battle*);			//traverse the list to call move for each enemy
 	void enemiesHeal(int* A);					//traverse the list to call heal for each enemy
-	void enemiesTravel(int n);
+	void enemiesTravel(int n,int d);		//traverses the list to move them from region to region
 	void towerAttack(Tower*, int);			//traverse the list to attack the enemies by the tower
 	void calcPriority(Battle*);				//calculate the priority of the shielded enemies
 };

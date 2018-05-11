@@ -50,8 +50,8 @@ void Battle::killRandom()
 //Clears the GUI for redrawing
 void Battle::clearGUI(GUI* pGUI) {
 	pGUI->ClearStatusBar();
-	pGUI->ClearBattleArea();
-	pGUI->DrawCastle();
+	//pGUI->ClearBattleArea();
+	//pGUI->DrawCastle();
 	pGUI->drawDestroyedCastle(isDestroyed);
 }
 
@@ -278,9 +278,9 @@ void Battle::regionalMove(int i)
 	normalEnemies[next].importOther(normalEnemies[i]);
 	freezeTankEnemies[next].importOther(freezeTankEnemies[i]);
 	shieldedEnemies[next].importOther(shieldedEnemies[i]);
-	normalEnemies[next].enemiesTravel(next);
-	shieldedEnemies[next].enemiesTravel(next);
-	freezeTankEnemies[next].enemiesTravel(next);
+	normalEnemies[next].enemiesTravel(next, unpavedDistance[next]);
+	shieldedEnemies[next].enemiesTravel(next, unpavedDistance[next]);
+	freezeTankEnemies[next].enemiesTravel(next, unpavedDistance[next]);
 	while (activeEnemies[i] > 0)
 	{
 		activeEnemies[i]--;

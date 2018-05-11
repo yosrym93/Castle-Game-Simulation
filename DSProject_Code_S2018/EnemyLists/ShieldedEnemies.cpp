@@ -78,9 +78,10 @@ void ShieldedEnemies::enemiesHeal(int*A)
 {
 	ShieldedArray.traverse(&Enemy::heal , A);
 }
-void ShieldedEnemies::enemiesTravel(int n)
+void ShieldedEnemies::enemiesTravel(int n, int d)
 {
 	ShieldedArray.traverse(&Enemy::setCRegion, n);
+	ShieldedArray.traverse(&Enemy::setNDistance, d);
 }
 ShieldedEnemies::~ShieldedEnemies()
 {

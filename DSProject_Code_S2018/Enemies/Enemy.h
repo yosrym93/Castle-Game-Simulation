@@ -51,6 +51,7 @@ public:
 	void setRld(int);
 	void setType(int);
 	void setSpeed(int);
+	void setNDistance(int);
 	int getDistance() const;
 	double getHealth()const;
 	string getTypeStr() const; //Returns the type as a string (for printing)

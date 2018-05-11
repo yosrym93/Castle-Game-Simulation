@@ -206,6 +206,12 @@ void Enemy::setSpeed(int spd)
 	else speed = 1;
 }
 
+void Enemy::setNDistance(int d)
+{
+	if (d > Distance)
+		Distance = d;
+}
+
 bool Enemy::isKilled() {
 	if (health == 0)
 		return true;
