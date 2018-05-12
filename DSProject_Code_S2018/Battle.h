@@ -95,7 +95,7 @@ public:
 	void pave(int,int);				//decrease paved distance during paver attack time
 	void castleAttack(int currTime);	//traverse enemies lists and call attack function for each enemy
 	void enemiesMove();				//traverse to move enemies
-	GAMESTATUS getGameStatus();		//returns the game status (win or lose)
+	
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();
 	REGION getRegion(char);			//Converts char type into enum type
@@ -103,7 +103,8 @@ public:
 	int getCurrentTime() const;		//Returns the current time step
 	int getTotalAlive();			//Gets the number of alive enemies at any moment.
 	int getUnpavedDist(int);		//Returns the unpaved distance of a region
-
+	GAMESTATUS getGameStatus();		//returns the game status (win or lose)
+	double getTowerHealth(int);	//return the tower health of a specific region
 	/****************************  Inactive Enemies Functions  ****************************/
 	void activateEnemy(Enemy* inactiveEnemy);
 

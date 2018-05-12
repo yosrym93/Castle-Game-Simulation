@@ -145,7 +145,7 @@ void Battle::timeCounter(GUI* pGUI)
 			break;
 			case MODE_STEPBYSTEP:        //step by step mode
 			{
-				auto next = Clock::now() + 1.2s;
+				auto next = Clock::now() + 1.1s;
 				while (isFighting())
 				{
 					clearGUI(pGUI);
@@ -159,7 +159,7 @@ void Battle::timeCounter(GUI* pGUI)
 						throw ActionException(userAction);
 					
 					this_thread::sleep_until(next);
-					next += 1.2s;
+					next += 1.1s;
 				}
 			}
 			break;
@@ -234,6 +234,7 @@ void Battle::startBattle(GUI* pGUI) {
 		else {
 			//Do something else
 		}
+		writer.writeGameStatus(*this);
 	}
 	catch (ActionException) {
 		return;
@@ -323,9 +324,7 @@ void Battle::enemiesMove()
 	}
 }
 
-GAMESTATUS Battle::getGameStatus() {
-	return gameStatus;
-}
+
 
 void Battle::updateShielded()
 {
@@ -354,7 +353,7 @@ void Battle::print(GUI *pGUI)
 		break;
 	}
 	pGUI->setHeight(1);
-	pGUI->updatePrintedMessage("    Castle info: (at T = " + to_string(currentTime) + ")" + "        MODE:  " + rmode);
+	pGUI->updatePrintedMessage("    Castle info: (at T = " + to_string(currentTime) + ")" + "        Mode:  " + rmode);
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		pGUI->setHeight(2+2*i);
@@ -381,6 +380,7 @@ void Battle::input(GUI *pGUI)
 	bool bmode = false;
 	ACTION action;
 
+	pGUI->PrintMessage("Pick a mode and load an input file !");
 	while (!bload || !bmode)
 	{
 		action = pGUI->getUserAction();
@@ -406,15 +406,15 @@ void Battle::input(GUI *pGUI)
 			throw ActionException(ACTION_EXIT);
 			break;
 		default:
-			pGUI->PrintMessage("Pick the mode and load input file");
+			pGUI->PrintMessage("Pick a mode and load an input file !");
 		}
 		if (bload == true && bmode == false)
 		{
-			pGUI->PrintMessage("File loaded ,please choose a mode");
+			pGUI->PrintMessage("File loaded ! Pick a mode !");
 		}
 		if (bload == false && bmode == true)
 		{
-			pGUI->PrintMessage("Mode choosen,please choose a file");
+			pGUI->PrintMessage("Mode Picked ! Load a file !");
 		}
 	}
 	//pGUI->drawFightingMenu(fileName,mode);
@@ -465,6 +465,13 @@ double Battle::getC3()
 {
 	return c3;
 }
+GAMESTATUS Battle::getGameStatus() {
+	return gameStatus;
+}
+
+double Battle::getTowerHealth(int r) {
+	return bCastle.getTower(r)->getHealth();
+}
 //------------------------------------------
 void Battle::pave(int regNumber, int distance)
 {
@@ -476,7 +483,7 @@ void Battle::load(GUI*pGUI)
 {
 	inactiveEnemies.clear();
 	ifstream inFile;
-	pGUI->PrintMessage("Enter the file name ");
+	pGUI->PrintMessage("Enter the file name !");
 	string fileName = pGUI->GetString();
 	inFile.open(fileName + ".txt"); //opening the file that we are going to read the data from it
 	if (inFile.is_open()) //check if the file is open to access the data 
