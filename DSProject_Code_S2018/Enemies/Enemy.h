@@ -35,7 +35,6 @@ public:
 	color getColor() const;
 	REGION getRegion() const;
 	void decrementDist();
-	void move(Battle* B);
 	string print();
 	void damage(double);
 	void heal(int* A);	//increases enemy health by 5% of initial health during balloon attack time
@@ -46,7 +45,6 @@ public:
 	void setArrTime(int);
 	int getArrTime();
 	void setHealth(double);
-	virtual void setPow(int);
 	void setCRegion(int);
 	void setRld(int);
 	void setType(int);
@@ -69,11 +67,11 @@ public:
 
 	// Virtual Functions: ----------------
 
-	//virtual void Move() = 0;	    //All enemies can move
 	virtual void Attack(Battle*) = 0;	//All enemies can attack (attacking is paving or shooting)
 	virtual void updateEnemy(Battle*);
 //	virtual bool operator>(Enemy*);
 	virtual double getPriority();
-
+	virtual void setPow(int);
+	virtual void move(Battle* B);
 };
 

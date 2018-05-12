@@ -17,6 +17,12 @@ void Paver::Attack(Battle *b)
 	}
 }
 
+void Paver::move(Battle * b)
+{
+	if (canAttack(b->getCurrentTime()))
+		return;
+	Enemy::move(b);
+}
 
 Paver::~Paver()
 {
