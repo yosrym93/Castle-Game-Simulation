@@ -63,7 +63,7 @@ void ShieldedEnemies::calcPriority(Battle *b)
 }
 void ShieldedEnemies::towerAttack(Tower*tower, int num)
 {
-	ShieldedArray.sort(&Enemy::getPriority);
+	ShieldedArray.sortDesc(&Enemy::getPriority);
 	ShieldedArray.traverse(&Tower::attackEnemy, *tower, num);
 }
 void ShieldedEnemies::enemiesAttack(Battle *b)
