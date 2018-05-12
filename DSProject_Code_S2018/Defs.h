@@ -58,6 +58,11 @@ enum MenuItem
 	MENU_ITM_COUNT	//no. of menu icons ==> This should be the last line in this enum
 };
 
+enum GAMESTATUS {
+	WIN,
+	LOSE
+};
+
 struct Point
 {
 	int x;

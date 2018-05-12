@@ -36,7 +36,7 @@ private:
 	bool enemyKilledAtT;							//true if an enemy was killed in this current step
 	bool isDestroyed[NoOfRegions];
 	MODE mode;
-
+	GAMESTATUS gameStatus;
 	/************************Inactive Enemies List(s)************************/
 	InactiveEnemies inactiveEnemies;				//all inactive enemies
 
@@ -95,6 +95,7 @@ public:
 	void pave(int,int);				//decrease paved distance during paver attack time
 	void castleAttack(int currTime);	//traverse enemies lists and call attack function for each enemy
 	void enemiesMove();				//traverse to move enemies
+	GAMESTATUS getGameStatus();		//returns the game status (win or lose)
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();
 	REGION getRegion(char);			//Converts char type into enum type
