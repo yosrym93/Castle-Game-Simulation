@@ -227,7 +227,7 @@ void Battle::startBattle(GUI* pGUI) {
 		input(pGUI);
 		//Starts counting time and updating according to the chosen mode
 		timeCounter(pGUI);
-		//Game ended check status
+		//Game ended, check status
 		if (gameStatus == WIN) {
 			playVictorySound();
 			pGUI->PrintMessage("The castle has won ! Mighty towers !");
@@ -308,6 +308,9 @@ void Battle::regionalMove(int i)
 //Updates all lists and the GUI array
 void Battle::update()
 {
+	if (currentTime == 0)
+		return;
+
 	inactiveEnemies.activateEnemies(*this);
 	updateShielded();
 	castleAttack(currentTime);
@@ -384,7 +387,7 @@ void Battle::input(GUI *pGUI)
 	bool bmode = false;
 	ACTION action;
 
-	pGUI->PrintMessage("Pick a mode and load an input file !");
+	pGUI->PrintMessage("Welcome to the battlefield ! Pick a mode and load an input file !");
 	while (!bload || !bmode)
 	{
 		action = pGUI->getUserAction();
@@ -719,6 +722,7 @@ bool Battle::isKilledEnemy(Enemy* e) {
 		e->calcKD(currentTime);
 		writer.addEnemy(e);
 		nKilledEnemies[e->getRegion()]++;
+		activeEnemies[e->getRegion()]--;
 		if (!enemyKilledAtT) {
 			playDeathSound();
 			enemyKilledAtT = true;

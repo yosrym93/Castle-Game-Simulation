@@ -28,7 +28,7 @@ void Tower::attack(Battle*b, int region, int currTime)
 {
 	currentTime = currTime;
 
-	if (!isKilled)
+	if (!isKilled && getCanAttack(currTime))
 	{
 		ActiveEnemies* normal = b->getNormalEnemies();
 		ActiveEnemies* tank = b->getFreezeTankEnemies();
