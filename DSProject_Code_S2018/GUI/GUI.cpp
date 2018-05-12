@@ -289,6 +289,7 @@ void GUI::DrawEnemy(const Enemy & E, int YPos) const       // It's a private fun
 	color clr = E.getColor();
 	REGION Region = E.getRegion();
 	int Distance = E.getDistance();
+	bool right;		//right or left of the castle
 
 	int x, y, refX, refY;
 	//First calculate x,y position of the enemy on the output screen
@@ -300,33 +301,45 @@ void GUI::DrawEnemy(const Enemy & E, int YPos) const       // It's a private fun
 		refY = YHalfBattleArea- 1 - EnemyWidth; //
 		x = refX - Distance*EnemyWidth - Distance; //(Distance)
 		y = refY - YPos*EnemyHeight - YPos; // YPos
+		right = false;
 		break;
 	case B_REG:
 		refX = (WindWidth/2 + CastleWidth/2);
 		refY = YHalfBattleArea- 1 - EnemyWidth; //
 		x = refX + (Distance-1)*EnemyWidth + Distance; //(Distance)
 		y = refY - YPos*EnemyHeight - YPos; // YPos
+		right = true;
 		break;
 	case C_REG:
 		refX = (WindWidth/2 + CastleWidth/2);
 		refY = YHalfBattleArea + 2 + EnemyWidth; //
 		x = refX + (Distance-1)*EnemyWidth + Distance; //(Distance)
 		y = refY + (YPos-1)*EnemyHeight + YPos; // YPos
+		right = true;
 		break;
 	case D_REG:
 		refX = (WindWidth/2 - CastleWidth/2);
 		refY = YHalfBattleArea + 2 + EnemyWidth; //
 		x = refX - Distance*EnemyWidth - Distance; //(Distance)
 		y = refY + (YPos-1)*EnemyHeight + YPos; // YPos
+		right = false;
 		break;
 	default:
 		break;
 	}
+	
+	string direction;
+	if (right)
+		direction = "Right";
+	else
+		direction = "Left";
 
+	string imageFile = "Images//Enemies//" + E.getTypeStr() + direction + ".jpg";
 	// Drawing the enemy
-	pWind->SetPen(clr);
-	pWind->SetBrush(clr);
-	pWind->DrawRectangle(x, y, x + EnemyWidth, y + EnemyHeight);
+	//pWind->SetPen(clr);
+	//pWind->SetBrush(clr);
+	//pWind->DrawRectangle(x, y, x + EnemyWidth, y + EnemyHeight);
+	pWind->DrawImage(imageFile, x, y, EnemyWidth, EnemyHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 /* A function to draw a list of enemies and ensure there is no overflow in the drawing*/

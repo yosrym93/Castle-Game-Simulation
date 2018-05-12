@@ -154,7 +154,7 @@ string Enemy::getTypeStr () const
 		return "Fighter";
 		break;
 	case shielded:
-		return "Shielded fighter";
+		return "Shielded Fighter";
 		break;
 	case tank:
 		return "Tank";
