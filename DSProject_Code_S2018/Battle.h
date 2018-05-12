@@ -19,7 +19,7 @@
 #include "EnemyLists\ShieldedEnemies.h"
 
 #include "Output\Output.h"
-
+#include<SFML\Audio.hpp>
 
 // it is the controller of the project
 class Battle
@@ -36,7 +36,7 @@ private:
 	bool enemyKilledAtT;							//true if an enemy was killed in this current step
 	bool isDestroyed[NoOfRegions];
 	MODE mode;
-
+	GAMESTATUS gameStatus;
 	/************************Inactive Enemies List(s)************************/
 	InactiveEnemies inactiveEnemies;				//all inactive enemies
 
@@ -50,6 +50,9 @@ private:
 
 	/************************ Output writer ************************/
 	Output writer;							//Writes data to the output file
+	/************************* Background Music Player ******************/
+	sf::Music backgroundMusic;
+
 public:
 	
 	Battle();
@@ -92,6 +95,7 @@ public:
 	void pave(int,int);				//decrease paved distance during paver attack time
 	void castleAttack(int currTime);	//traverse enemies lists and call attack function for each enemy
 	void enemiesMove();				//traverse to move enemies
+	GAMESTATUS getGameStatus();		//returns the game status (win or lose)
 	/****************************  Getter Functions  ****************************/
 	Castle * getCastle();
 	REGION getRegion(char);			//Converts char type into enum type
@@ -109,6 +113,7 @@ public:
 	void writeEnemy(Enemy*);		//Outputs enemy's data to output file (through writer)
 
 	/**************************** Audio Functions  ****************************/
+	void playBackgroundMusic();
 	void playDeathSound();				//done
 	void playTowerDestructionSound();
 	void playPavingSound();				

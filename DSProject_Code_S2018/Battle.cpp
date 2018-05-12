@@ -2,6 +2,7 @@
 #include<chrono>
 #include<thread>
 
+
 using Clock = std::chrono::high_resolution_clock;
 
 
@@ -19,6 +20,7 @@ Battle::Battle()
 	}
 
 	bEnemiesForDraw = nullptr;
+	gameStatus = WIN;
 }
 void Battle::killRandom()
 {
@@ -143,7 +145,7 @@ void Battle::timeCounter(GUI* pGUI)
 			break;
 			case MODE_STEPBYSTEP:        //step by step mode
 			{
-				auto next = Clock::now() + 1s;
+				auto next = Clock::now() + 1.2s;
 				while (isFighting())
 				{
 					clearGUI(pGUI);
@@ -157,7 +159,7 @@ void Battle::timeCounter(GUI* pGUI)
 						throw ActionException(userAction);
 					
 					this_thread::sleep_until(next);
-					next += 1s;
+					next += 1.2s;
 				}
 			}
 			break;
@@ -219,10 +221,19 @@ void Battle::timeCounter(GUI* pGUI)
 //Initiates the battle
 void Battle::startBattle(GUI* pGUI) {
 	try {
+		//Play background music
+		playBackgroundMusic();
 		//Inputs data from the user (input file & mode)
 		input(pGUI);
 		//Starts counting time and updating according to the chosen mode
 		timeCounter(pGUI);
+		//Game ended check status
+		if (gameStatus == WIN) {
+			//Do something
+		}
+		else {
+			//Do something else
+		}
 	}
 	catch (ActionException) {
 		return;
@@ -244,6 +255,7 @@ void Battle::resetBattle() {
 	enemyCount = 0;
 	totalEnemiesCount = 0;
 
+	gameStatus = WIN;
 	writer.reset();
 	deleteGUIArray();
 }
@@ -309,6 +321,10 @@ void Battle::enemiesMove()
 		shieldedEnemies[i].enemiesMove(this);
 		freezeTankEnemies[i].enemiesMove(this);
 	}
+}
+
+GAMESTATUS Battle::getGameStatus() {
+	return gameStatus;
 }
 
 void Battle::updateShielded()
@@ -546,11 +562,14 @@ void Battle::load(GUI*pGUI)
 
 bool Battle::isFighting()
 {
-	bool isFig = false;
+	bool allEnemiesKilled = true;
 	for (int i = 0; i < NoOfRegions;i++)
-		isFig = isFig || (!freezeTankEnemies[i].isEmpty() || !shieldedEnemies[i].isEmpty() || !normalEnemies[i].isEmpty() 
-			|| !inactiveEnemies.isEmpty());
-	return isFig;
+		allEnemiesKilled = allEnemiesKilled && (freezeTankEnemies[i].isEmpty() && shieldedEnemies[i].isEmpty() && 
+			normalEnemies[i].isEmpty() && inactiveEnemies.isEmpty());
+	bool castleDestroyed = bCastle.isDestroyed();
+	if (castleDestroyed)
+		gameStatus = LOSE;
+	return (!allEnemiesKilled && !castleDestroyed);
 }
 
 /****************************  Getter Functions  ****************************/
@@ -703,6 +722,14 @@ void Battle::writeEnemy(Enemy* e) {
 }
 
 /**************************** Audio Functions  ****************************/
+
+void Battle::playBackgroundMusic() {
+		if (backgroundMusic.openFromFile("Sounds\\Fantascape.wav")) {
+			backgroundMusic.play();
+			backgroundMusic.setLoop(true);
+			backgroundMusic.setVolume(100);
+		}
+}
 
 void Battle::playDeathSound() {
 	if (mode != MODE_SILENT)
