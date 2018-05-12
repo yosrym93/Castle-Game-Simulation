@@ -229,11 +229,13 @@ void Battle::startBattle(GUI* pGUI) {
 		timeCounter(pGUI);
 		//Game ended, check status
 		if (gameStatus == WIN) {
+			pGUI->drawFinalState(true);
 			playVictorySound();
 			pGUI->PrintMessage("The castle has won ! Mighty towers !");
 			pGUI->GetPointClicked(Point());
 		}
 		else {
+			pGUI->drawFinalState(false);
 			playDefeatSound();
 			pGUI->PrintMessage("The castle has lost ! Towers have done their best but the enemies overpowered them !");
 			pGUI->GetPointClicked(Point());

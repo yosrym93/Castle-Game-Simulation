@@ -60,7 +60,7 @@ public:
 	void updatePrintedMessage(string msg) const; // prints a message in the status bar
 	void drawFightingMenu(string , MODE);
 	void DrawString(const int iX, const int iY, const string Text); // prints a message in the passed coordinates
-
+	void drawFinalState(bool);		//Draws the victory/defeat state.
 	void DrawMenu() const;	// draws the game menu
 	void ClearStatusBar() const;    // clears the status bar
 	void ClearBattleArea() const;	// clears the Battle area from all drawn enemies
