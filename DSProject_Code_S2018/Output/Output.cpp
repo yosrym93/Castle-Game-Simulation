@@ -62,10 +62,10 @@ void Output::writeGameStatus(Battle &b) {
 			<< "T4_Total_Damage" << endl;
 
 		for (int i = 0; i < NoOfRegions; i++) {
-			double towerDamage = towerStartingHealth - 0; //replace 0 with tower i current health
+			double towerDamage = towerStartingHealth - b.getTowerHealth(i);
 			writer << towerDamage << '\t';
 		}
-		writer << endl;
+		writer << endl << endl;
 		//Writing unpaved distances
 		writer << "R1_Unpaved_Dist" << '\t' << "R2_Unpaved_Dist" << '\t' << "R3_Unpaved_Dist" << '\t'
 			<< "R4_Unpaved_Dist" << endl;
@@ -91,8 +91,8 @@ void Output::writeGameStatus(Battle &b) {
 			writer << "Total Number of alive: " << nEnemies - nKilled << endl;
 		}
 
-		writer << "Average First-shot delay: " << averageFD;
-		writer << "Average kill delay: " << averageKD;
+		writer << "Average First-shot delay: " << averageFD << endl;
+		writer << "Average kill delay: " << averageKD << endl;
 
 	}
 	writer.close();
