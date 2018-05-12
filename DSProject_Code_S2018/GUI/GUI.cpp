@@ -148,6 +148,13 @@ void GUI::DrawString(const int iX, const int iY, const string Text)
 	pWind->SetFont(18, BOLD , BY_NAME, "Arial");   
 	pWind->DrawString(iX, iY, Text);
 }
+void GUI::drawFinalState(bool S)
+{
+	if(S)
+		pWind->DrawImage("images\\GUI\\victory.jpg", 0, MenuBarHeight, WindWidth, WindHeight - MenuBarHeight - StatusBarHeight);
+	else
+		pWind->DrawImage("images\\GUI\\defeat.jpg", 0, MenuBarHeight, WindWidth, WindHeight - MenuBarHeight - StatusBarHeight);
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::DrawMenu() const
 {
@@ -191,7 +198,7 @@ void GUI::ClearBattleArea() const
 	//pWind->SetPen(KHAKI, 3);
 	//pWind->SetBrush(KHAKI);
 	//pWind->DrawRectangle(0, MenuBarHeight, WindWidth, WindHeight - StatusBarHeight);
-	pWind->DrawImage("images\\MenuItems\\background.jpg", 0, MenuBarHeight, WindWidth, WindHeight - MenuBarHeight - StatusBarHeight);
+	pWind->DrawImage("images\\GUI\\background.jpg", 0, MenuBarHeight, WindWidth, WindHeight - MenuBarHeight - StatusBarHeight);
 }
 ///////////////////////////////////////////////////////////////////////////////////
 void GUI::clearToolbar()
@@ -213,7 +220,7 @@ void GUI::DrawCastle() const
 	//pWind->SetPen(BROWN);
 	//pWind->SetBrush(BROWN);
 	//pWind->DrawRectangle(CastleStartX, CastleStartY, CastleEndX, CastleEndY);
-	pWind->DrawImage("images\\MenuItems\\castle2.jpg", CastleStartX, CastleStartY, CastleWidth, CastleWidth);
+	pWind->DrawImage("images\\GUI\\castle.jpg", CastleStartX, CastleStartY, CastleWidth, CastleWidth);
 	// 2- Drawing the 2 brown crossed lines (for making 4 regions)
 	pWind->SetPen(BORDERS, 3);
 	pWind->DrawLine(0, YHalfBattleArea, WindWidth, YHalfBattleArea);
@@ -271,13 +278,13 @@ void GUI::DrawPaved(int* unpavedDistances) const {
 void GUI::drawDestroyedCastle(bool *b) const
 {
 	if(b[0])
-		pWind->DrawImage("images\\MenuItems\\upperleft.jpg", CastleStartX, CastleStartY, CastleWidth/2, CastleWidth/2);
+		pWind->DrawImage("images\\GUI\\upperleft.jpg", CastleStartX, CastleStartY, CastleWidth/2, CastleWidth/2);
 	if(b[1])
-		pWind->DrawImage("images\\MenuItems\\upperright.jpg", CastleStartX+ CastleWidth / 2, CastleStartY, CastleWidth/2, CastleWidth/2);
+		pWind->DrawImage("images\\GUI\\upperright.jpg", CastleStartX+ CastleWidth / 2, CastleStartY, CastleWidth/2, CastleWidth/2);
 	if(b[2])
-		pWind->DrawImage("images\\MenuItems\\lowerright.jpg", CastleStartX + CastleWidth / 2, CastleStartY + CastleWidth / 2, CastleWidth / 2, CastleWidth / 2);
+		pWind->DrawImage("images\\GUI\\lowerright.jpg", CastleStartX + CastleWidth / 2, CastleStartY + CastleWidth / 2, CastleWidth / 2, CastleWidth / 2);
 	if(b[3])
-		pWind->DrawImage("images\\MenuItems\\lowerleft.jpg", CastleStartX, CastleStartY + CastleWidth / 2, CastleWidth / 2, CastleWidth / 2);
+		pWind->DrawImage("images\\GUI\\lowerleft.jpg", CastleStartX, CastleStartY + CastleWidth / 2, CastleWidth / 2, CastleWidth / 2);
 
 
 }
