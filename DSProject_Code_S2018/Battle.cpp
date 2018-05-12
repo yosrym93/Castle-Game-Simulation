@@ -700,6 +700,7 @@ void Battle::playBackgroundMusic() {
 		if (backgroundMusic.openFromFile("Sounds\\Fantascape.wav")) {
 			backgroundMusic.play();
 			backgroundMusic.setLoop(true);
+			backgroundMusic.setVolume(100);
 		}
 	}
 }
