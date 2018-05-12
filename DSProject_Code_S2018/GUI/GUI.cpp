@@ -101,15 +101,15 @@ void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
 	
-	pWind->SetPen(DARKRED);
-	pWind->SetFont(18, BOLD , BY_NAME, "Arial");   
+	pWind->SetPen(FONT);
+	pWind->SetFont(18, BOLD , BY_NAME, "Calibri");   
 	pWind->DrawString(10, WindHeight - (int) (StatusBarHeight / 1.5), msg); // You may need to change these coordinates later 
 	                                                                      // to be able to write multi-line
 }
 void GUI::updatePrintedMessage(string msg) const	//Prints a message on status bar
 {
-	pWind->SetPen(DARKRED);
-	pWind->SetFont(18, BOLD, BY_NAME, "Arial");
+	pWind->SetPen(FONT);
+	pWind->SetFont(17, BOLD, BY_NAME, "Calibri");
 	pWind->DrawString(width, WindHeight - (int)(height), msg); // You may need to change these coordinates later 
 															   // to be able to write multi-line
 }
@@ -170,18 +170,18 @@ void GUI::DrawMenu() const
 		pWind->DrawImage(MenuItemImages[i], i*MenuItemWidth, 0, MenuItemWidth, MenuBarHeight);
 
 	//Draw a line under the menu bar
-	pWind->SetPen(BROWN, 3);
+	pWind->SetPen(BORDERS, 3);
 	pWind->DrawLine(0, MenuBarHeight, WindWidth, MenuBarHeight);	
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::ClearStatusBar() const
 {
-	pWind->SetPen(WHITE, 3);
-	pWind->SetBrush(WHITE);
+	pWind->SetPen(BACKGROUND, 3);
+	pWind->SetBrush(BACKGROUND);
 	pWind->DrawRectangle(0, WindHeight - StatusBarHeight , WindWidth, WindHeight);	
 
-	pWind->SetPen(BROWN, 3);
+	pWind->SetPen(BORDERS, 3);
 	pWind->DrawLine(0, WindHeight - StatusBarHeight , WindWidth, WindHeight - StatusBarHeight);	
 }
 ///////////////////////////////////////////////////////////////////////////////////
@@ -200,7 +200,7 @@ void GUI::clearToolbar()
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, 0, WindWidth, WindHeight - MenuBarHeight);
 
-	pWind->SetPen(BROWN, 3);
+	pWind->SetPen(BORDERS, 3);
 	pWind->DrawLine(0, WindHeight - MenuBarHeight, WindWidth, WindHeight - MenuBarHeight);
 
 }
@@ -215,7 +215,7 @@ void GUI::DrawCastle() const
 	//pWind->DrawRectangle(CastleStartX, CastleStartY, CastleEndX, CastleEndY);
 	pWind->DrawImage("images\\MenuItems\\castle2.jpg", CastleStartX, CastleStartY, CastleWidth, CastleWidth);
 	// 2- Drawing the 2 brown crossed lines (for making 4 regions)
-	pWind->SetPen(BROWN, 3);
+	pWind->SetPen(BORDERS, 3);
 	pWind->DrawLine(0, YHalfBattleArea, WindWidth, YHalfBattleArea);
 	pWind->DrawLine(WindWidth/2, MenuBarHeight, WindWidth/2, WindHeight-StatusBarHeight);
 
@@ -243,7 +243,7 @@ void GUI::DrawCastle() const
 	// 6- Drawing the 2 vertical brown lines at distance 60
 	// that is because some rounding errors may occur if you choose another width and height for the window
 	// so we draw 2 vertical lines at distance 60 to mark it
-	pWind->SetPen(BROWN);
+	pWind->SetPen(BORDERS);
 	pWind->DrawLine(CastleStartX - MaxDistance*EnemyWidth - MaxDistance -1, MenuBarHeight,
 		CastleStartX - MaxDistance*EnemyWidth - MaxDistance -1, WindHeight-StatusBarHeight);
 	pWind->DrawLine(CastleEndX + MaxDistance*EnemyWidth + MaxDistance +1, MenuBarHeight,

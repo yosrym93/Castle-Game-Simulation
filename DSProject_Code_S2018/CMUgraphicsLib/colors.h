@@ -36,7 +36,9 @@ bool operator!=(color a, color b);
   $XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp 
 
 */
-
+const color BORDERS = color(28, 30, 35);
+const color BACKGROUND = color(39, 42, 49);
+const color FONT = color(180, 180, 180);
 const color SNOW = color(255, 250, 250);
 const color GHOSTWHITE = color(248, 248, 255);
 const color WHITESMOKE = color(245, 245, 245);

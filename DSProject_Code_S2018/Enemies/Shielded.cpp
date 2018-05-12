@@ -36,7 +36,7 @@ int Shielded::getRemainingTime(int CT )
 
 double Shielded::getPriority()
 {
-	return -Priority;
+	return Priority;
 }
 
 Shielded::~Shielded()
