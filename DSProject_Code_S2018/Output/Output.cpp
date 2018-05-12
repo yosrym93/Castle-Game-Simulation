@@ -81,7 +81,7 @@ void Output::writeGameStatus(Battle &b) {
 		double averageFD = double(sumFD) / double(nKilled);
 		double averageKD = double(sumKD) / double(nKilled);
 
-		if (b.getGameStatus == WIN) {	
+		if (b.getGameStatus() == WIN) {	
 			writer << "Game is WIN !" << endl << endl;
 			writer << "Total number of enemies: " << nEnemies << endl;
 		}
