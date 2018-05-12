@@ -63,17 +63,16 @@ void Output::writeGameStatus(Battle &b) {
 
 		for (int i = 0; i < NoOfRegions; i++) {
 			double towerDamage = towerStartingHealth - b.getTowerHealth(i);
-			writer << towerDamage << '\t';
+			writer << towerDamage << '\t' << '\t';
 		}
 		writer << endl << endl;
 		//Writing unpaved distances
 		writer << "R1_Unpaved_Dist" << '\t' << "R2_Unpaved_Dist" << '\t' << "R3_Unpaved_Dist" << '\t'
 			<< "R4_Unpaved_Dist" << endl;
 
-		for (int i = 0; i < NoOfRegions; i++) {
-			int unpavedDist = 60 - b.getUnpavedDist(i); 
-			writer << unpavedDist << '\t';
-		}
+		for (int i = 0; i < NoOfRegions; i++) 
+			writer << b.getUnpavedDist(i) << '\t' << '\t';
+
 		writer << endl << endl;
 
 		//Writing final game status
