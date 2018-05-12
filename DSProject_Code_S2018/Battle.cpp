@@ -144,7 +144,7 @@ void Battle::timeCounter(GUI* pGUI)
 			break;
 			case MODE_STEPBYSTEP:        //step by step mode
 			{
-				auto next = Clock::now() + 1s;
+				auto next = Clock::now() + 1.2s;
 				while (isFighting())
 				{
 					clearGUI(pGUI);
@@ -158,7 +158,7 @@ void Battle::timeCounter(GUI* pGUI)
 						throw ActionException(userAction);
 					
 					this_thread::sleep_until(next);
-					next += 1s;
+					next += 1.2s;
 				}
 			}
 			break;
