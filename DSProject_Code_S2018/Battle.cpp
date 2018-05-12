@@ -325,8 +325,20 @@ void Battle::print(GUI *pGUI)
 	string castleInfo;
 	string region;
 	string enemies;
+	string rmode;
+	switch (mode)
+	{
+	case MODE_INTERACTIVE:
+		rmode = "Interactive";
+		break;
+	case MODE_STEPBYSTEP:
+		rmode = "Step By Step";
+		break;
+	default:
+		break;
+	}
 	pGUI->setHeight(1);
-	pGUI->updatePrintedMessage("    Castle info: (at T = " + to_string(currentTime) + ")");
+	pGUI->updatePrintedMessage("    Castle info: (at T = " + to_string(currentTime) + ")" + "        MODE:  " + rmode);
 	for (int i = 0; i < NoOfRegions; i++)
 	{
 		pGUI->setHeight(2+2*i);
