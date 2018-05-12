@@ -11,7 +11,7 @@ class Array
 	void swap(T*&f, T*&s);					//Swaps two elements in sorting.
 	void quickSort(int start, int pivot);	//Sorts using quicksort technique.
 	void updateCapacity();					//Adjusts array's capacity based on needed size.
-
+	void reverseOrder();					//Flips the array (reverses its order)
 
 public:
 	Array();								//Constructor for the array.
@@ -36,6 +36,9 @@ public:
 	
 	template<typename S>
 	void sort(double (S::*sortFn)());						//Sorts elements according to the value of sortFn (ascending)
+
+	template<typename S>
+	void sortDesc(double (S::*sortFn)());						//Sorts elements according to the value of sortFn (descending)
 
 	template<typename S>
 	void quickSort(int start, int pivot, double (S::*sortFn)());	//Sorts elements according to the value of sortFn (ascending).
@@ -127,6 +130,14 @@ void Array<T>::updateCapacity()
 
 		}
 }
+
+template <class T>
+void Array<T>::reverseOrder() {
+	for (int i = 0; i < size / 2; i++) {
+		swap(arr[i], arr[size - 1 - i]);
+	}
+}
+
 template <class T>
 int Array<T>::getCount() const
 {
@@ -225,6 +236,7 @@ void Array<T>::condtionalRemove(bool(S::* conditionFn)())
 		if ((arr[i]->*conditionFn)())
 		{
 			swap(arr[i], arr[size - 1]);
+			i--;
 			size--;
 		}
 	}
@@ -241,6 +253,7 @@ void Array<T>::condtionalRemove(bool (S::*conditionFn)(T*), S &fnCaller)
 		{
 			swap(arr[i], arr[size - 1]);
 			size--;
+			i--;
 		}
 	}
 }
@@ -253,6 +266,14 @@ void Array<T>::sort(double (S::*sortFn)())
 	quickSort(0, size - 1, sortFn);
 }
 
+//Sorts elements according to the value of sortFn (descending)
+template<typename T>
+template<typename S>
+void Array<T>::sortDesc(double (S::*sortFn)()) {
+	quickSort(0, size - 1, sortFn);
+	reverseOrder();
+}
+
 //Sorts elements according to the value of sortFn (ascending) using quicksort.
 template<typename T>
 template<typename S>
@@ -263,7 +284,7 @@ void Array<T>::quickSort(int start, int pivot, double (S::*sortFn)())
 	int current = start;
 	int wall = start;
 	while (current != pivot)
-		if ((arr[current]->*sortFn)() < (arr[pivot]->*sortFn)())
+		if ((arr[current]->*sortFn)() > (arr[pivot]->*sortFn)())
 		{
 			current++;
 		}
