@@ -149,6 +149,9 @@
     <ClInclude Include="Exceptions\PrecondViolatedExcep.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="Exceptions\TimeoutException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Castle\Castle.cpp">
@@ -301,6 +304,9 @@
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Exceptions\ActionException.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions\TimeoutException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
   </ItemGroup>

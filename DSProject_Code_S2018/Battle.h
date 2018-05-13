@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <mmsystem.h>
 #include "Exceptions\ActionException.h"
+#include "Exceptions\TimeoutException.h"
 
 #include "Enemies\Enemy.h"
 #include "Enemies\Fighter.h"

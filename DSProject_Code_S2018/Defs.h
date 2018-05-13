@@ -7,6 +7,7 @@
 		                        // if they are in the same region and same distance
 								// (will be drawn vertical to each other)
 #define MaxEnemyCount 300       // the maximum number of enemies the application can work on
+#define MaxTime 300				//Maximum time step allowed
 //The four regions: A, B, C , and D
 enum REGION {	
 	A_REG,

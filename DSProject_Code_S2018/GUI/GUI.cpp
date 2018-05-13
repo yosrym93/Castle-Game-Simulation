@@ -164,6 +164,9 @@ void GUI::DrawMenu() const
 	//First prepare List of images for each menu item
 	//To control the order of these images in the menu, 
 	//reoder them in enum MenuItem
+	pWind->SetPen(BACKGROUND, 3);
+	pWind->SetBrush(BACKGROUND);
+	pWind->DrawRectangle(0, 0, WindWidth, MenuBarHeight);
 	string MenuItemImages[MENU_ITM_COUNT];
 
 	MenuItemImages[MENU_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
@@ -177,8 +180,8 @@ void GUI::DrawMenu() const
 		pWind->DrawImage(MenuItemImages[i], i*MenuItemWidth, 0, MenuItemWidth, MenuBarHeight);
 
 	//Draw a line under the menu bar
-	pWind->SetPen(BORDERS, 3);
-	pWind->DrawLine(0, MenuBarHeight, WindWidth, MenuBarHeight);	
+	pWind->SetPen(BLACK, 4);
+	pWind->DrawLine(0, MenuBarHeight - 2, WindWidth, MenuBarHeight - 2);	
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
