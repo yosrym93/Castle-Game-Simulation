@@ -155,6 +155,8 @@ inline T List<T>::Export()
 		throw (new PrecondViolatedExcep(message));
 	}
 	Node<T>*temp = head;
+	if (tail == head)
+		tail = head->getNext();
 	head = head->getNext();
 	T exported = temp->getData();
 	delete temp;
@@ -221,6 +223,8 @@ void List<T>::condtionalRemove(bool(S::* conditionFn)())
 {
 	Node<T>* temp;
 	while (head != nullptr && (head->getData()->*conditionFn)()) {
+		if (tail == head)
+			tail = head->getNext();
 		head = head->getNext();
 		count--;
 	}
@@ -233,6 +237,8 @@ void List<T>::condtionalRemove(bool(S::* conditionFn)())
 	while (ptr->getNext() != NULL) {
 		if ((ptr->getNext()->getData()->*conditionFn)()) {
 			temp = ptr->getNext();
+			if (tail == temp)
+				tail = ptr;
 			ptr->setNext(temp->getNext());
 			count--;
 		}
@@ -248,6 +254,8 @@ template<typename S>
 void List<T>::condtionalRemove(bool (S::*conditionFn)(T), S &fnCaller) {
 	Node<T>* temp;
 	while (head != nullptr && (fnCaller.*conditionFn)(head->getData())) {
+		if (tail == head)
+			tail = head->getNext();
 		head = head->getNext();
 		count--;
 	}
@@ -260,6 +268,8 @@ void List<T>::condtionalRemove(bool (S::*conditionFn)(T), S &fnCaller) {
 	while (ptr->getNext() != NULL) {
 		if ((fnCaller.*conditionFn)(ptr->getNext()->getData())) {
 			temp = ptr->getNext();
+			if (tail == temp)
+				tail = ptr;
 			ptr->setNext(temp->getNext());
 			count--;
 		}
