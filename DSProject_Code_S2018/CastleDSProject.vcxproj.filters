@@ -290,7 +290,6 @@
       <Filter>Output</Filter>
     </ClCompile>
     <ClCompile Include="Battle.cpp" />
-    <ClCompile Include="Demo_Main.cpp" />
     <ClCompile Include="EnemyLists\ActiveEnemies.cpp">
       <Filter>EnemyLists</Filter>
     </ClCompile>
@@ -309,6 +308,7 @@
     <ClCompile Include="Exceptions\TimeoutException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADTs\List.h">

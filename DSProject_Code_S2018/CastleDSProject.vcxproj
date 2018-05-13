@@ -274,7 +274,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Demo_Main.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Enemies\Balloon.cpp" />
     <ClCompile Include="Enemies\Enemy.cpp" />
     <ClCompile Include="Enemies\Fighter.cpp" />
