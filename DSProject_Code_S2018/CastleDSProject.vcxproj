@@ -285,6 +285,7 @@
     <ClCompile Include="EnemyLists\InactiveEnemies.cpp" />
     <ClCompile Include="EnemyLists\ShieldedEnemies.cpp" />
     <ClCompile Include="Exceptions\ActionException.cpp" />
+    <ClCompile Include="Exceptions\TimeoutException.cpp" />
     <ClCompile Include="GUI\GUI.cpp" />
     <ClCompile Include="Output\Output.cpp" />
   </ItemGroup>
@@ -328,6 +329,7 @@
     <ClInclude Include="EnemyLists\ShieldedEnemies.h" />
     <ClInclude Include="Exceptions\ActionException.h" />
     <ClInclude Include="Exceptions\PrecondViolatedExcep.h" />
+    <ClInclude Include="Exceptions\TimeoutException.h" />
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="Output\Output.h" />
   </ItemGroup>

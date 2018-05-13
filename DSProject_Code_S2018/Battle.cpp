@@ -140,6 +140,8 @@ void Battle::timeCounter(GUI* pGUI)
 					update();
 					updateGUI(pGUI);
 					currentTime++;
+					if (currentTime >= MaxTime)
+						throw TimeoutException();
 				}
 			}
 			break;
@@ -243,6 +245,12 @@ void Battle::startBattle(GUI* pGUI) {
 		writer.writeGameStatus(*this);
 	}
 	catch (ActionException) {
+		return;
+	}
+	catch (TimeoutException) {
+		pGUI->ClearBattleArea();
+		pGUI->PrintMessage("Time limit exceeded ! The game will now exit !");
+		pGUI->GetPointClicked(Point());
 		return;
 	}
 }

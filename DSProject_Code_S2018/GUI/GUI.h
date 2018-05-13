@@ -24,7 +24,7 @@ private:
 		WindWidth=1200, WindHeight=670,		//Window width and height
 		StatusBarHeight = 170,	//Status Bar Height
 		MenuBarHeight = 50,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		MenuItemWidth = 80,		//Width of each item in menu bar menu
+		MenuItemWidth = 140,		//Width of each item in menu bar menu
 		
 		BattleAreaHeight = WindHeight - MenuBarHeight - StatusBarHeight,		
 		YHalfBattleArea = MenuBarHeight + BattleAreaHeight/2, //The y coordinate of half the Battle area
