@@ -756,7 +756,7 @@ void Battle::writeEnemy(Enemy* e) {
 /**************************** Audio Functions  ****************************/
 
 void Battle::playBackgroundMusic() {
-		if (backgroundMusic.openFromFile("Sounds\\Fantascape.wav")) {
+		if (backgroundMusic.openFromFile("Sounds\\Fantascape.ogg")) {
 			backgroundMusic.play();
 			backgroundMusic.setLoop(true);
 			backgroundMusic.setVolume(100);
