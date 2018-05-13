@@ -76,7 +76,7 @@ bool Tower::getCanAttack(int currentTime) const
 }
 void Tower::freeze(int x)
 {
-	freezeTime = x;
+	freezeTime = x+1;
 }
 int Tower::getMaxNum()const
 {
