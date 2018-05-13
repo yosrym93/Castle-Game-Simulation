@@ -60,6 +60,7 @@ void Battle::clearGUI(GUI* pGUI) {
 //Redraws the GUI
 void Battle::updateGUI(GUI* pGUI) {
 	print(pGUI);
+	pGUI->drawDestroyedCastle(isDestroyed);
 	pGUI->DrawPaved(unpavedDistance);
 	drawEnemies(pGUI);
 }
@@ -672,6 +673,12 @@ int Battle::getUnpavedDist(int r) {
 /****************************  Inactive Enemies Functions  ****************************/
 void Battle::activateEnemy(Enemy* inactiveEnemy) {
 	int Reg = inactiveEnemy->getRegion();
+	while (bCastle.isDestroyed(Reg)) {
+		Reg++;
+		if (Reg >= NoOfRegions)
+			Reg = 0;
+		inactiveEnemy->setCRegion(Reg);
+	}
 	activeEnemies[Reg]++;
 
 	if (mode!=MODE_SILENT) 
